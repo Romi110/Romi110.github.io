@@ -106,7 +106,7 @@
     .gif-toggle-icon { font-size: 13px; transition: transform .2s; }
     .gif-toggle.open .gif-toggle-icon { transform: rotate(90deg); }
     .gif-reveal { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
-    .gif-reveal.open { max-height: 380px; }
+    .gif-reveal.open { max-height: 1300px; }
     .gif-reveal img { width: 100%; border-radius: 8px; margin-top: 8px; display: block; }
     .gif-credit { font-size: 10px; color: var(--muted); text-align: right; margin-top: 3px; opacity: .6; }
 
@@ -251,6 +251,7 @@
     .warmup-row:last-child { border-bottom: none; }
     .warmup-name { font-size: 13px; font-weight: 500; color: var(--ink); }
     .warmup-detail { font-size: 12px; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
+    .tip-img-placeholder { background: var(--bg2); border: 1px dashed var(--border); border-radius: 8px; padding: 18px; text-align: center; font-size: 12px; color: var(--muted); margin-top: 8px; }
   </style>
 </head>
 <body>
@@ -306,6 +307,234 @@
     <div class="callout">
       <div class="callout-icon">🎓</div>
       <div class="callout-text"><strong>New to kettlebells?</strong> This guide covers everything you need to train safely and effectively from day one. Work through each section before your first session — 10 minutes here will prevent months of wasted effort and avoidable injury.</div>
+    </div>
+
+    <!-- FORM FUNDAMENTALS -->
+    <div class="tips-section">
+      <div class="tips-section-title">📐 General Form Fundamentals</div>
+      <div class="tips-grid">
+
+        <div class="tip-card">
+          <div class="tip-card-icon">🫁</div>
+          <div class="tip-card-title">Brace like you're about to get punched</div>
+          <div class="tip-card-body">Before every rep, imagine someone is about to punch you in the stomach — take a breath and tighten your whole midsection as if to brace for impact. <strong>That hardness is your core being on.</strong> This creates intra-abdominal pressure that acts like an internal weight belt, protecting your spine under load. Without it, your lower back absorbs forces it was never meant to handle.</div>
+          <button class="gif-toggle" onclick="toggleGif(this)">
+            <span class="gif-toggle-icon">▶</span>
+            <span class="gif-toggle-label">Show example</span>
+          </button>
+          <div class="gif-reveal">
+            <img src="tips%20assests/bracecore.png" alt="Core bracing demonstration">
+          </div>
+        </div>
+
+        <div class="tip-card">
+          <div class="tip-card-icon">🦴</div>
+          <div class="tip-card-title">A string is pulling your head to the ceiling</div>
+          <div class="tip-card-body">Imagine a string attached to the very top of your skull pulling straight up toward the ceiling. This one cue fixes more problems than almost any other: your chin tucks slightly, your neck lengthens, your chest opens, and your spine stacks naturally. <strong>The moment your head drops forward, the whole chain collapses.</strong> Use it during carries, squats, rows — everything.</div>
+          <button class="gif-toggle" onclick="toggleGif(this)">
+            <span class="gif-toggle-icon">▶</span>
+            <span class="gif-toggle-label">Show example</span>
+          </button>
+          <div class="gif-reveal">
+            <img src="tips%20assests/posture.webp" alt="Neutral spine / string posture cue">
+          </div>
+        </div>
+
+        <div class="tip-card">
+          <div class="tip-card-icon">🔩</div>
+          <div class="tip-card-title">Squeeze everything before you move</div>
+          <div class="tip-card-body">Before each rep: crush the handle, squeeze your glutes, brace your abs. This "irradiation" effect — tension in one muscle radiating to neighbouring muscles — makes you measurably stronger without adding any weight. Think of it like <strong>tightening every bolt before you drive.</strong> A loose body is a weak and vulnerable body.</div>
+          <button class="gif-toggle" onclick="toggleGif(this)">
+            <span class="gif-toggle-icon">▶</span>
+            <span class="gif-toggle-label">Show example</span>
+          </button>
+          <div class="gif-reveal">
+            <img src="tips%20assests/russian-kettlebell-swing.gif" alt="Full body tension demonstration">
+          </div>
+        </div>
+
+        <div class="tip-card">
+          <div class="tip-card-icon">👣</div>
+          <div class="tip-card-title">Screw your feet into the floor</div>
+          <div class="tip-card-body">Press all four corners of each foot down and imagine screwing them outward — like trying to rip the floor apart beneath you (without actually moving your feet). This creates rotational torque through the hip that activates your glutes and locks your knees in the correct path. <strong>Strong floor contact = strong lift.</strong> Try it and feel your glutes switch on immediately.</div>
+          <button class="gif-toggle" onclick="toggleGif(this)">
+            <span class="gif-toggle-icon">▶</span>
+            <span class="gif-toggle-label">Show example</span>
+          </button>
+          <div class="gif-reveal">
+            <img src="tips%20assests/activatefeet.jpg" alt="Foot rooting / screwing feet demonstration">
+          </div>
+        </div>
+
+        <div class="tip-card">
+          <div class="tip-card-icon">🧱</div>
+          <div class="tip-card-title">Tuck your shoulder blades into your back pockets</div>
+          <div class="tip-card-body">Before any press, row, or carry, pull your shoulder blades down and together — like you are trying to slide them into your back trouser pockets. This depresses and retracts the scapulae, creating a stable base for the arm and protecting the rotator cuff. <strong>Shrugged, elevated shoulders during pressing is how people get injured.</strong> Set them down first, every single time.</div>
+          <button class="gif-toggle" onclick="toggleGif(this)">
+            <span class="gif-toggle-icon">▶</span>
+            <span class="gif-toggle-label">Show example</span>
+          </button>
+          <div class="gif-reveal">
+            <img src="tips%20assests/shoulderblades.jpeg" alt="Shoulder packing / scapula retraction demonstration">
+          </div>
+        </div>
+
+        <div class="tip-card">
+          <div class="tip-card-icon">🐢</div>
+          <div class="tip-card-title">Lower like you're lowering a sleeping child</div>
+          <div class="tip-card-body">The lowering (eccentric) phase builds more muscle than lifting. Take 2–3 seconds on the way down on every press, squat, and row — as if you are gently lowering something you cannot afford to drop. Most people fling the weight down and waste half the rep. <strong>Slow eccentrics also make you more aware of where your form breaks</strong> — the moment you rush, you stop feeling what is working.</div>
+          <button class="gif-toggle" onclick="toggleGif(this)">
+            <span class="gif-toggle-icon">▶</span>
+            <span class="gif-toggle-label">Show example</span>
+          </button>
+          <div class="gif-reveal">
+            <img src="tips%20assests/slowcontrol.gif" alt="Slow eccentric / controlled lowering demonstration">
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- EXERCISE-SPECIFIC FORM TIPS -->
+    <div class="tips-section">
+      <div class="tips-section-title">🎯 Exercise-Specific Form Tips</div>
+      <div class="callout" style="margin-bottom:1rem">
+        <div class="callout-icon">💡</div>
+        <div class="callout-text">Each exercise has one or two make-or-break cues. Nail these and the rest tends to fall into place. Film yourself against these checkpoints — what you feel and what you look like are often very different things.</div>
+      </div>
+      <div class="mistake-list">
+
+        <div class="mistake-item" style="border-left-color:var(--accent2)">
+          <div class="mistake-label" style="color:var(--accent2)">🔄 Kettlebell Swing</div>
+          <div class="mistake-fix"><strong>Hike, snap, float.</strong> The bell hikes back between your legs like a football snap, then your hips drive forward like you are slamming a car door with your backside. The arms are just ropes — they go along for the ride. At the top, you should be standing in a perfect plank: glutes locked, abs braced, shoulders packed. The bell floats briefly at chest height from pure momentum. <em>Tired shoulders = your arms are working. Tired lower back = you are squatting instead of hinging.</em></div>
+          <button class="gif-toggle" onclick="toggleGif(this)">
+            <span class="gif-toggle-icon">▶</span>
+            <span class="gif-toggle-label">Show example</span>
+          </button>
+          <div class="gif-reveal">
+           
+            <img src="tips%20assests/2-3-H-Two-Handed-Kettlebell-Swing-683x1024.png" alt="Kettlebell swing form guide">
+          </div>
+        </div>
+
+        <div class="mistake-item" style="border-left-color:var(--accent2)">
+          <div class="mistake-label" style="color:var(--accent2)">⬇️ Kettlebell Deadlift</div>
+          <div class="mistake-fix"><strong>Push the floor away — don't pull the bell up.</strong> Your legs are a hydraulic press; think of them driving the ground downward rather than your back pulling the bell up. Before you move: big breath, brace your core like you're about to get punched, then lift your chest ("proud chest") to lock your back flat. Hips and shoulders should rise at the same rate — if your hips shoot up first and your chest drops, your lower back is taking over. <em>Think: leg press, not back lift.</em></div>
+          <button class="gif-toggle" onclick="toggleGif(this)">
+            <span class="gif-toggle-icon">▶</span>
+            <span class="gif-toggle-label">Show example</span>
+          </button>
+          <div class="gif-reveal">
+           
+            <img src="tips%20assests/2-1-H-Kettlebell-Single-Arm-Deadlift-683x1024.png" alt="Kettlebell deadlift form guide">
+          </div>
+        </div>
+
+        <div class="mistake-item" style="border-left-color:var(--accent2)">
+          <div class="mistake-label" style="color:var(--accent2)">🏆 Goblet Squat</div>
+          <div class="mistake-fix"><strong>Elbows pry knees apart; sit between your heels.</strong> At the bottom, use your elbows to actively push your knees out — as if prying open a door. Your goal is to sit <em>between</em> your heels, not above them. Imagine the floor is a drain and you are squatting down over it, spreading your feet to let the water through. Hold a 3-second pause at the bottom each rep for the first two weeks — your body will quickly learn where it needs to be.</div>
+          <button class="gif-toggle" onclick="toggleGif(this)">
+            <span class="gif-toggle-icon">▶</span>
+            <span class="gif-toggle-label">Show example</span>
+          </button>
+          <div class="gif-reveal">
+           
+            <img src="tips%20assests/3-1-H-Kettlebell-Goblet-Squat-683x1024.png" alt="Goblet squat form guide">
+          </div>
+        </div>
+
+        <div class="mistake-item" style="border-left-color:var(--accent2)">
+          <div class="mistake-label" style="color:var(--accent2)">🎯 Overhead Press</div>
+          <div class="mistake-fix"><strong>Juice the handle; press your body away from the floor.</strong> Before the press: crush the handle as hard as you can, glutes squeezed, abs braced like you're about to be punched, shoulder packed into its socket. As you press, think of pushing yourself down through the floor rather than pushing the bell up — this engages your lats and keeps the bar path vertical. Your bicep should finish beside your ear. If it is in front of your face, you have lost your lat and the shoulder is unprotected at lockout.</div>
+          <button class="gif-toggle" onclick="toggleGif(this)">
+            <span class="gif-toggle-icon">▶</span>
+            <span class="gif-toggle-label">Show example</span>
+          </button>
+          <div class="gif-reveal">
+           
+            <img src="tips%20assests/4-3-H-Kettlebell-Overhead-Press-683x1024.png.webp" alt="Overhead press form guide">
+          </div>
+        </div>
+
+        <div class="mistake-item" style="border-left-color:var(--accent2)">
+          <div class="mistake-label" style="color:var(--accent2)">🚣 Single-Arm Row</div>
+          <div class="mistake-fix"><strong>Elbow to back pocket — imagine you are starting a lawnmower slowly.</strong> The elbow drives back and down along your ribcage, finishing near your hip bone — not flaring out wide toward your ear. At the top, pause for one second and actively try to squeeze your shoulder blade toward your spine. Keep your torso completely flat — if you rotate to heave the weight, you are no longer rowing with your back, you are spinning with your oblique. <em>If you have to twist, the weight is too heavy.</em></div>
+          <button class="gif-toggle" onclick="toggleGif(this)">
+            <span class="gif-toggle-icon">▶</span>
+            <span class="gif-toggle-label">Show example</span>
+          </button>
+          <div class="gif-reveal">
+           
+            <img src="tips%20assests/5-1-H-Kettlebell-Bent-Over-Row-683x1024.png" alt="Kettlebell row form guide">
+          </div>
+        </div>
+
+        <div class="mistake-item" style="border-left-color:var(--accent2)">
+          <div class="mistake-label" style="color:var(--accent2)">🧹 Farmer's Carry</div>
+          <div class="mistake-fix"><strong>A string pulls your head up; the bell cannot tilt you.</strong> The whole point of this exercise is to resist the side-bend the weight wants to force on you. Walk as if someone has that string attached to the top of your skull pulling straight up — shoulders perfectly level, gaze forward, deliberate medium steps. Squeeze the handle the entire duration. The moment you lean away from the bell, your core has given out — that is your signal to put it down, not push through.</div>
+          <button class="gif-toggle" onclick="toggleGif(this)">
+            <span class="gif-toggle-icon">▶</span>
+            <span class="gif-toggle-label">Show example</span>
+          </button>
+          <div class="gif-reveal">
+           <div class="tip-img-placeholder">📷 Image coming soon — add src to img tag below</div>
+            <!-- <img src="tips/carry-form.gif" alt="Farmer's carry form cue" loading="lazy"> -->
+          </div>
+        </div>
+
+        <div class="mistake-item" style="border-left-color:var(--accent2)">
+          <div class="mistake-label" style="color:var(--accent2)">🔁 Kettlebell Clean</div>
+          <div class="mistake-fix"><strong>Zip the bell up the centre line; receive it like an egg.</strong> The bell travels in a tight arc close to your body — think of a zip running up the centre of your torso that you are pulling the bell along. At the top, the bell "racks" softly on your forearm and shoulder as you rotate your hand — land it as gently as you would catch an egg. If it bangs your wrist, the arc went too wide or you skipped the hand rotation. Spend time just practicing the rack position before adding speed.</div>
+          <button class="gif-toggle" onclick="toggleGif(this)">
+            <span class="gif-toggle-icon">▶</span>
+            <span class="gif-toggle-label">Show example</span>
+          </button>
+          <div class="gif-reveal">
+           
+            <img src="tips%20assests/2-6-H-Kettlebell-Clean-683x1024.png" alt="Kettlebell clean form guide">
+          </div>
+        </div>
+
+        <div class="mistake-item" style="border-left-color:var(--accent2)">
+          <div class="mistake-label" style="color:var(--accent2)">🌀 Turkish Get-Up</div>
+          <div class="mistake-fix"><strong>Eyes on the bell — always. Move like you are underwater.</strong> Looking at the bell is not optional — it is the mechanism that keeps your shoulder stable. There are 7 distinct positions in a TGU; treat each one as its own pause before continuing. Imagine you are moving underwater — that speed is correct. If the bell wobbles or drifts, you have moved too fast. Master each stage with a shoe balanced on your fist before adding any weight.</div>
+          <button class="gif-toggle" onclick="toggleGif(this)">
+            <span class="gif-toggle-icon">▶</span>
+            <span class="gif-toggle-label">Show example</span>
+          </button>
+          <div class="gif-reveal">
+           
+            <img src="tips%20assests/6-1-H-Kettlebell-Turkish-Get-Up.png" alt="Turkish get-up form guide">
+          </div>
+        </div>
+
+        <div class="mistake-item" style="border-left-color:var(--accent2)">
+          <div class="mistake-label" style="color:var(--accent2)">🏹 Single-Leg RDL</div>
+          <div class="mistake-fix"><strong>Seesaw with a headlamp pointing forward.</strong> Imagine a headlamp strapped to your chest — as you hinge forward, it should point at the wall in front of you, not at the floor. Your free leg and your torso form the two arms of a seesaw with your standing hip as the pivot point. Keep your hips level — imagine a tray of drinks balanced across them that you cannot spill. Move glacially; balance collapses when you rush. A slight bend in the standing knee is correct.</div>
+          <button class="gif-toggle" onclick="toggleGif(this)">
+            <span class="gif-toggle-icon">▶</span>
+            <span class="gif-toggle-label">Show example</span>
+          </button>
+          <div class="gif-reveal">
+           
+            <img src="tips%20assests/2-2-H-Kettlebell-Single-Leg-Deadlift-683x1024.png" alt="Single-leg RDL form guide">
+          </div>
+        </div>
+
+        <div class="mistake-item" style="border-left-color:var(--accent2)">
+          <div class="mistake-label" style="color:var(--accent2)">💨 Thruster</div>
+          <div class="mistake-fix"><strong>Catch the rebound from the squat and ride it overhead.</strong> Think of the thruster as one continuous arc, not two separate movements. As you drive up from the squat, your legs are a coiled spring — the moment they release, that energy travels up through your core and into the press. Begin pressing while you are still rising, catching the momentum like a surfer catching a wave. If you pause at the top of the squat before pressing, the wave has already passed — you are now pressing with arms only.</div>
+          <button class="gif-toggle" onclick="toggleGif(this)">
+            <span class="gif-toggle-icon">▶</span>
+            <span class="gif-toggle-label">Show example</span>
+          </button>
+          <div class="gif-reveal">
+           
+            <img src="tips%20assests/7-2-H-Kettlebell-thruster-683x1024.png" alt="Thruster form guide">
+          </div>
+        </div>
+
+      </div>
     </div>
 
     <!-- CHOOSING YOUR WEIGHT -->

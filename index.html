@@ -218,6 +218,39 @@
       .tabs { gap: 6px; }
       .tab { padding: 8px 14px; font-size: 13px; }
     }
+
+    /* TIPS PANEL */
+    .tips-section { margin-bottom: 2rem; }
+    .tips-section-title { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 1.5px; color: var(--ink); margin-bottom: 1rem; padding-bottom: 6px; border-bottom: 2px solid var(--border); }
+    .tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+    .tip-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.2rem; }
+    .tip-card-icon { font-size: 26px; margin-bottom: 8px; }
+    .tip-card-title { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+    .tip-card-body { font-size: 13px; color: var(--muted); line-height: 1.65; }
+    .tip-card-body strong { color: var(--ink); font-weight: 500; }
+    .steps-list { display: flex; flex-direction: column; gap: 12px; }
+    .step-item { display: flex; gap: 14px; align-items: flex-start; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
+    .step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: 'Bebas Neue', sans-serif; }
+    .step-content { flex: 1; }
+    .step-title { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+    .step-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+    .step-desc strong { color: var(--ink); font-weight: 500; }
+    .weight-table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--bg); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+    .weight-table th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); font-weight: 600; padding: 8px 12px; border-bottom: 1px solid var(--border); background: var(--bg2); }
+    .weight-table td { padding: 9px 12px; border-bottom: 1px solid var(--border); color: var(--ink); }
+    .weight-table tr:last-child td { border-bottom: none; }
+    .weight-table td:first-child { font-weight: 500; }
+    .weight-table td:last-child { color: var(--muted); font-size: 12px; }
+    .mistake-list { display: flex; flex-direction: column; gap: 10px; }
+    .mistake-item { background: var(--bg); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 10px; padding: 12px 14px; }
+    .mistake-label { font-size: 11px; font-weight: 700; color: var(--accent); margin-bottom: 5px; text-transform: uppercase; letter-spacing: .5px; }
+    .mistake-fix { font-size: 12px; color: var(--muted); line-height: 1.6; }
+    .mistake-fix strong { color: var(--ink); font-weight: 500; }
+    .warmup-container { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+    .warmup-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 14px; border-bottom: 1px solid var(--border); background: var(--bg); gap: 12px; }
+    .warmup-row:last-child { border-bottom: none; }
+    .warmup-name { font-size: 13px; font-weight: 500; color: var(--ink); }
+    .warmup-detail { font-size: 12px; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
   </style>
 </head>
 <body>
@@ -232,6 +265,7 @@
     <button class="tab active" onclick="showPanel('exercises', this)">Exercises by Muscle</button>
     <button class="tab" onclick="showPanel('circuits', this)">Workout Circuits</button>
     <button class="tab" onclick="showPanel('bodygroups', this)">Body Group Workouts</button>
+    <button class="tab" onclick="showPanel('tips', this)">Tips & Strategies</button>
   </div>
 
   <!-- EXERCISES PANEL -->
@@ -265,6 +299,193 @@
     </div>
     <div class="day-selector" id="day-selector"></div>
     <div id="circuit-content"></div>
+  </div>
+
+  <!-- TIPS & STRATEGIES PANEL -->
+  <div class="panel" id="panel-tips">
+    <div class="callout">
+      <div class="callout-icon">🎓</div>
+      <div class="callout-text"><strong>New to kettlebells?</strong> This guide covers everything you need to train safely and effectively from day one. Work through each section before your first session — 10 minutes here will prevent months of wasted effort and avoidable injury.</div>
+    </div>
+
+    <!-- CHOOSING YOUR WEIGHT -->
+    <div class="tips-section">
+      <div class="tips-section-title">⚖️ Choosing Your First Kettlebell</div>
+      <div class="callout" style="margin-bottom:1rem">
+        <div class="callout-icon">💡</div>
+        <div class="callout-text">Most beginners go too light. A bell that feels challenging at rep 5 will feel easy at rep 15 after two weeks. Start heavier than your gut says — you can always set it down, but you cannot make a light bell harder.</div>
+      </div>
+      <table class="weight-table">
+        <thead>
+          <tr><th>Who You Are</th><th>Suggested Starting Weight</th><th>Why</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Woman, new to training</td><td>8 kg (18 lb)</td><td>Safe entry point for swings and deadlifts</td></tr>
+          <tr><td>Woman, gym-active</td><td>12 kg (26 lb)</td><td>Challenging without compromising form</td></tr>
+          <tr><td>Man, new to training</td><td>12–16 kg (26–35 lb)</td><td>Substantial enough for real hip hinge work</td></tr>
+          <tr><td>Man, gym-active</td><td>20–24 kg (44–53 lb)</td><td>Honest challenge across all basic movements</td></tr>
+          <tr><td>For overhead pressing (all)</td><td>Go 4–8 kg lighter</td><td>Pressing demands more shoulder control</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- FIRST 4 WEEKS -->
+    <div class="tips-section">
+      <div class="tips-section-title">📅 Your First 4 Weeks</div>
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <div class="step-title">Week 1–2: Master the Deadlift & Goblet Squat</div>
+            <div class="step-desc">Do nothing else for the first two sessions. <strong>Two-Hand KB Deadlift</strong> and <strong>Goblet Squat</strong> teach you the two fundamental movement patterns — the hip hinge and the squat. Every other exercise in this guide is built on these foundations. Do 3–4 sets of 8 reps each, rest as long as you need between sets.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <div class="step-title">Week 2–3: Add the Swing & Single-Arm Row</div>
+            <div class="step-desc">Once your hip hinge feels solid, add the <strong>Kettlebell Swing</strong>. It is the king of KB exercises but requires a good hinge first — the swing is a hinge with power, not a front raise. Also add the <strong>Single-Arm Row</strong> for your back. You now have all major patterns covered.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <div class="step-title">Week 3–4: Add the Press & Farmer's Carry</div>
+            <div class="step-desc">Introduce the <strong>Single-Arm Overhead Press</strong> and <strong>Farmer's Carry</strong>. The press builds overhead stability. The carry trains your core, grip, and posture all at once and is the most underrated exercise in existence. At this point you have a complete beginner program.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <div class="step-title">After Week 4: Follow the Beginner Circuits</div>
+            <div class="step-desc">Head to the <strong>Workout Circuits</strong> tab and start with the Beginner circuits. You now have enough movement competency to follow structured workouts safely. Train <strong>3 days per week</strong> with at least one rest day between sessions.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GOLDEN RULES -->
+    <div class="tips-section">
+      <div class="tips-section-title">🔒 6 Golden Safety Rules</div>
+      <div class="tips-grid">
+        <div class="tip-card">
+          <div class="tip-card-icon">🏗️</div>
+          <div class="tip-card-title">Form before weight, always</div>
+          <div class="tip-card-body">A perfect rep with a lighter bell builds more strength than a sloppy rep with a heavier one — and won't hurt your back. <strong>Never chase reps at the cost of form.</strong> When form breaks, stop the set.</div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-card-icon">🔋</div>
+          <div class="tip-card-title">Always warm up</div>
+          <div class="tip-card-body">Cold muscles and joints don't move well. Do 5–10 minutes of light movement before every session. The warm-up protocol below takes less than 7 minutes and dramatically reduces injury risk.</div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-card-icon">👁️</div>
+          <div class="tip-card-title">Film yourself occasionally</div>
+          <div class="tip-card-body">You cannot feel what you look like. Set your phone sideways and record a set from the side. You will immediately spot things you'd never notice — a rounding back, collapsed knee, or shallow range of motion.</div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-card-icon">😴</div>
+          <div class="tip-card-title">Rest days are not optional</div>
+          <div class="tip-card-body">Strength is built during recovery, not during the workout. Training 3 days per week with rest days between sessions produces faster results than training 5–6 days. <strong>More is not always better.</strong></div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-card-icon">⚡</div>
+          <div class="tip-card-title">End sets before failure</div>
+          <div class="tip-card-body">Leave 2–3 reps in reserve on most working sets. Training to absolute failure every set causes excessive fatigue and increases injury risk. Save max-effort sets for experienced lifters who manage recovery well.</div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-card-icon">🎯</div>
+          <div class="tip-card-title">Train patterns, not muscles</div>
+          <div class="tip-card-body">KB training organizes around movement: hinge, squat, push, pull, carry, rotate. One exercise from each pattern per session trains your entire body and nothing gets missed.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMMON MISTAKES -->
+    <div class="tips-section">
+      <div class="tips-section-title">⚠️ Common Beginner Mistakes</div>
+      <div class="mistake-list">
+        <div class="mistake-item">
+          <div class="mistake-label">❌ Squatting the swing</div>
+          <div class="mistake-fix">The swing is a hinge, not a squat. Your hips go <em>back</em>, not down. If your shins are tilting forward and knees are bending deeply, you are squatting. <strong>Fix:</strong> Think "snap your hips forward" — the squat goblet trains quads, swings train glutes and hamstrings.</div>
+        </div>
+        <div class="mistake-item">
+          <div class="mistake-label">❌ Using your arms in the swing</div>
+          <div class="mistake-fix">The arms only guide the bell — they do not pull it up. If your shoulders are burning from swings, you are muscling it with your arms. <strong>Fix:</strong> Think of your arms as ropes attached to your hips. The hip snap creates all the force.</div>
+        </div>
+        <div class="mistake-item">
+          <div class="mistake-label">❌ Rounding the lower back on deadlifts</div>
+          <div class="mistake-fix">A rounded lower back under load is how people get hurt. <strong>Fix:</strong> Before you pull, take a big breath and brace your core hard. Think "proud chest" — lift your chest before you lift the bell. Your back should feel like a rigid board.</div>
+        </div>
+        <div class="mistake-item">
+          <div class="mistake-label">❌ Going too heavy too soon</div>
+          <div class="mistake-fix">Ego lifting is the most common beginner mistake. <strong>Fix:</strong> Spend 2–3 weeks with a weight that lets you move perfectly. Form must be automatic before you add weight. The goal in month one is to become a better mover, not to lift more.</div>
+        </div>
+        <div class="mistake-item">
+          <div class="mistake-label">❌ Neglecting the pull pattern</div>
+          <div class="mistake-fix">Most beginners do too much pressing and not enough pulling, leading to shoulder imbalances and poor posture. <strong>Fix:</strong> For every pressing rep you do, match it with a pulling rep (row or pullover). Aim for a 1:1 or 2:1 pull-to-push ratio.</div>
+        </div>
+        <div class="mistake-item">
+          <div class="mistake-label">❌ Skipping the Farmer's Carry</div>
+          <div class="mistake-fix">It looks too simple so beginners skip it. This is a mistake. <strong>Fix:</strong> Add Farmer's Carries to every session. Pick up something genuinely heavy, stand tall, and walk. 3 sets of 30–45 seconds will transform your core strength faster than almost anything else.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WARM-UP PROTOCOL -->
+    <div class="tips-section">
+      <div class="tips-section-title">🔥 Warm-Up Every Session (7 min)</div>
+      <div class="callout" style="margin-bottom:1rem">
+        <div class="callout-icon">⏱️</div>
+        <div class="callout-text">Do this before every kettlebell session. It primes your joints, activates your core, and gets blood moving to the muscles you are about to use. It is 7 minutes and non-negotiable.</div>
+      </div>
+      <div class="warmup-container">
+        <div class="warmup-row"><span class="warmup-name">World's Greatest Stretch</span><span class="warmup-detail">5 reps each side · ~60 sec</span></div>
+        <div class="warmup-row"><span class="warmup-name">Hip 90/90 Rotations</span><span class="warmup-detail">10 reps each side · ~60 sec</span></div>
+        <div class="warmup-row"><span class="warmup-name">Bodyweight Hip Hinge (deadlift pattern)</span><span class="warmup-detail">10 reps · ~45 sec</span></div>
+        <div class="warmup-row"><span class="warmup-name">Bodyweight Goblet Squat (3 sec hold at bottom)</span><span class="warmup-detail">8 reps · ~60 sec</span></div>
+        <div class="warmup-row"><span class="warmup-name">Halo (light bell or hands clasped)</span><span class="warmup-detail">5 each direction · ~45 sec</span></div>
+        <div class="warmup-row"><span class="warmup-name">Arm Circles + Shoulder Rolls</span><span class="warmup-detail">10 each direction · ~30 sec</span></div>
+        <div class="warmup-row"><span class="warmup-name">KB Dead Bug (no weight, focus on breathing)</span><span class="warmup-detail">5 reps each side · ~45 sec</span></div>
+      </div>
+    </div>
+
+    <!-- PROGRESSION STRATEGY -->
+    <div class="tips-section">
+      <div class="tips-section-title">📈 How to Progress Week Over Week</div>
+      <div class="tips-grid">
+        <div class="tip-card">
+          <div class="tip-card-icon">📊</div>
+          <div class="tip-card-title">The 2-for-2 Rule</div>
+          <div class="tip-card-body">If you complete 2 extra reps on your last set for <strong>2 consecutive sessions</strong>, it is time to increase weight. Progression should be earned, not rushed. This rule prevents jumping weight before you are ready.</div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-card-icon">📝</div>
+          <div class="tip-card-title">Track Your Workouts</div>
+          <div class="tip-card-body">Write down what you lifted, how many reps, and how it felt. Without a log you will forget and stagnate. Even a simple notes app works. Seeing progress on paper is also one of the most motivating things you can do.</div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-card-icon">🔄</div>
+          <div class="tip-card-title">Deload Every 4th Week</div>
+          <div class="tip-card-body">Every fourth week, reduce volume and intensity by about 40%. Use lighter weights and fewer sets. This clears accumulated fatigue and you will feel stronger the week after. <strong>Deloads are where gains happen.</strong></div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-card-icon">🎯</div>
+          <div class="tip-card-title">One New Exercise Per Week Max</div>
+          <div class="tip-card-body">Do not try to learn everything at once. Introduce <strong>one new exercise per week</strong>, practice it until automatic, then add the next. Consistency with fewer exercises beats randomness with many.</div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-card-icon">💤</div>
+          <div class="tip-card-title">Sleep Is Your Best Supplement</div>
+          <div class="tip-card-body">Strength gains, fat loss, and skill learning all accelerate with adequate sleep. 7–9 hours consistently will do more for your progress than any supplement or extra workout session.</div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-card-icon">🧠</div>
+          <div class="tip-card-title">Mind-Muscle Connection</div>
+          <div class="tip-card-body">Actively think about which muscles should be working. During swings, consciously squeeze your glutes at the top. During rows, think "elbow to back pocket." <strong>Intentional movement builds faster.</strong></div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- BODY GROUP WORKOUTS PANEL -->

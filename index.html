@@ -1,1120 +1,148 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="home">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kettlebell Guide | Full Body Strength & Conditioning</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Romesh's Website</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/themes.css">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --ink: #1a1a1a;
-      --muted: #666;
-      --bg: #ffffff;
-      --bg2: #f5f4f1;
-      --border: rgba(0,0,0,0.1);
-      --accent: #D85A30;
-      --accent2: #1D9E75;
-      --accent3: #378ADD;
-      --gold: #BA7517;
-      --radius: 12px;
-      --opt-a-bg: #FFF7F4;
-      --opt-a-border: #D85A30;
-      --opt-a-header: #FAECE7;
-      --opt-b-bg: #F3F8FF;
-      --opt-b-border: #378ADD;
-      --opt-b-header: #E6F1FB;
-      --opt-c-bg: #F2FBF7;
-      --opt-c-border: #1D9E75;
-      --opt-c-header: #E1F5EE;
-    }
-    [data-theme="dark"] {
-      --ink: #EDECE8;
-      --muted: #909090;
-      --bg: #1E1E1E;
-      --bg2: #161616;
-      --border: rgba(255,255,255,0.1);
-      --opt-a-bg: #2A1F1B;
-      --opt-a-border: #C04E28;
-      --opt-a-header: #321F18;
-      --opt-b-bg: #192030;
-      --opt-b-border: #2E72BB;
-      --opt-b-header: #1A2840;
-      --opt-c-bg: #162420;
-      --opt-c-border: #178A63;
-      --opt-c-header: #182E27;
-    }
-    body { font-family: 'DM Sans', sans-serif; background: var(--bg2); color: var(--ink); min-height: 100vh; transition: background .2s, color .2s; }
-    .wrap { max-width: 960px; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
 
-    /* HERO */
-    .hero { text-align: center; padding: 3rem 1rem 2rem; background: var(--ink); color: #fff; border-radius: var(--radius); margin-bottom: 2rem; }
-    .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(42px, 8vw, 72px); letter-spacing: 3px; line-height: 1; }
-    .hero-title span { color: var(--accent); }
-    .hero-sub { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; margin-top: 8px; }
-
-    /* TABS */
-    .tabs { display: flex; gap: 8px; margin-bottom: 1.5rem; flex-wrap: wrap; }
-    .tab { padding: 10px 20px; border-radius: 50px; border: 1px solid var(--border); background: var(--bg); font-size: 14px; font-family: 'DM Sans', sans-serif; color: var(--muted); cursor: pointer; transition: all .2s; }
-    .tab.active { background: var(--ink); color: #fff; border-color: transparent; }
-    .tab:hover:not(.active) { background: var(--bg2); color: var(--ink); border-color: var(--border); }
-
-    /* MUSCLE NAV */
-    .muscle-nav { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; margin-bottom: 1.5rem; }
-    .muscle-btn { padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); font-size: 13px; font-family: 'DM Sans', sans-serif; cursor: pointer; text-align: left; transition: all .2s; color: var(--ink); }
-    .muscle-btn:hover, .muscle-btn.active { background: var(--ink); color: #fff; border-color: transparent; }
-    .muscle-emoji { display: block; font-size: 20px; margin-bottom: 4px; }
-
-    /* CALLOUT */
-    .callout { background: var(--bg); border-left: 4px solid var(--accent2); border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 1.5rem; display: flex; gap: 12px; align-items: flex-start; }
-    .callout-icon { font-size: 22px; flex-shrink: 0; }
-    .callout-text { font-size: 13px; color: var(--muted); line-height: 1.7; }
-    .callout-text strong { color: var(--ink); font-weight: 500; }
-
-    /* EXERCISE GRID */
-    .exercises-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 12px; margin-bottom: 2rem; }
-    @media (max-width: 600px) { .exercises-grid { grid-template-columns: 1fr; } }
-
-    /* EXERCISE CARD */
-    .ex-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.1rem 1.1rem 1.4rem; position: relative; overflow: hidden; transition: transform .15s; }
-    .ex-card:hover { transform: translateY(-2px); }
-    .ex-card-accent { position: absolute; top: 0; left: 0; width: 4px; height: 100%; }
-    .ex-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; gap: 8px; }
-    .ex-name { font-size: 15px; font-weight: 500; color: var(--ink); line-height: 1.3; }
-    .ex-badge { display: flex; flex-direction: column; align-items: center; min-width: 42px; flex-shrink: 0; }
-    .ex-score { font-family: 'Bebas Neue', sans-serif; font-size: 26px; line-height: 1; }
-    .ex-score-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; }
-    .score-bar { height: 4px; border-radius: 2px; background: var(--border); margin-top: 5px; width: 42px; overflow: hidden; }
-    .score-fill { height: 100%; border-radius: 2px; }
-    .ex-tag { display: inline-block; font-size: 11px; padding: 3px 9px; border-radius: 10px; margin-bottom: 8px; font-weight: 500; }
-    .tag-form     { background:#E1F5EE; color:#0A5C47; }
-    .tag-essential{ background:#FAECE7; color:#8B2E10; }
-    .tag-technical{ background:#EEEDFE; color:#3E349A; }
-    .tag-default  { background:#ECEAE4; color:#4A4845; }
-    [data-theme="dark"] .tag-form      { background:#0D2E24; color:#5DD4A8; }
-    [data-theme="dark"] .tag-essential { background:#2D1510; color:#F08060; }
-    [data-theme="dark"] .tag-technical { background:#1C1830; color:#A099E8; }
-    [data-theme="dark"] .tag-default   { background:#252320; color:#A8A5A0; }
-    .ex-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
-    .ex-form { font-size: 12px; color: var(--ink); margin-top: 10px; padding: 8px 10px; background: var(--bg2); border-radius: 8px; line-height: 1.55; }
-    .ex-form strong { font-weight: 500; color: var(--accent2); }
-
-    /* GIF TOGGLE */
-    .gif-toggle { display: flex; align-items: center; gap: 6px; margin-top: 10px; padding: 6px 10px; border-radius: 8px; border: 1px solid var(--border); background: transparent; font-size: 11px; font-family: 'DM Sans', sans-serif; color: var(--muted); cursor: pointer; transition: all .2s; width: 100%; }
-    .gif-toggle:hover { background: var(--bg2); color: var(--ink); border-color: var(--ink); }
-    .gif-toggle-icon { font-size: 13px; transition: transform .2s; }
-    .gif-toggle.open .gif-toggle-icon { transform: rotate(90deg); }
-    .gif-reveal { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
-    .gif-reveal.open { max-height: 1300px; }
-    .gif-reveal img { width: 100%; border-radius: 8px; margin-top: 8px; display: block; }
-    .gif-credit { font-size: 10px; color: var(--muted); text-align: right; margin-top: 3px; opacity: .6; }
-
-    /* CIRCUIT LEVEL / DAY SELECTORS */
-    .circuit-tabs { display: flex; gap: 6px; margin-bottom: 1.5rem; flex-wrap: wrap; }
-    .circuit-tab { padding: 7px 16px; border-radius: 8px; border: 1px solid var(--border); font-size: 12px; font-family: 'DM Sans', sans-serif; cursor: pointer; color: var(--muted); background: var(--bg); transition: all .2s; text-transform: uppercase; letter-spacing: .5px; }
-    .circuit-tab.active { background: var(--accent); color: #fff; border-color: transparent; }
-    .day-selector { display: flex; gap: 6px; margin-bottom: 1.25rem; flex-wrap: wrap; }
-    .day-btn { padding: 8px 16px; border-radius: 8px; border: 1px solid var(--border); font-size: 13px; font-family: 'DM Sans', sans-serif; cursor: pointer; color: var(--muted); background: var(--bg); transition: all .2s; }
-    .day-btn.active { color: var(--ink); font-weight: 500; border-color: var(--ink); background: var(--bg); }
-
-    /* CIRCUIT DAY HEADER */
-    .circuit-header { display: flex; align-items: center; gap: 14px; margin-bottom: 1rem; }
-    .circuit-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--bg2); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
-    .circuit-title { font-size: 18px; font-weight: 500; color: var(--ink); }
-    .circuit-meta { font-size: 12px; color: var(--muted); margin-top: 2px; }
-
-    /* CIRCUIT OPTIONS — 3-COLUMN COMPACT GRID */
-    .options-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1rem; }
-    @media (max-width: 680px) { .options-grid { grid-template-columns: 1fr; } }
-
-    .option-card { border-radius: var(--radius); overflow: hidden; border: 1.5px solid; }
-    .option-card.opt-a { background: var(--opt-a-bg); border-color: var(--opt-a-border); }
-    .option-card.opt-b { background: var(--opt-b-bg); border-color: var(--opt-b-border); }
-    .option-card.opt-c { background: var(--opt-c-bg); border-color: var(--opt-c-border); }
-
-    .option-header { padding: 8px 10px; }
-    .opt-a .option-header { background: var(--opt-a-header); }
-    .opt-b .option-header { background: var(--opt-b-header); }
-    .opt-c .option-header { background: var(--opt-c-header); }
-    .option-header-top { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; margin-bottom: 4px; }
-    .opt-a .option-header-top { color: var(--accent); }
-    .opt-b .option-header-top { color: var(--accent3); }
-    .opt-c .option-header-top { color: var(--accent2); }
-    .opt-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-    .opt-a .opt-dot { background: var(--accent); }
-    .opt-b .opt-dot { background: var(--accent3); }
-    .opt-c .opt-dot { background: var(--accent2); }
-    .option-desc { font-size: 11px; color: var(--muted); line-height: 1.4; margin-bottom: 5px; }
-    .muscle-chips { display: flex; flex-wrap: wrap; gap: 3px; }
-    .muscle-chip { font-size: 10px; padding: 2px 6px; border-radius: 4px; background: rgba(0,0,0,0.07); color: var(--muted); font-weight: 500; }
-    [data-theme="dark"] .muscle-chip { background: rgba(255,255,255,0.09); color: var(--muted); }
-
-    .option-body { padding: 8px 10px 10px; }
-    .compact-row { display: flex; align-items: baseline; gap: 6px; padding: 5px 0; border-bottom: 1px solid var(--border); }
-    .compact-row:last-child { border-bottom: none; }
-    .compact-num { font-size: 10px; color: var(--muted); min-width: 14px; flex-shrink: 0; font-weight: 600; }
-    .compact-name { font-size: 12px; font-weight: 500; color: var(--ink); flex: 1; line-height: 1.3; }
-    .compact-detail { font-size: 11px; color: var(--muted); white-space: nowrap; }
-
-    .tip-box { background: var(--bg); border-left: 3px solid var(--accent2); border-radius: 8px; padding: 12px 14px; margin-top: .75rem; font-size: 13px; color: var(--muted); line-height: 1.65; }
-    .tip-box strong { color: var(--ink); font-weight: 500; }
-
-    /* DARK MODE TOGGLE */
-    .theme-toggle { position: fixed; top: 1rem; right: 1rem; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border); background: var(--bg); color: var(--ink); font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 100; transition: all .2s; box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
-    .theme-toggle:hover { transform: scale(1.1); }
-
-    /* BODY GROUP WORKOUTS */
-    .group-selector { display: flex; gap: 6px; margin-bottom: 1.25rem; flex-wrap: wrap; }
-    .group-btn { padding: 8px 14px; border-radius: 8px; border: 1px solid var(--border); font-size: 12px; font-family: 'DM Sans', sans-serif; cursor: pointer; color: var(--muted); background: var(--bg); transition: all .2s; }
-    .group-btn.active { color: var(--ink); font-weight: 500; border-color: var(--ink); }
-    .group-header { display: flex; align-items: center; gap: 14px; margin-bottom: 1rem; }
-    .group-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--bg2); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
-    .group-title { font-size: 18px; font-weight: 500; color: var(--ink); }
-    .group-meta { font-size: 12px; color: var(--muted); margin-top: 2px; }
-
-    .rank-cards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 1rem; }
-    @media (max-width: 600px) { .rank-cards-grid { grid-template-columns: 1fr; } }
-
-    /* Per-group color tokens via CSS custom properties */
-    .rank-card.grp-hinge { --grp-color:#D85A30; --grp-header:#FAECE7; --grp-bg:#FFF7F4; }
-    .rank-card.grp-squat { --grp-color:#378ADD; --grp-header:#E6F1FB; --grp-bg:#F3F8FF; }
-    .rank-card.grp-push  { --grp-color:#1D9E75; --grp-header:#E1F5EE; --grp-bg:#F2FBF7; }
-    .rank-card.grp-pull  { --grp-color:#BA7517; --grp-header:#FAF0D0; --grp-bg:#FDF8EC; }
-    .rank-card.grp-core  { --grp-color:#534AB7; --grp-header:#EEEDFE; --grp-bg:#F5F4FE; }
-    .rank-card.grp-total { --grp-color:#D4537E; --grp-header:#FDDEE9; --grp-bg:#FFF2F7; }
-    [data-theme="dark"] .rank-card.grp-hinge { --grp-header:#321F18; --grp-bg:#2A1F1B; }
-    [data-theme="dark"] .rank-card.grp-squat { --grp-header:#1A2840; --grp-bg:#192030; }
-    [data-theme="dark"] .rank-card.grp-push  { --grp-header:#182E27; --grp-bg:#162420; }
-    [data-theme="dark"] .rank-card.grp-pull  { --grp-header:#2C2004; --grp-bg:#23200A; }
-    [data-theme="dark"] .rank-card.grp-core  { --grp-header:#221F38; --grp-bg:#1C1A30; }
-    [data-theme="dark"] .rank-card.grp-total { --grp-header:#321825; --grp-bg:#2A1520; }
-
-    .rank-card { background: var(--grp-bg); border: 1.5px solid var(--grp-color); border-radius: var(--radius); overflow: hidden; }
-    .rank-card-header { background: var(--grp-header); padding: 10px 12px; display: flex; gap: 10px; align-items: flex-start; }
-    .rank-badge { width: 30px; height: 30px; border-radius: 7px; background: var(--grp-color); color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 20px; line-height: 1; flex-shrink: 0; }
-    .rank-info { flex: 1; min-width: 0; }
-    .rank-name { font-size: 13px; font-weight: 600; color: var(--ink); line-height: 1.3; margin-bottom: 5px; }
-    .rank-card-body { background: var(--bg); padding: 8px 12px 10px; }
-    .rank-tag-row { margin-bottom: 6px; display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
-    .rank-why { font-size: 11px; color: var(--muted); line-height: 1.5; padding-bottom: 7px; border-bottom: 1px solid var(--border); margin-bottom: 7px; }
-    .rank-sets { display: flex; flex-direction: column; gap: 0; }
-    .sets-row { display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid var(--border); }
-    .sets-row:last-child { border-bottom: none; }
-    .sets-level { font-size: 10px; text-transform: uppercase; letter-spacing: .5px; font-weight: 600; }
-    .sets-beg { color: #158A62; }
-    .sets-int { color: #906010; }
-    .sets-adv { color: #B84020; }
-    [data-theme="dark"] .sets-beg { color: #4ECBA0; }
-    [data-theme="dark"] .sets-int { color: #D4A030; }
-    [data-theme="dark"] .sets-adv { color: #F07A56; }
-    .sets-val { font-size: 12px; font-weight: 500; color: var(--ink); }
-
-    .panel { display: none; }
-    .panel.active { display: block; }
-
-    @media (max-width: 500px) {
-      .hero { padding: 2rem .75rem 1.5rem; border-radius: 8px; }
-      .tabs { gap: 6px; }
-      .tab { padding: 8px 14px; font-size: 13px; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      padding: 40px 20px;
     }
 
-    /* TIPS PANEL */
-    .tips-section { margin-bottom: 2rem; }
-    .tips-section-title { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 1.5px; color: var(--ink); margin-bottom: 1rem; padding-bottom: 6px; border-bottom: 2px solid var(--border); }
-    .tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
-    .tip-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.2rem; }
-    .tip-card-icon { font-size: 26px; margin-bottom: 8px; }
-    .tip-card-title { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
-    .tip-card-body { font-size: 13px; color: var(--muted); line-height: 1.65; }
-    .tip-card-body strong { color: var(--ink); font-weight: 500; }
-    .steps-list { display: flex; flex-direction: column; gap: 12px; }
-    .step-item { display: flex; gap: 14px; align-items: flex-start; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
-    .step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: 'Bebas Neue', sans-serif; }
-    .step-content { flex: 1; }
-    .step-title { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
-    .step-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
-    .step-desc strong { color: var(--ink); font-weight: 500; }
-    .weight-table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--bg); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
-    .weight-table th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); font-weight: 600; padding: 8px 12px; border-bottom: 1px solid var(--border); background: var(--bg2); }
-    .weight-table td { padding: 9px 12px; border-bottom: 1px solid var(--border); color: var(--ink); }
-    .weight-table tr:last-child td { border-bottom: none; }
-    .weight-table td:first-child { font-weight: 500; }
-    .weight-table td:last-child { color: var(--muted); font-size: 12px; }
-    .mistake-list { display: flex; flex-direction: column; gap: 10px; }
-    .mistake-item { background: var(--bg); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 10px; padding: 12px 14px; }
-    .mistake-label { font-size: 11px; font-weight: 700; color: var(--accent); margin-bottom: 5px; text-transform: uppercase; letter-spacing: .5px; }
-    .mistake-fix { font-size: 12px; color: var(--muted); line-height: 1.6; }
-    .mistake-fix strong { color: var(--ink); font-weight: 500; }
-    .warmup-container { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
-    .warmup-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 14px; border-bottom: 1px solid var(--border); background: var(--bg); gap: 12px; }
-    .warmup-row:last-child { border-bottom: none; }
-    .warmup-name { font-size: 13px; font-weight: 500; color: var(--ink); }
-    .warmup-detail { font-size: 12px; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
-    .tip-img-placeholder { background: var(--bg2); border: 1px dashed var(--border); border-radius: 8px; padding: 18px; text-align: center; font-size: 12px; color: var(--muted); margin-top: 8px; }
+    /* ── Header ── */
+    .site-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.8rem, 8vw, 5rem);
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      text-align: center;
+    }
+
+    /* ── Social icons ── */
+    .socials {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      color: var(--muted);
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .social-link:hover {
+      border-color: var(--muted);
+      color: var(--ink);
+    }
+
+    .social-link svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    /* ── Project buttons ── */
+    .projects {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .project-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 140px;
+      height: 140px;
+      border-radius: var(--radius);
+      background: var(--bg3);
+      border: 1.5px solid var(--border);
+      color: var(--ink);
+      text-decoration: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
+      cursor: pointer;
+    }
+
+    .project-btn:hover {
+      background: var(--bg2);
+      border-color: var(--border);
+      transform: translateY(-2px);
+    }
+
+    .project-btn .btn-icon {
+      font-size: 2.4rem;
+      line-height: 1;
+    }
+
+    .project-btn .btn-label {
+      text-align: center;
+      line-height: 1.3;
+      color: var(--muted);
+    }
   </style>
 </head>
 <body>
-<button class="theme-toggle" onclick="toggleTheme()" id="theme-btn" title="Toggle dark mode">🌙</button>
-<div class="wrap">
-  <div class="hero">
-    <div class="hero-title">Kettlebell <span>Guide</span></div>
-    <div class="hero-sub">Full Body Strength &amp; Conditioning &middot; Beginner Friendly</div>
+
+  <h1 class="site-name">hi :3</h1>
+
+  <!-- Social media links (empty for now) -->
+  <div class="socials">
+    <!-- GitHub -->
+    <a class="social-link" href="#" title="GitHub">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.729.083-.729 1.205.085 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.605-2.665-.3-5.467-1.332-5.467-5.93 0-1.31.468-2.382 1.236-3.22-.124-.303-.536-1.523.117-3.176 0 0 1.008-.322 3.3 1.23a11.5 11.5 0 0 1 3.003-.404c1.02.005 2.047.138 3.003.404 2.29-1.552 3.297-1.23 3.297-1.23.655 1.653.243 2.873.12 3.176.77.838 1.235 1.91 1.235 3.22 0 4.61-2.807 5.625-5.48 5.92.43.372.823 1.102.823 2.222 0 1.606-.015 2.898-.015 3.293 0 .322.216.694.825.576C20.565 21.796 24 17.298 24 12c0-6.63-5.37-12-12-12z"/>
+      </svg>
+    </a>
+    <!-- LinkedIn -->
+    <a class="social-link" href="#" title="LinkedIn">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+      </svg>
+    </a>
+    <!-- Twitter / X -->
+    <a class="social-link" href="#" title="Twitter / X">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.26 5.632 5.905-5.632zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+      </svg>
+    </a>
   </div>
 
-  <div class="tabs">
-    <button class="tab active" onclick="showPanel('exercises', this)">Exercises by Muscle</button>
-    <button class="tab" onclick="showPanel('circuits', this)">Workout Circuits</button>
-    <button class="tab" onclick="showPanel('bodygroups', this)">Body Group Workouts</button>
-    <button class="tab" onclick="showPanel('tips', this)">Tips & Strategies</button>
+  <!-- Project buttons -->
+  <div class="projects">
+    <a class="project-btn" href="kettlebell.html" title="Kettlebell Guide">
+      <span class="btn-icon">🏋️</span>
+      <span class="btn-label">Kettlebell Guide</span>
+    </a>
   </div>
 
-  <!-- EXERCISES PANEL -->
-  <div class="panel active" id="panel-exercises">
-    <div class="callout">
-      <div class="callout-icon">💡</div>
-      <div class="callout-text"><strong>Brand new to kettlebells?</strong> Start with exercises tagged "Form Builder" first. These build the foundational movement patterns that make all other lifts safe and effective. Spend 2–3 weeks here before progressing to heavier or more complex moves.</div>
-    </div>
-    <div class="muscle-nav" id="muscle-nav">
-      <button class="muscle-btn active" onclick="showMuscle('all',this)"><span class="muscle-emoji">🔥</span>All Exercises</button>
-      <button class="muscle-btn" onclick="showMuscle('hinge',this)"><span class="muscle-emoji">🍑</span>Hinge / Glutes</button>
-      <button class="muscle-btn" onclick="showMuscle('squat',this)"><span class="muscle-emoji">🦵</span>Quads / Legs</button>
-      <button class="muscle-btn" onclick="showMuscle('push',this)"><span class="muscle-emoji">💪</span>Push / Chest</button>
-      <button class="muscle-btn" onclick="showMuscle('pull',this)"><span class="muscle-emoji">🔙</span>Pull / Back</button>
-      <button class="muscle-btn" onclick="showMuscle('core',this)"><span class="muscle-emoji">🏋️</span>Core</button>
-      <button class="muscle-btn" onclick="showMuscle('total',this)"><span class="muscle-emoji">⚡</span>Total Body</button>
-    </div>
-    <div class="exercises-grid" id="ex-grid"></div>
-  </div>
-
-  <!-- CIRCUITS PANEL -->
-  <div class="panel" id="panel-circuits">
-    <div class="callout">
-      <div class="callout-icon">📋</div>
-      <div class="callout-text"><strong>How to use these circuits:</strong> Pick Option A, B, or C based on your energy and goals that day. Aim for 3 rounds (beginners) or 4–5 rounds (intermediate/advanced). Rest 60–90 sec between rounds. Train 3 days per week with rest days between sessions.</div>
-    </div>
-    <div class="circuit-tabs">
-      <button class="circuit-tab active" onclick="showLevel('beginner',this)">Beginner</button>
-      <button class="circuit-tab" onclick="showLevel('intermediate',this)">Intermediate</button>
-      <button class="circuit-tab" onclick="showLevel('advanced',this)">Advanced</button>
-    </div>
-    <div class="day-selector" id="day-selector"></div>
-    <div id="circuit-content"></div>
-  </div>
-
-  <!-- TIPS & STRATEGIES PANEL -->
-  <div class="panel" id="panel-tips">
-    <div class="callout">
-      <div class="callout-icon">🎓</div>
-      <div class="callout-text"><strong>New to kettlebells?</strong> This guide covers everything you need to train safely and effectively from day one. Work through each section before your first session — 10 minutes here will prevent months of wasted effort and avoidable injury.</div>
-    </div>
-
-    <!-- FORM FUNDAMENTALS -->
-    <div class="tips-section">
-      <div class="tips-section-title">📐 General Form Fundamentals</div>
-      <div class="tips-grid">
-
-        <div class="tip-card">
-          <div class="tip-card-icon">🫁</div>
-          <div class="tip-card-title">Brace like you're about to get punched</div>
-          <div class="tip-card-body">Before every rep, imagine someone is about to punch you in the stomach — take a breath and tighten your whole midsection as if to brace for impact. <strong>That hardness is your core being on.</strong> This creates intra-abdominal pressure that acts like an internal weight belt, protecting your spine under load. Without it, your lower back absorbs forces it was never meant to handle.</div>
-          <button class="gif-toggle" onclick="toggleGif(this)">
-            <span class="gif-toggle-icon">▶</span>
-            <span class="gif-toggle-label">Show example</span>
-          </button>
-          <div class="gif-reveal">
-            <img src="assets/tips%20assests/bracecore.png" alt="Core bracing demonstration">
-          </div>
-        </div>
-
-        <div class="tip-card">
-          <div class="tip-card-icon">🦴</div>
-          <div class="tip-card-title">A string is pulling your head to the ceiling</div>
-          <div class="tip-card-body">Imagine a string attached to the very top of your skull pulling straight up toward the ceiling. This one cue fixes more problems than almost any other: your chin tucks slightly, your neck lengthens, your chest opens, and your spine stacks naturally. <strong>The moment your head drops forward, the whole chain collapses.</strong> Use it during carries, squats, rows — everything.</div>
-          <button class="gif-toggle" onclick="toggleGif(this)">
-            <span class="gif-toggle-icon">▶</span>
-            <span class="gif-toggle-label">Show example</span>
-          </button>
-          <div class="gif-reveal">
-            <img src="assets/tips%20assests/posture.webp" alt="Neutral spine / string posture cue">
-          </div>
-        </div>
-
-        <div class="tip-card">
-          <div class="tip-card-icon">🔩</div>
-          <div class="tip-card-title">Squeeze everything before you move</div>
-          <div class="tip-card-body">Before each rep: crush the handle, squeeze your glutes, brace your abs. This "irradiation" effect — tension in one muscle radiating to neighbouring muscles — makes you measurably stronger without adding any weight. Think of it like <strong>tightening every bolt before you drive.</strong> A loose body is a weak and vulnerable body.</div>
-          <button class="gif-toggle" onclick="toggleGif(this)">
-            <span class="gif-toggle-icon">▶</span>
-            <span class="gif-toggle-label">Show example</span>
-          </button>
-          <div class="gif-reveal">
-            <img src="assets/tips%20assests/russian-kettlebell-swing.gif" alt="Full body tension demonstration">
-          </div>
-        </div>
-
-        <div class="tip-card">
-          <div class="tip-card-icon">👣</div>
-          <div class="tip-card-title">Screw your feet into the floor</div>
-          <div class="tip-card-body">Press all four corners of each foot down and imagine screwing them outward — like trying to rip the floor apart beneath you (without actually moving your feet). This creates rotational torque through the hip that activates your glutes and locks your knees in the correct path. <strong>Strong floor contact = strong lift.</strong> Try it and feel your glutes switch on immediately.</div>
-          <button class="gif-toggle" onclick="toggleGif(this)">
-            <span class="gif-toggle-icon">▶</span>
-            <span class="gif-toggle-label">Show example</span>
-          </button>
-          <div class="gif-reveal">
-            <img src="assets/tips%20assests/activatefeet.jpg" alt="Foot rooting / screwing feet demonstration">
-          </div>
-        </div>
-
-        <div class="tip-card">
-          <div class="tip-card-icon">🧱</div>
-          <div class="tip-card-title">Tuck your shoulder blades into your back pockets</div>
-          <div class="tip-card-body">Before any press, row, or carry, pull your shoulder blades down and together — like you are trying to slide them into your back trouser pockets. This depresses and retracts the scapulae, creating a stable base for the arm and protecting the rotator cuff. <strong>Shrugged, elevated shoulders during pressing is how people get injured.</strong> Set them down first, every single time.</div>
-          <button class="gif-toggle" onclick="toggleGif(this)">
-            <span class="gif-toggle-icon">▶</span>
-            <span class="gif-toggle-label">Show example</span>
-          </button>
-          <div class="gif-reveal">
-            <img src="assets/tips%20assests/shoulderblades.jpeg" alt="Shoulder packing / scapula retraction demonstration">
-          </div>
-        </div>
-
-        <div class="tip-card">
-          <div class="tip-card-icon">🐢</div>
-          <div class="tip-card-title">Lower like you're lowering a sleeping child</div>
-          <div class="tip-card-body">The lowering (eccentric) phase builds more muscle than lifting. Take 2–3 seconds on the way down on every press, squat, and row — as if you are gently lowering something you cannot afford to drop. Most people fling the weight down and waste half the rep. <strong>Slow eccentrics also make you more aware of where your form breaks</strong> — the moment you rush, you stop feeling what is working.</div>
-          <button class="gif-toggle" onclick="toggleGif(this)">
-            <span class="gif-toggle-icon">▶</span>
-            <span class="gif-toggle-label">Show example</span>
-          </button>
-          <div class="gif-reveal">
-            <img src="assets/tips%20assests/slowcontrol.gif" alt="Slow eccentric / controlled lowering demonstration">
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- EXERCISE-SPECIFIC FORM TIPS -->
-    <div class="tips-section">
-      <div class="tips-section-title">🎯 Exercise-Specific Form Tips</div>
-      <div class="callout" style="margin-bottom:1rem">
-        <div class="callout-icon">💡</div>
-        <div class="callout-text">Each exercise has one or two make-or-break cues. Nail these and the rest tends to fall into place. Film yourself against these checkpoints — what you feel and what you look like are often very different things.</div>
-      </div>
-      <div class="mistake-list">
-
-        <div class="mistake-item" style="border-left-color:var(--accent2)">
-          <div class="mistake-label" style="color:var(--accent2)">🔄 Kettlebell Swing</div>
-          <div class="mistake-fix"><strong>Hike, snap, float.</strong> The bell hikes back between your legs like a football snap, then your hips drive forward like you are slamming a car door with your backside. The arms are just ropes — they go along for the ride. At the top, you should be standing in a perfect plank: glutes locked, abs braced, shoulders packed. The bell floats briefly at chest height from pure momentum. <em>Tired shoulders = your arms are working. Tired lower back = you are squatting instead of hinging.</em></div>
-          <button class="gif-toggle" onclick="toggleGif(this)">
-            <span class="gif-toggle-icon">▶</span>
-            <span class="gif-toggle-label">Show example</span>
-          </button>
-          <div class="gif-reveal">
-           
-            <img src="assets/tips%20assests/2-3-H-Two-Handed-Kettlebell-Swing-683x1024.png" alt="Kettlebell swing form guide">
-          </div>
-        </div>
-
-        <div class="mistake-item" style="border-left-color:var(--accent2)">
-          <div class="mistake-label" style="color:var(--accent2)">⬇️ Kettlebell Deadlift</div>
-          <div class="mistake-fix"><strong>Push the floor away — don't pull the bell up.</strong> Your legs are a hydraulic press; think of them driving the ground downward rather than your back pulling the bell up. Before you move: big breath, brace your core like you're about to get punched, then lift your chest ("proud chest") to lock your back flat. Hips and shoulders should rise at the same rate — if your hips shoot up first and your chest drops, your lower back is taking over. <em>Think: leg press, not back lift.</em></div>
-          <button class="gif-toggle" onclick="toggleGif(this)">
-            <span class="gif-toggle-icon">▶</span>
-            <span class="gif-toggle-label">Show example</span>
-          </button>
-          <div class="gif-reveal">
-           
-            <img src="assets/tips%20assests/2-1-H-Kettlebell-Single-Arm-Deadlift-683x1024.png" alt="Kettlebell deadlift form guide">
-          </div>
-        </div>
-
-        <div class="mistake-item" style="border-left-color:var(--accent2)">
-          <div class="mistake-label" style="color:var(--accent2)">🏆 Goblet Squat</div>
-          <div class="mistake-fix"><strong>Elbows pry knees apart; sit between your heels.</strong> At the bottom, use your elbows to actively push your knees out — as if prying open a door. Your goal is to sit <em>between</em> your heels, not above them. Imagine the floor is a drain and you are squatting down over it, spreading your feet to let the water through. Hold a 3-second pause at the bottom each rep for the first two weeks — your body will quickly learn where it needs to be.</div>
-          <button class="gif-toggle" onclick="toggleGif(this)">
-            <span class="gif-toggle-icon">▶</span>
-            <span class="gif-toggle-label">Show example</span>
-          </button>
-          <div class="gif-reveal">
-           
-            <img src="assets/tips%20assests/3-1-H-Kettlebell-Goblet-Squat-683x1024.png" alt="Goblet squat form guide">
-          </div>
-        </div>
-
-        <div class="mistake-item" style="border-left-color:var(--accent2)">
-          <div class="mistake-label" style="color:var(--accent2)">🎯 Overhead Press</div>
-          <div class="mistake-fix"><strong>Juice the handle; press your body away from the floor.</strong> Before the press: crush the handle as hard as you can, glutes squeezed, abs braced like you're about to be punched, shoulder packed into its socket. As you press, think of pushing yourself down through the floor rather than pushing the bell up — this engages your lats and keeps the bar path vertical. Your bicep should finish beside your ear. If it is in front of your face, you have lost your lat and the shoulder is unprotected at lockout.</div>
-          <button class="gif-toggle" onclick="toggleGif(this)">
-            <span class="gif-toggle-icon">▶</span>
-            <span class="gif-toggle-label">Show example</span>
-          </button>
-          <div class="gif-reveal">
-           
-            <img src="assets/tips%20assests/4-3-H-Kettlebell-Overhead-Press-683x1024.png.webp" alt="Overhead press form guide">
-          </div>
-        </div>
-
-        <div class="mistake-item" style="border-left-color:var(--accent2)">
-          <div class="mistake-label" style="color:var(--accent2)">🚣 Single-Arm Row</div>
-          <div class="mistake-fix"><strong>Elbow to back pocket — imagine you are starting a lawnmower slowly.</strong> The elbow drives back and down along your ribcage, finishing near your hip bone — not flaring out wide toward your ear. At the top, pause for one second and actively try to squeeze your shoulder blade toward your spine. Keep your torso completely flat — if you rotate to heave the weight, you are no longer rowing with your back, you are spinning with your oblique. <em>If you have to twist, the weight is too heavy.</em></div>
-          <button class="gif-toggle" onclick="toggleGif(this)">
-            <span class="gif-toggle-icon">▶</span>
-            <span class="gif-toggle-label">Show example</span>
-          </button>
-          <div class="gif-reveal">
-           
-            <img src="assets/tips%20assests/5-1-H-Kettlebell-Bent-Over-Row-683x1024.png" alt="Kettlebell row form guide">
-          </div>
-        </div>
-
-        <div class="mistake-item" style="border-left-color:var(--accent2)">
-          <div class="mistake-label" style="color:var(--accent2)">🧹 Farmer's Carry</div>
-          <div class="mistake-fix"><strong>A string pulls your head up; the bell cannot tilt you.</strong> The whole point of this exercise is to resist the side-bend the weight wants to force on you. Walk as if someone has that string attached to the top of your skull pulling straight up — shoulders perfectly level, gaze forward, deliberate medium steps. Squeeze the handle the entire duration. The moment you lean away from the bell, your core has given out — that is your signal to put it down, not push through.</div>
-          <button class="gif-toggle" onclick="toggleGif(this)">
-            <span class="gif-toggle-icon">▶</span>
-            <span class="gif-toggle-label">Show example</span>
-          </button>
-          <div class="gif-reveal">
-           <div class="tip-img-placeholder">📷 Image coming soon — add src to img tag below</div>
-            <!-- <img src="tips/carry-form.gif" alt="Farmer's carry form cue" loading="lazy"> -->
-          </div>
-        </div>
-
-        <div class="mistake-item" style="border-left-color:var(--accent2)">
-          <div class="mistake-label" style="color:var(--accent2)">🔁 Kettlebell Clean</div>
-          <div class="mistake-fix"><strong>Zip the bell up the centre line; receive it like an egg.</strong> The bell travels in a tight arc close to your body — think of a zip running up the centre of your torso that you are pulling the bell along. At the top, the bell "racks" softly on your forearm and shoulder as you rotate your hand — land it as gently as you would catch an egg. If it bangs your wrist, the arc went too wide or you skipped the hand rotation. Spend time just practicing the rack position before adding speed.</div>
-          <button class="gif-toggle" onclick="toggleGif(this)">
-            <span class="gif-toggle-icon">▶</span>
-            <span class="gif-toggle-label">Show example</span>
-          </button>
-          <div class="gif-reveal">
-           
-            <img src="assets/tips%20assests/2-6-H-Kettlebell-Clean-683x1024.png" alt="Kettlebell clean form guide">
-          </div>
-        </div>
-
-        <div class="mistake-item" style="border-left-color:var(--accent2)">
-          <div class="mistake-label" style="color:var(--accent2)">🌀 Turkish Get-Up</div>
-          <div class="mistake-fix"><strong>Eyes on the bell — always. Move like you are underwater.</strong> Looking at the bell is not optional — it is the mechanism that keeps your shoulder stable. There are 7 distinct positions in a TGU; treat each one as its own pause before continuing. Imagine you are moving underwater — that speed is correct. If the bell wobbles or drifts, you have moved too fast. Master each stage with a shoe balanced on your fist before adding any weight.</div>
-          <button class="gif-toggle" onclick="toggleGif(this)">
-            <span class="gif-toggle-icon">▶</span>
-            <span class="gif-toggle-label">Show example</span>
-          </button>
-          <div class="gif-reveal">
-           
-            <img src="assets/tips%20assests/6-1-H-Kettlebell-Turkish-Get-Up.png" alt="Turkish get-up form guide">
-          </div>
-        </div>
-
-        <div class="mistake-item" style="border-left-color:var(--accent2)">
-          <div class="mistake-label" style="color:var(--accent2)">🏹 Single-Leg RDL</div>
-          <div class="mistake-fix"><strong>Seesaw with a headlamp pointing forward.</strong> Imagine a headlamp strapped to your chest — as you hinge forward, it should point at the wall in front of you, not at the floor. Your free leg and your torso form the two arms of a seesaw with your standing hip as the pivot point. Keep your hips level — imagine a tray of drinks balanced across them that you cannot spill. Move glacially; balance collapses when you rush. A slight bend in the standing knee is correct.</div>
-          <button class="gif-toggle" onclick="toggleGif(this)">
-            <span class="gif-toggle-icon">▶</span>
-            <span class="gif-toggle-label">Show example</span>
-          </button>
-          <div class="gif-reveal">
-           
-            <img src="assets/tips%20assests/2-2-H-Kettlebell-Single-Leg-Deadlift-683x1024.png" alt="Single-leg RDL form guide">
-          </div>
-        </div>
-
-        <div class="mistake-item" style="border-left-color:var(--accent2)">
-          <div class="mistake-label" style="color:var(--accent2)">💨 Thruster</div>
-          <div class="mistake-fix"><strong>Catch the rebound from the squat and ride it overhead.</strong> Think of the thruster as one continuous arc, not two separate movements. As you drive up from the squat, your legs are a coiled spring — the moment they release, that energy travels up through your core and into the press. Begin pressing while you are still rising, catching the momentum like a surfer catching a wave. If you pause at the top of the squat before pressing, the wave has already passed — you are now pressing with arms only.</div>
-          <button class="gif-toggle" onclick="toggleGif(this)">
-            <span class="gif-toggle-icon">▶</span>
-            <span class="gif-toggle-label">Show example</span>
-          </button>
-          <div class="gif-reveal">
-           
-            <img src="assets/tips%20assests/7-2-H-Kettlebell-thruster-683x1024.png" alt="Thruster form guide">
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- CHOOSING YOUR WEIGHT -->
-    <div class="tips-section">
-      <div class="tips-section-title">⚖️ Choosing Your First Kettlebell</div>
-      <div class="callout" style="margin-bottom:1rem">
-        <div class="callout-icon">💡</div>
-        <div class="callout-text">Most beginners go too light. A bell that feels challenging at rep 5 will feel easy at rep 15 after two weeks. Start heavier than your gut says — you can always set it down, but you cannot make a light bell harder.</div>
-      </div>
-      <table class="weight-table">
-        <thead>
-          <tr><th>Who You Are</th><th>Suggested Starting Weight</th><th>Why</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Woman, new to training</td><td>8 kg (18 lb)</td><td>Safe entry point for swings and deadlifts</td></tr>
-          <tr><td>Woman, gym-active</td><td>12 kg (26 lb)</td><td>Challenging without compromising form</td></tr>
-          <tr><td>Man, new to training</td><td>12–16 kg (26–35 lb)</td><td>Substantial enough for real hip hinge work</td></tr>
-          <tr><td>Man, gym-active</td><td>20–24 kg (44–53 lb)</td><td>Honest challenge across all basic movements</td></tr>
-          <tr><td>For overhead pressing (all)</td><td>Go 4–8 kg lighter</td><td>Pressing demands more shoulder control</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- FIRST 4 WEEKS -->
-    <div class="tips-section">
-      <div class="tips-section-title">📅 Your First 4 Weeks</div>
-      <div class="steps-list">
-        <div class="step-item">
-          <div class="step-num">1</div>
-          <div class="step-content">
-            <div class="step-title">Week 1–2: Master the Deadlift & Goblet Squat</div>
-            <div class="step-desc">Do nothing else for the first two sessions. <strong>Two-Hand KB Deadlift</strong> and <strong>Goblet Squat</strong> teach you the two fundamental movement patterns — the hip hinge and the squat. Every other exercise in this guide is built on these foundations. Do 3–4 sets of 8 reps each, rest as long as you need between sets.</div>
-          </div>
-        </div>
-        <div class="step-item">
-          <div class="step-num">2</div>
-          <div class="step-content">
-            <div class="step-title">Week 2–3: Add the Swing & Single-Arm Row</div>
-            <div class="step-desc">Once your hip hinge feels solid, add the <strong>Kettlebell Swing</strong>. It is the king of KB exercises but requires a good hinge first — the swing is a hinge with power, not a front raise. Also add the <strong>Single-Arm Row</strong> for your back. You now have all major patterns covered.</div>
-          </div>
-        </div>
-        <div class="step-item">
-          <div class="step-num">3</div>
-          <div class="step-content">
-            <div class="step-title">Week 3–4: Add the Press & Farmer's Carry</div>
-            <div class="step-desc">Introduce the <strong>Single-Arm Overhead Press</strong> and <strong>Farmer's Carry</strong>. The press builds overhead stability. The carry trains your core, grip, and posture all at once and is the most underrated exercise in existence. At this point you have a complete beginner program.</div>
-          </div>
-        </div>
-        <div class="step-item">
-          <div class="step-num">4</div>
-          <div class="step-content">
-            <div class="step-title">After Week 4: Follow the Beginner Circuits</div>
-            <div class="step-desc">Head to the <strong>Workout Circuits</strong> tab and start with the Beginner circuits. You now have enough movement competency to follow structured workouts safely. Train <strong>3 days per week</strong> with at least one rest day between sessions.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- GOLDEN RULES -->
-    <div class="tips-section">
-      <div class="tips-section-title">🔒 6 Golden Safety Rules</div>
-      <div class="tips-grid">
-        <div class="tip-card">
-          <div class="tip-card-icon">🏗️</div>
-          <div class="tip-card-title">Form before weight, always</div>
-          <div class="tip-card-body">A perfect rep with a lighter bell builds more strength than a sloppy rep with a heavier one — and won't hurt your back. <strong>Never chase reps at the cost of form.</strong> When form breaks, stop the set.</div>
-        </div>
-        <div class="tip-card">
-          <div class="tip-card-icon">🔋</div>
-          <div class="tip-card-title">Always warm up</div>
-          <div class="tip-card-body">Cold muscles and joints don't move well. Do 5–10 minutes of light movement before every session. The warm-up protocol below takes less than 7 minutes and dramatically reduces injury risk.</div>
-        </div>
-        <div class="tip-card">
-          <div class="tip-card-icon">👁️</div>
-          <div class="tip-card-title">Film yourself occasionally</div>
-          <div class="tip-card-body">You cannot feel what you look like. Set your phone sideways and record a set from the side. You will immediately spot things you'd never notice — a rounding back, collapsed knee, or shallow range of motion.</div>
-        </div>
-        <div class="tip-card">
-          <div class="tip-card-icon">😴</div>
-          <div class="tip-card-title">Rest days are not optional</div>
-          <div class="tip-card-body">Strength is built during recovery, not during the workout. Training 3 days per week with rest days between sessions produces faster results than training 5–6 days. <strong>More is not always better.</strong></div>
-        </div>
-        <div class="tip-card">
-          <div class="tip-card-icon">⚡</div>
-          <div class="tip-card-title">End sets before failure</div>
-          <div class="tip-card-body">Leave 2–3 reps in reserve on most working sets. Training to absolute failure every set causes excessive fatigue and increases injury risk. Save max-effort sets for experienced lifters who manage recovery well.</div>
-        </div>
-        <div class="tip-card">
-          <div class="tip-card-icon">🎯</div>
-          <div class="tip-card-title">Train patterns, not muscles</div>
-          <div class="tip-card-body">KB training organizes around movement: hinge, squat, push, pull, carry, rotate. One exercise from each pattern per session trains your entire body and nothing gets missed.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- COMMON MISTAKES -->
-    <div class="tips-section">
-      <div class="tips-section-title">⚠️ Common Beginner Mistakes</div>
-      <div class="mistake-list">
-        <div class="mistake-item">
-          <div class="mistake-label">❌ Squatting the swing</div>
-          <div class="mistake-fix">The swing is a hinge, not a squat. Your hips go <em>back</em>, not down. If your shins are tilting forward and knees are bending deeply, you are squatting. <strong>Fix:</strong> Think "snap your hips forward" — the squat goblet trains quads, swings train glutes and hamstrings.</div>
-        </div>
-        <div class="mistake-item">
-          <div class="mistake-label">❌ Using your arms in the swing</div>
-          <div class="mistake-fix">The arms only guide the bell — they do not pull it up. If your shoulders are burning from swings, you are muscling it with your arms. <strong>Fix:</strong> Think of your arms as ropes attached to your hips. The hip snap creates all the force.</div>
-        </div>
-        <div class="mistake-item">
-          <div class="mistake-label">❌ Rounding the lower back on deadlifts</div>
-          <div class="mistake-fix">A rounded lower back under load is how people get hurt. <strong>Fix:</strong> Before you pull, take a big breath and brace your core hard. Think "proud chest" — lift your chest before you lift the bell. Your back should feel like a rigid board.</div>
-        </div>
-        <div class="mistake-item">
-          <div class="mistake-label">❌ Going too heavy too soon</div>
-          <div class="mistake-fix">Ego lifting is the most common beginner mistake. <strong>Fix:</strong> Spend 2–3 weeks with a weight that lets you move perfectly. Form must be automatic before you add weight. The goal in month one is to become a better mover, not to lift more.</div>
-        </div>
-        <div class="mistake-item">
-          <div class="mistake-label">❌ Neglecting the pull pattern</div>
-          <div class="mistake-fix">Most beginners do too much pressing and not enough pulling, leading to shoulder imbalances and poor posture. <strong>Fix:</strong> For every pressing rep you do, match it with a pulling rep (row or pullover). Aim for a 1:1 or 2:1 pull-to-push ratio.</div>
-        </div>
-        <div class="mistake-item">
-          <div class="mistake-label">❌ Skipping the Farmer's Carry</div>
-          <div class="mistake-fix">It looks too simple so beginners skip it. This is a mistake. <strong>Fix:</strong> Add Farmer's Carries to every session. Pick up something genuinely heavy, stand tall, and walk. 3 sets of 30–45 seconds will transform your core strength faster than almost anything else.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- WARM-UP PROTOCOL -->
-    <div class="tips-section">
-      <div class="tips-section-title">🔥 Warm-Up Every Session (7 min)</div>
-      <div class="callout" style="margin-bottom:1rem">
-        <div class="callout-icon">⏱️</div>
-        <div class="callout-text">Do this before every kettlebell session. It primes your joints, activates your core, and gets blood moving to the muscles you are about to use. It is 7 minutes and non-negotiable.</div>
-      </div>
-      <div class="warmup-container">
-        <div class="warmup-row"><span class="warmup-name">World's Greatest Stretch</span><span class="warmup-detail">5 reps each side · ~60 sec</span></div>
-        <div class="warmup-row"><span class="warmup-name">Hip 90/90 Rotations</span><span class="warmup-detail">10 reps each side · ~60 sec</span></div>
-        <div class="warmup-row"><span class="warmup-name">Bodyweight Hip Hinge (deadlift pattern)</span><span class="warmup-detail">10 reps · ~45 sec</span></div>
-        <div class="warmup-row"><span class="warmup-name">Bodyweight Goblet Squat (3 sec hold at bottom)</span><span class="warmup-detail">8 reps · ~60 sec</span></div>
-        <div class="warmup-row"><span class="warmup-name">Halo (light bell or hands clasped)</span><span class="warmup-detail">5 each direction · ~45 sec</span></div>
-        <div class="warmup-row"><span class="warmup-name">Arm Circles + Shoulder Rolls</span><span class="warmup-detail">10 each direction · ~30 sec</span></div>
-        <div class="warmup-row"><span class="warmup-name">KB Dead Bug (no weight, focus on breathing)</span><span class="warmup-detail">5 reps each side · ~45 sec</span></div>
-      </div>
-    </div>
-
-    <!-- PROGRESSION STRATEGY -->
-    <div class="tips-section">
-      <div class="tips-section-title">📈 How to Progress Week Over Week</div>
-      <div class="tips-grid">
-        <div class="tip-card">
-          <div class="tip-card-icon">📊</div>
-          <div class="tip-card-title">The 2-for-2 Rule</div>
-          <div class="tip-card-body">If you complete 2 extra reps on your last set for <strong>2 consecutive sessions</strong>, it is time to increase weight. Progression should be earned, not rushed. This rule prevents jumping weight before you are ready.</div>
-        </div>
-        <div class="tip-card">
-          <div class="tip-card-icon">📝</div>
-          <div class="tip-card-title">Track Your Workouts</div>
-          <div class="tip-card-body">Write down what you lifted, how many reps, and how it felt. Without a log you will forget and stagnate. Even a simple notes app works. Seeing progress on paper is also one of the most motivating things you can do.</div>
-        </div>
-        <div class="tip-card">
-          <div class="tip-card-icon">🔄</div>
-          <div class="tip-card-title">Deload Every 4th Week</div>
-          <div class="tip-card-body">Every fourth week, reduce volume and intensity by about 40%. Use lighter weights and fewer sets. This clears accumulated fatigue and you will feel stronger the week after. <strong>Deloads are where gains happen.</strong></div>
-        </div>
-        <div class="tip-card">
-          <div class="tip-card-icon">🎯</div>
-          <div class="tip-card-title">One New Exercise Per Week Max</div>
-          <div class="tip-card-body">Do not try to learn everything at once. Introduce <strong>one new exercise per week</strong>, practice it until automatic, then add the next. Consistency with fewer exercises beats randomness with many.</div>
-        </div>
-        <div class="tip-card">
-          <div class="tip-card-icon">💤</div>
-          <div class="tip-card-title">Sleep Is Your Best Supplement</div>
-          <div class="tip-card-body">Strength gains, fat loss, and skill learning all accelerate with adequate sleep. 7–9 hours consistently will do more for your progress than any supplement or extra workout session.</div>
-        </div>
-        <div class="tip-card">
-          <div class="tip-card-icon">🧠</div>
-          <div class="tip-card-title">Mind-Muscle Connection</div>
-          <div class="tip-card-body">Actively think about which muscles should be working. During swings, consciously squeeze your glutes at the top. During rows, think "elbow to back pocket." <strong>Intentional movement builds faster.</strong></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- BODY GROUP WORKOUTS PANEL -->
-  <div class="panel" id="panel-bodygroups">
-    <div class="callout">
-      <div class="callout-icon">🎯</div>
-      <div class="callout-text"><strong>Targeted body group training:</strong> Exercises ranked #1–5 by effectiveness for each muscle group. Use the set/rep prescriptions as your starting point — increase weight when the top end of the range feels easy for two consecutive sessions.</div>
-    </div>
-    <div class="group-selector" id="group-selector"></div>
-    <div id="group-content"></div>
-  </div>
-</div>
-<script>
-const EXERCISES = [
-
-  {id:'deadlift',name:'Two-Hand Kettlebell Deadlift',muscle:'hinge',score:10,tag:'Form Builder',gif:'assets/gifs/deadlift.gif',
-   desc:'The single most important lift to learn first. Stand with the kettlebell between your feet, push your hips back like closing a car door with your butt, grab the handle, then drive your hips forward to stand tall. You are picking up the bell with your hips and legs — not your back.',
-   form:'Keep your chest up and back flat. The bell should travel close to your legs. Think "hip hinge" not "squat down." Your shins stay nearly vertical throughout.'},
-  {id:'swing',name:'Kettlebell Swing',muscle:'hinge',score:10,tag:'Essential',gif:'assets/gifs/swing.gif',
-   desc:'The king of kettlebell exercises. Hike the bell back between your legs like hiking a football, then explosively snap your hips forward to send it swinging to chest height. The power comes entirely from your hips and glutes — not your arms.',
-   form:'At the top, squeeze your glutes hard and stand tall. The arms are just a guide — they do not pull. Keep your shoulders packed down and back. Master the deadlift before attempting this.'},
-  {id:'rdl',name:'Single-Leg Romanian Deadlift',muscle:'hinge',score:8,tag:'Balance & Stability',gif:'assets/gifs/rdl.gif',
-   desc:'Hold the bell in one hand, shift your weight to the opposite foot, and hinge forward letting the bell hang as your free leg floats back behind you like a seesaw. Incredible for building hamstrings, glutes, and balance all at once.',
-   form:'Keep your hips square to the floor — do not rotate open. A slight bend in the standing knee is fine. Move slowly and with full control. Start without a weight to learn the pattern first.'},
-  {id:'clean',name:'Kettlebell Clean',muscle:'hinge',score:9,tag:'Technical',gif:'assets/gifs/clean.gif',
-   desc:'The clean pulls the bell from between your legs up to your shoulder in one smooth arc. At the top, the bell "racks" on your forearm and shoulder — this position is key for pressing exercises. Think of it as a swing that ends at your shoulder instead of chest height.',
-   form:'Guide the bell in a tight arc close to your body. The bell should land softly on your arm — if it bangs your wrist, the arc is too wide. Spend time just practicing the rack position before adding speed.'},
-  {id:'goblet',name:'Goblet Squat',muscle:'squat',score:10,tag:'Form Builder',gif:'assets/gifs/goblet.gif',
-   desc:'Hold the kettlebell at your chest like a goblet and squat down. This is the best squat for beginners because the weight in front naturally keeps your torso upright. You should be able to get your hips below your knees comfortably.',
-   form:'Keep your elbows inside your knees at the bottom — use them to push your knees out. Chest stays tall. Drive through your heels to stand. Try a 3-second descent to build control.'},
-  {id:'frontRack',name:'Front Rack Squat',muscle:'squat',score:8,tag:'Intermediate',gif:'assets/gifs/front-rack.gif',
-   desc:'One or two bells held in the "rack" position (resting on your forearms at shoulder height) while you squat. More demanding than a goblet squat because it requires significant core stability and upper back strength to keep upright.',
-   form:'The bells rest on your forearms and upper arms — not held by your wrists alone. Elbows stay high. Breathe in at the top, brace your core hard, squat, then exhale on the way up.'},
-  {id:'singleLegBox',name:'Single-Leg Box Squat',muscle:'squat',score:7,tag:'Balance',gif:'assets/gifs/single-leg-box.gif',
-   desc:'Stand in front of a chair or low box, extend one leg forward, and slowly lower yourself down on one leg — then stand back up. A superb exercise for single-leg strength that you can do with just bodyweight before adding a bell.',
-   form:'Lower slowly and with full control — touch the box gently, do not crash into it. Lean your torso slightly forward as you descend. Drive through your heel to stand. Hold a light bell at your chest for counterbalance.'},
-  {id:'lateralSquat',name:'Lateral Squat',muscle:'squat',score:7,tag:'Hip Mobility',gif:'assets/gifs/lateral-squat.gif',
-   desc:'Stand wide with toes turned out slightly. Shift your weight to one side, bending that knee deeply while the other leg stays straight. You will feel a stretch through the inner thigh of the straight leg — great for hip mobility alongside leg strength.',
-   form:'Keep the bent-knee foot flat on the floor. Hold the bell at your chest for balance. Chest stays up. Alternate sides each rep or do all reps on one side before switching.'},
-  {id:'press',name:'Single-Arm Overhead Press',muscle:'push',score:9,tag:'Essential',gif:'assets/gifs/press.gif',
-   desc:'Hold the kettlebell in the rack position at your shoulder, brace your core, and press it straight overhead until your arm is fully extended and your bicep is next to your ear. Lower back slowly under full control.',
-   form:'Pack your shoulder down and back before pressing — do not shrug. Your wrist stays straight (not cocked back). Squeeze your glutes and brace your abs throughout. This is a full-body tension exercise, not just an arm movement.'},
-  {id:'floorPress',name:'Kettlebell Floor Press',muscle:'push',score:8,tag:'Chest Focus',gif:'assets/gifs/floor-press.gif',
-   desc:'Lie on your back with knees bent, hold a kettlebell in one hand, and press it up from chest height toward the ceiling. Like a bench press but on the floor — the floor limits elbow depth, which actually protects your shoulder.',
-   form:'Keep your elbow at about 45 degrees from your body — not flared straight out. Full pause at the top with a locked elbow, then a slow controlled descent back to the floor. Switch hands between sets.'},
-  {id:'pushPress',name:'Push Press',muscle:'push',score:8,tag:'Power',gif:'assets/gifs/push-press.gif',
-   desc:'Like the overhead press, but you use a quick knee-dip to generate momentum that assists getting the bell overhead. This lets you work with heavier weight and builds explosive upper-body power you cannot train with a strict press.',
-   form:'The knee dip is shallow and fast — a slight pop, not a full squat. Your legs straighten before the bell leaves shoulder height. Lock out the arm fully overhead and hold for one second before lowering.'},
-  {id:'row',name:'Single-Arm Row',muscle:'pull',score:9,tag:'Form Builder',gif:'assets/gifs/row.gif',
-   desc:'Place one hand and same-side knee on a bench or chair for support. Hold a kettlebell in the other hand and pull it toward your hip — like starting a lawnmower. This targets the back muscles responsible for upright posture.',
-   form:'Lead with your elbow, not your hand. Think "tuck your elbow toward your back pocket." Keep your spine flat — do not rotate to heave the weight. Squeeze the back muscles hard at the top and lower slowly.'},
-  {id:'pullover',name:'Kettlebell Pullover',muscle:'pull',score:7,tag:'Lats & Chest',gif:'assets/gifs/pullover.gif',
-   desc:'Lie on your back, hold the kettlebell above your chest, then slowly arc it back overhead toward the floor behind you. Return under control. This stretches and strengthens the lats and opens up a tight chest.',
-   form:'Keep your elbows slightly bent throughout — never locked straight. Your lower back stays pressed against the floor. Move slowly through the full range of motion. This is about quality of movement, not speed.'},
-  {id:'halos',name:'Halo',muscle:'pull',score:6,tag:'Shoulder Health',gif:'assets/gifs/halos.gif',
-   desc:'Hold the kettlebell upside down (by the ball, not the handle) at chest height and rotate it in a large circle around your head — one way, then the other. An excellent shoulder warm-up and mobility drill that also quietly works your core.',
-   form:'Circle wide and smooth. Keep your core braced so you are not swaying. Move slowly — this is about mobility, not speed. Use a light bell. An essential warm-up move for anyone doing overhead pressing.'},
-  {id:'deadbug',name:'Kettlebell Dead Bug',muscle:'core',score:9,tag:'Form Builder',gif:'assets/gifs/deadbug.gif',
-   desc:'Lie on your back, hold the kettlebell above your chest with both hands, knees bent at 90 degrees. Slowly lower one leg toward the floor while keeping your lower back pressed flat against the ground. Return and switch sides. Teaches deep core control essential for protecting your back during all other lifts.',
-   form:'Your lower back MUST stay flat on the floor at all times — if it arches, you have gone too far. Breathe out as you lower the leg. Move slowly. This seemingly easy exercise is the foundation of all safe lifting.'},
-  {id:'farmersCarry',name:'Farmer\'s Carry',muscle:'core',score:10,tag:'Essential',gif:'assets/gifs/farmers-carry.gif',
-   desc:'Pick up a heavy kettlebell (or two) and walk. Deceptively simple, yet one of the most effective exercises in existence for core strength, grip, posture, and real-world fitness. If your shoulder tips to one side, your core is working overtime to stop it.',
-   form:'Stand tall — do not lean away from the bell. Shoulders back and down. Small deliberate steps. Start with a single bell held at your side (suitcase carry) before using two bells. Go heavier than you think you should.'},
-  {id:'windmill',name:'Windmill',muscle:'core',score:8,tag:'Obliques',gif:'assets/gifs/windmill.gif',
-   desc:'Press a kettlebell overhead with one arm, feet wide and turned out. Slowly hinge to the side, reaching your free hand down your inner leg toward the floor, while keeping the bell locked overhead. One of the best oblique and hip mobility exercises available.',
-   form:'Your eyes stay on the bell the entire time — this is what keeps it locked safely. The hinge is lateral (to the side), not forward. Start without a weight or with a very light bell. A challenging but rewarding movement.'},
-  {id:'tgu',name:'Turkish Get-Up',muscle:'core',score:10,tag:'Mastery Move',gif:'assets/gifs/tgu.gif',
-   desc:'Start lying on your back with the bell pressed to the ceiling, then use a series of deliberate steps to stand up — all while keeping the bell locked overhead. Then reverse back to the floor. Complex, but it trains every part of your body simultaneously and is considered by many coaches to be the single greatest kettlebell exercise.',
-   form:'Go extremely slow — there is no rushing this. Learn each step as its own standalone move first. Eyes on the bell always. Once you can do this with a shoe balanced on your fist instead of a bell, you are ready for weight.'},
-  {id:'snatch',name:'Kettlebell Snatch',muscle:'total',score:9,tag:'Advanced',gif:'assets/gifs/snatch.gif',
-   desc:'A one-arm swing that continues in one fluid motion overhead into a locked-out position above your head. Combines the explosive power of the swing with an overhead lockout. Burns enormous calories, builds total-body power, and is the benchmark lift of kettlebell sport.',
-   form:'This is all hip drive — not a muscle move. The bell should float at the top before flipping over your hand. Master the swing and the clean completely before attempting this. Let the bell rest in your open hand at the top.'},
-  {id:'complex',name:'Clean + Press Combo',muscle:'total',score:9,tag:'Conditioning',gif:'assets/gifs/complex.gif',
-   desc:'Two moves linked into one sequence: clean the bell to your shoulder, then press it overhead. Lower back to rack, then swing back down. Repeat. Linking movements doubles the work per set and builds both strength and serious conditioning.',
-   form:'Breathe in before the clean, exhale at the top of the press. Treat each phase as its own careful movement until the pattern is ingrained — do not rush to link them. This combo reveals any weakness in either the clean or the press.'},
-  {id:'thruster',name:'Kettlebell Thruster',muscle:'total',score:8,tag:'Cardio-Strength',gif:'assets/gifs/thruster.gif',
-   desc:'A goblet squat directly connected to an overhead press. Hold the bell at your chest, squat down, and as you drive up use the momentum to press the bell overhead in one fluid movement. Extremely challenging and one of the most efficient full-body conditioning exercises that exists.',
-   form:'Time the press so you are still rising from the squat as you begin pressing — not after you have fully stood up. The leg drive feeds the press. Keep the bell close to your body throughout the entire movement.'},
-];
-const CIRCUITS = {
-  beginner:{days:[
-    {label:'Day 1',icon:'🏁',title:'Foundation Day A',meta:'20–25 min · 3 rounds',options:[
-      {label:'Classic',desc:'Balanced intro covering all foundational patterns.',muscles:['Glutes','Quads','Back','Core'],exercises:[{n:'Goblet Squat',d:'8 reps'},{n:'Two-Hand KB Deadlift',d:'8 reps'},{n:'Single-Arm Row (each)',d:'6 reps'},{n:"Farmer's Carry",d:'30 sec'},{n:'KB Dead Bug',d:'5 each side'}]},
-      {label:'More Cardio',desc:'Elevates heart rate with explosive hip-hinge work.',muscles:['Glutes','Back','Core'],exercises:[{n:'KB Swing',d:'10 reps'},{n:'Goblet Squat',d:'8 reps'},{n:'Halo',d:'5 each dir.'},{n:'Single-Arm Row (each)',d:'6 reps'},{n:"Farmer's Carry",d:'30 sec'}]},
-      {label:'Slow & Controlled',desc:'Tempo training — 3 sec descent on every rep.',muscles:['Hinge','Lats','Core'],exercises:[{n:'KB Deadlift (3 sec lower)',d:'6 reps'},{n:'Goblet Squat (3 sec lower)',d:'6 reps'},{n:'Pullover',d:'8 reps'},{n:'KB Dead Bug',d:'6 each side'},{n:'Halo',d:'5 each dir.'}]},
-    ],tip:'Focus on form over speed. Rest 90 seconds between rounds. If a movement feels wrong, stop and reset — proper mechanics always come first.'},
-    {label:'Day 2',icon:'🔥',title:'Foundation Day B',meta:'20–25 min · 3 rounds',options:[
-      {label:'Balanced',desc:'Full-body with first taste of overhead pressing.',muscles:['Glutes','Legs','Shoulders','Back'],exercises:[{n:'KB Swing',d:'10 reps'},{n:'Overhead Press (each)',d:'5 reps'},{n:'Single-Leg Box Squat (each)',d:'5 reps'},{n:'Single-Arm Row (each)',d:'6 reps'},{n:"Farmer's Carry",d:'40 sec'}]},
-      {label:'Upper Focus',desc:'Push and pull emphasis — chest, back, shoulders.',muscles:['Chest','Back','Shoulders'],exercises:[{n:'Floor Press (each)',d:'6 reps'},{n:'KB Swing',d:'10 reps'},{n:'Single-Arm Row (each)',d:'8 reps'},{n:'Halo',d:'5 each way'},{n:'Goblet Squat',d:'8 reps'}]},
-      {label:'Lower Focus',desc:'Leg-dominant session with core finisher.',muscles:['Quads','Glutes','Adductors','Core'],exercises:[{n:'Goblet Squat',d:'10 reps'},{n:'Two-Hand KB Deadlift',d:'8 reps'},{n:'Lateral Squat (each)',d:'6 reps'},{n:"Farmer's Carry",d:'40 sec'},{n:'KB Dead Bug',d:'5 each side'}]},
-    ],tip:'Try to go slightly heavier than Day 1 on familiar movements. Your body learns incredibly fast in the early weeks — trust the process.'},
-    {label:'Day 3',icon:'⚡',title:'Foundation Day C',meta:'25–30 min · 3 rounds',options:[
-      {label:'Full Body Flow',desc:'Integrates all patterns into one connected circuit.',muscles:['Total Body'],exercises:[{n:'KB Swing',d:'12 reps'},{n:'Goblet Squat',d:'8 reps'},{n:'Single-Arm Press (each)',d:'5 reps'},{n:'Single-Arm Row (each)',d:'6 reps'},{n:"Farmer's Carry",d:'40 sec'},{n:'Windmill (each)',d:'3 reps'}]},
-      {label:'AMRAP Style',desc:'As many rounds as possible in 15 min.',muscles:['Glutes','Legs','Chest','Core'],exercises:[{n:'KB Swing',d:'10 reps'},{n:'Goblet Squat',d:'8 reps'},{n:'Floor Press (each)',d:'6 reps'},{n:'Dead Bug',d:'5 each side'},{n:'Halo',d:'5 each dir.'}]},
-      {label:'Minimal Equipment',desc:'One bell only — maximum efficiency.',muscles:['Hinge','Quads','Core','Lats'],exercises:[{n:'Two-Hand KB Deadlift',d:'10 reps'},{n:'Goblet Squat',d:'10 reps'},{n:"Farmer's Carry",d:'60 sec'},{n:'Pullover',d:'8 reps'},{n:'KB Dead Bug',d:'6 each side'}]},
-    ],tip:"Day 3 is about applying what you've practiced. Aim for smoother, more connected movement. Notice where your form breaks down — that's your focus for next week."},
-  ]},
-  intermediate:{days:[
-    {label:'Day 1',icon:'💥',title:'Power & Hinge',meta:'30 min · 4 rounds',options:[
-      {label:'Strength',desc:'Heavy compound lifts — build maximal strength.',muscles:['Hinge','Quads','Shoulders','Grip'],exercises:[{n:'KB Clean (each)',d:'5 reps'},{n:'Front Rack Squat',d:'6 reps'},{n:'Single-Arm Press (each)',d:'5 reps'},{n:'Single-Leg RDL (each)',d:'6 reps'},{n:"Farmer's Carry (heavy)",d:'45 sec'}]},
-      {label:'Conditioning',desc:'High-rep power circuit — strength meets cardio.',muscles:['Glutes','Shoulders','Back','Obliques'],exercises:[{n:'KB Swing',d:'15 reps'},{n:'Push Press (each)',d:'5 reps'},{n:'Single-Arm Row (each)',d:'8 reps'},{n:'Goblet Squat',d:'10 reps'},{n:'Windmill (each)',d:'4 reps'}]},
-      {label:'Unilateral',desc:'Single-limb work for balance and symmetry.',muscles:['Hinge','Shoulders','Back','Core'],exercises:[{n:'Single-Leg RDL (each)',d:'6 reps'},{n:'Single-Arm Press (each)',d:'6 reps'},{n:'Single-Arm Row (each)',d:'8 reps'},{n:'Lateral Squat (each)',d:'8 reps'},{n:"Farmer's Carry (1 bell)",d:'40s each side'}]},
-    ],tip:'Use a weight that makes the last 2 reps of each set genuinely challenging. If it feels easy the whole way through, go heavier.'},
-    {label:'Day 2',icon:'🌊',title:'Flow & Total Body',meta:'30–35 min · 4 rounds',options:[
-      {label:'Classic Combo',desc:'Linked movement chains — clean into press into swing.',muscles:['Total Body'],exercises:[{n:'Clean + Press (each)',d:'4 reps'},{n:'Goblet Squat',d:'8 reps'},{n:'KB Swing',d:'15 reps'},{n:'Windmill (each)',d:'4 reps'},{n:"Farmer's Carry",d:'50 sec'}]},
-      {label:'Upper Emphasis',desc:'Push/pull supersets with hip-hinge base.',muscles:['Chest','Back','Shoulders','Core'],exercises:[{n:'Floor Press (each)',d:'8 reps'},{n:'Single-Arm Row (each)',d:'8 reps'},{n:'Push Press (each)',d:'5 reps'},{n:'KB Swing',d:'12 reps'},{n:'KB Dead Bug',d:'8 each side'}]},
-      {label:'Metabolic',desc:'Short rest, high output — max calorie burn.',muscles:['Glutes','Legs','Back','Core'],exercises:[{n:'KB Swing',d:'20 reps'},{n:'Thruster',d:'6 reps'},{n:'Single-Arm Row (each)',d:'6 reps'},{n:'Single-Leg Box Squat (each)',d:'5 reps'},{n:'Halo',d:'6 each dir.'}]},
-    ],tip:'The clean + press combo is your priority this session. Practice transitioning smoothly between the clean and press before adding speed.'},
-    {label:'Day 3',icon:'🏆',title:'Max Effort Day',meta:'35 min · 4 rounds',options:[
-      {label:'Heavy Day',desc:'Max weight, low reps — pure strength day.',muscles:['Total Body'],exercises:[{n:'KB Deadlift (heavy)',d:'6 reps'},{n:'Front Rack Squat',d:'5 reps'},{n:'Single-Arm Press (each)',d:'4 reps'},{n:"Farmer's Carry (very heavy)",d:'45 sec'},{n:'Turkish Get-Up (each)',d:'2 reps'}]},
-      {label:'Volume Day',desc:'High reps across all patterns — build work capacity.',muscles:['Glutes','Legs','Back','Obliques'],exercises:[{n:'KB Swing',d:'20 reps'},{n:'Goblet Squat',d:'12 reps'},{n:'Clean + Press (each)',d:'5 reps'},{n:'Single-Arm Row (each)',d:'10 reps'},{n:'Windmill (each)',d:'4 reps'}]},
-      {label:'TGU Focus',desc:'Turkish Get-Up skill day — quality over speed.',muscles:['Total Body','Core'],exercises:[{n:'Turkish Get-Up (each)',d:'3 reps'},{n:'KB Swing',d:'15 reps'},{n:'Single-Arm Press (each)',d:'5 reps'},{n:"Farmer's Carry",d:'60 sec'},{n:'KB Dead Bug',d:'8 each side'}]},
-    ],tip:'The Turkish Get-Up is the priority move for intermediate lifters. If needed, spend 10 dedicated minutes on it before your main circuit.'},
-  ]},
-  advanced:{days:[
-    {label:'Day 1',icon:'⚔️',title:'Strength & Power',meta:'40 min · 5 rounds',options:[
-      {label:'Max Strength',desc:'Heavy bilateral and unilateral compound work.',muscles:['Total Body'],exercises:[{n:'KB Snatch (each)',d:'5 reps'},{n:'Front Rack Squat (2 bells)',d:'5 reps'},{n:'Single-Arm Press (each, heavy)',d:'5 reps'},{n:'Single-Leg RDL (each)',d:'6 reps'},{n:"Double Farmer's Carry",d:'60 sec'}]},
-      {label:'Power Endurance',desc:'Explosive reps under accumulating fatigue.',muscles:['Total Body'],exercises:[{n:'KB Swing',d:'25 reps'},{n:'KB Snatch (each)',d:'5 reps'},{n:'Thruster',d:'8 reps'},{n:'Clean + Press (each)',d:'5 reps'},{n:'Turkish Get-Up (each)',d:'2 reps'}]},
-      {label:'No-Rest Complex',desc:'Zero rest between exercises — rest 2 min between rounds.',muscles:['Total Body'],exercises:[{n:'Clean (each) → no rest',d:'3 reps'},{n:'Front Rack Squat → no rest',d:'3 reps'},{n:'Press (each) → no rest',d:'3 reps'},{n:'KB Swing → no rest',d:'10 reps'},{n:"Farmer's Carry → rest 2 min",d:'45 sec'}]},
-    ],tip:'Option C is a barbell-style complex — complete all exercises with zero rest between them, then rest 2 minutes. Go heavy enough that the squat is the limiting factor.'},
-    {label:'Day 2',icon:'🌪️',title:'Conditioning & Flow',meta:'35–40 min · 5 rounds',options:[
-      {label:'Snatch Focus',desc:'Olympic-style KB power — snatch as the centerpiece.',muscles:['Glutes','Shoulders','Back','Core'],exercises:[{n:'KB Snatch (each)',d:'8 reps'},{n:'Push Press (each)',d:'6 reps'},{n:'Single-Arm Row (each)',d:'8 reps'},{n:'Windmill (each)',d:'5 reps'},{n:'Goblet Squat',d:'10 reps'}]},
-      {label:'EMOM',desc:'Every Minute On the Minute — 5-exercise loop × 4.',muscles:['Total Body'],exercises:[{n:'KB Swing',d:'15 reps · Min 1'},{n:'KB Snatch (each)',d:'6 reps · Min 2'},{n:'Front Rack Squat',d:'8 reps · Min 3'},{n:'Clean + Press (each)',d:'4 reps · Min 4'},{n:'Rest',d:'Min 5 — repeat 4×'}]},
-      {label:'Double Bell',desc:'Two-bell work for maximum systemic load.',muscles:['Total Body'],exercises:[{n:'Double KB Clean',d:'5 reps'},{n:'Double KB Front Squat',d:'6 reps'},{n:'Double KB Press',d:'4 reps'},{n:"Double Farmer's Carry",d:'60 sec'},{n:'Turkish Get-Up (each)',d:'2 reps'}]},
-    ],tip:'Option B is EMOM — Every Minute On the Minute. Start each exercise at the top of the minute and rest whatever time remains in that minute before the next.'},
-    {label:'Day 3',icon:'💀',title:'Elite Circuit',meta:'40–45 min · 5 rounds',options:[
-      {label:'Full Arsenal',desc:'Every elite movement in one showcase circuit.',muscles:['Total Body'],exercises:[{n:'Turkish Get-Up (each)',d:'2 reps'},{n:'KB Snatch (each)',d:'6 reps'},{n:'Double KB Front Squat',d:'6 reps'},{n:'Clean + Press Complex (each)',d:'5 reps'},{n:"Farmer's Carry (max weight)",d:'60 sec'}]},
-      {label:'Long Swing',desc:'Volume-based swing and snatch — posterior chain emphasis.',muscles:['Glutes','Hamstrings','Shoulders','Back'],exercises:[{n:'KB Swing',d:'30 reps'},{n:'KB Snatch (each)',d:'10 reps'},{n:'Push Press (each)',d:'6 reps'},{n:'Single-Arm Row (each)',d:'10 reps'},{n:'Windmill (each)',d:'5 reps'}]},
-      {label:'Timed Challenge',desc:'Race the clock — record reps and beat your score.',muscles:['Total Body'],exercises:[{n:'KB Swing (max reps)',d:'60 sec'},{n:'Goblet Squat',d:'15 reps'},{n:'Thruster',d:'10 reps'},{n:'Clean + Press (each)',d:'6 reps'},{n:'Turkish Get-Up (each, slow)',d:'1 rep'}]},
-    ],tip:'At the advanced level, track your total reps and round times. Progressive overload is still the law — heavier bell, more reps, or less rest. Something must improve every week.'},
-  ]},
-};
-
-const BODY_GROUPS = [
-  {id:'hinge', label:'Glutes & Hamstrings', icon:'🍑', desc:'Hip-hinge movements targeting the posterior chain',
-   exercises:[
-    {name:'Kettlebell Swing',tag:'Essential',muscles:['Glutes','Hamstrings','Core'],
-     why:'Peak explosive glute activation with maximum calorie burn — the single best posterior chain exercise',
-     beg:'3 × 10–12',int:'4 × 15–20',adv:'5 × 20–25'},
-    {name:'Two-Hand KB Deadlift',tag:'Form Builder',muscles:['Glutes','Hamstrings','Lower Back'],
-     why:'Heaviest hinge load available — builds the strength base that every other lift depends on',
-     beg:'3 × 8',int:'4 × 8',adv:'4 × 5 (heavy)'},
-    {name:'Single-Leg RDL',tag:'Balance & Stability',muscles:['Hamstrings','Glutes','Core'],
-     why:'Unilateral balance plus maximal hamstring lengthening under load — fixes left/right asymmetry',
-     beg:'3 × 6 each',int:'3 × 8 each',adv:'4 × 8 each'},
-    {name:'Kettlebell Clean',tag:'Technical',muscles:['Glutes','Traps','Forearms'],
-     why:'Hip hinge power that flows directly into upper-body work — trains the full posterior chain pull',
-     beg:'3 × 5 each',int:'4 × 5 each',adv:'4 × 6 each'},
-  ]},
-  {id:'squat', label:'Quads & Legs', icon:'🦵', desc:'Squat-pattern exercises for leg strength and mobility',
-   exercises:[
-    {name:'Goblet Squat',tag:'Form Builder',muscles:['Quads','Glutes','Core'],
-     why:'Best-in-class beginner squat — the counterweight naturally holds your torso upright while you learn',
-     beg:'3 × 10',int:'4 × 12',adv:'4 × 15'},
-    {name:'Front Rack Squat',tag:'Intermediate',muscles:['Quads','Glutes','Core','Upper Back'],
-     why:'Heavy bilateral squat with serious core anti-flexion demand — builds maximal quad strength',
-     beg:'3 × 6',int:'4 × 8',adv:'4 × 10'},
-    {name:'Single-Leg Box Squat',tag:'Balance',muscles:['Quads','Glutes','Core'],
-     why:'Pure single-leg quad dominance — directly exposes and corrects strength imbalances',
-     beg:'3 × 5 each',int:'3 × 8 each',adv:'4 × 8 each'},
-    {name:'Lateral Squat',tag:'Hip Mobility',muscles:['Quads','Adductors','Glutes'],
-     why:'Trains the medial quad, adductors, and hip mobility simultaneously — often neglected',
-     beg:'3 × 8 each',int:'3 × 10 each',adv:'4 × 12 each'},
-  ]},
-  {id:'push', label:'Push / Chest & Shoulders', icon:'💪', desc:'Pressing movements for upper-body strength and power',
-   exercises:[
-    {name:'Single-Arm Overhead Press',tag:'Essential',muscles:['Shoulders','Triceps','Core'],
-     why:'Full-body tension overhead press — shoulder strength combined with anti-rotation core demand',
-     beg:'3 × 5 each',int:'4 × 6 each',adv:'4 × 8 each'},
-    {name:'Push Press',tag:'Power',muscles:['Shoulders','Triceps','Quads'],
-     why:'Leg drive enables heavier loads — builds more total explosive power than any strict press',
-     beg:'3 × 5 each',int:'4 × 6 each',adv:'4 × 8 each'},
-    {name:'Kettlebell Floor Press',tag:'Chest Focus',muscles:['Chest','Triceps','Shoulders'],
-     why:'Shoulder-safe chest press — the floor stops elbow depth and protects the joint at the bottom',
-     beg:'3 × 8 each',int:'4 × 8 each',adv:'4 × 10 each'},
-    {name:'Kettlebell Thruster',tag:'Cardio-Strength',muscles:['Quads','Shoulders','Triceps','Core'],
-     why:'Squat fused into a press — doubles the muscles worked per rep for maximum conditioning effect',
-     beg:'3 × 6',int:'4 × 8',adv:'4 × 10'},
-  ]},
-  {id:'pull', label:'Pull / Back', icon:'🔙', desc:'Pulling movements for a strong, injury-resilient back',
-   exercises:[
-    {name:'Single-Arm Row',tag:'Form Builder',muscles:['Lats','Rhomboids','Rear Delt'],
-     why:'Best lat and rhomboid builder in this guide — directly counteracts the forward posture of daily life',
-     beg:'3 × 8 each',int:'4 × 10 each',adv:'4 × 12 each'},
-    {name:'Kettlebell Clean',tag:'Technical',muscles:['Lats','Traps','Biceps','Glutes'],
-     why:'Explosive vertical pull training the back from hips to traps in a single connected arc',
-     beg:'3 × 5 each',int:'4 × 6 each',adv:'4 × 8 each'},
-    {name:'Kettlebell Pullover',tag:'Lats & Chest',muscles:['Lats','Long Head Triceps','Chest'],
-     why:'The only KB exercise with lat stretch under load — excellent for opening a tight thoracic spine',
-     beg:'3 × 10',int:'3 × 12',adv:'4 × 15'},
-    {name:'Halo',tag:'Shoulder Health',muscles:['Rotator Cuff','Traps','Core'],
-     why:'Rotator cuff and shoulder girdle health — non-negotiable prep work before overhead pressing',
-     beg:'3 × 5 each dir.',int:'3 × 6 each dir.',adv:'4 × 8 each dir.'},
-  ]},
-  {id:'core', label:'Core', icon:'🏋️', desc:'Stabilization and anti-rotation for a bulletproof midsection',
-   exercises:[
-    {name:"Farmer's Carry",tag:'Essential',muscles:['Core','Obliques','Traps','Grip'],
-     why:'Most functional core exercise — trains anti-lateral-flexion under real load while actually moving',
-     beg:'3 × 30 sec',int:'4 × 45 sec',adv:'4 × 60 sec (heavy)'},
-    {name:'Turkish Get-Up',tag:'Mastery Move',muscles:['Core','Shoulders','Hips','Total Body'],
-     why:'Complete core integration — every stabilizer fires simultaneously through the full movement arc',
-     beg:'3 × 1 each',int:'3 × 2 each',adv:'4 × 2 each'},
-    {name:'Kettlebell Dead Bug',tag:'Form Builder',muscles:['Transverse Abs','Lower Back','Core'],
-     why:'Teaches deep core bracing that protects the spine during every other movement in this guide',
-     beg:'3 × 6 each',int:'3 × 8 each',adv:'4 × 10 each'},
-    {name:'Windmill',tag:'Obliques',muscles:['Obliques','Glutes','Shoulder Stability'],
-     why:'Oblique and lateral hip stability under overhead load — uniquely demanding and difficult to replicate',
-     beg:'3 × 3 each',int:'3 × 5 each',adv:'4 × 5 each'},
-  ]},
-  {id:'total', label:'Total Body', icon:'⚡', desc:'Full-body lifts for peak athletic performance',
-   exercises:[
-    {name:'Turkish Get-Up',tag:'Mastery Move',muscles:['Total Body'],
-     why:'The single most complete KB exercise — strength, mobility, stability, and coordination combined',
-     beg:'3 × 1 each',int:'3 × 2 each',adv:'4 × 2 each'},
-    {name:'Kettlebell Snatch',tag:'Advanced',muscles:['Glutes','Shoulders','Core','Total Body'],
-     why:'The most athletic KB lift — highest peak power output with the greatest metabolic demand',
-     beg:'3 × 5 each',int:'4 × 6 each',adv:'4 × 8 each'},
-    {name:'Clean + Press Combo',tag:'Conditioning',muscles:['Total Body'],
-     why:'Two-movement chain — hip drive into pressing strength, back-to-back in one fluid sequence',
-     beg:'3 × 3 each',int:'3 × 5 each',adv:'4 × 5 each'},
-    {name:'Kettlebell Thruster',tag:'Cardio-Strength',muscles:['Quads','Shoulders','Core'],
-     why:'Fastest path to total-body fatigue — squat and press fused into one explosive rep',
-     beg:'3 × 6',int:'4 × 8',adv:'4 × 10'},
-    {name:'Kettlebell Swing',tag:'Essential',muscles:['Glutes','Core','Total Body'],
-     why:'Foundational hip-hinge power that carries over to every other lift in this guide',
-     beg:'3 × 12',int:'4 × 15',adv:'5 × 20'},
-  ]},
-];
-
-let currentMuscle = 'all', currentLevel = 'beginner', currentDay = 0, currentGroup = 'hinge';
-
-function getScoreColor(s){ return s>=9?'#D85A30':s>=7?'#BA7517':'#888780'; }
-function getMuscleAccent(m){ return {hinge:'#D85A30',squat:'#378ADD',push:'#1D9E75',pull:'#BA7517',core:'#534AB7',total:'#D4537E'}[m]||'#888'; }
-function getTagClass(t){
-  if(t==='Form Builder') return 'tag-form';
-  if(t==='Essential') return 'tag-essential';
-  if(t==='Technical'||t==='Advanced'||t==='Mastery Move') return 'tag-technical';
-  return 'tag-default';
-}
-
-function toggleGif(btn){
-  const reveal = btn.nextElementSibling;
-  const isOpen = reveal.classList.contains('open');
-  if(isOpen){
-    reveal.classList.remove('open');
-    btn.classList.remove('open');
-    btn.querySelector('.gif-toggle-label').textContent = 'Show exercise demo';
-  } else {
-    reveal.classList.add('open');
-    btn.classList.add('open');
-    btn.querySelector('.gif-toggle-label').textContent = 'Hide demo';
-  }
-}
-
-function renderExercises(){
-  const list = currentMuscle==='all'?EXERCISES:EXERCISES.filter(e=>e.muscle===currentMuscle);
-  document.getElementById('ex-grid').innerHTML = list.map(ex=>`
-    <div class="ex-card">
-      <div class="ex-card-accent" style="background:${getMuscleAccent(ex.muscle)}"></div>
-      <div class="ex-top">
-        <div class="ex-name">${ex.name}</div>
-        <div class="ex-badge">
-          <div class="ex-score" style="color:${getScoreColor(ex.score)}">${ex.score}</div>
-          <div class="ex-score-label">/ 10</div>
-          <div class="score-bar"><div class="score-fill" style="width:${ex.score*10}%;background:${getScoreColor(ex.score)}"></div></div>
-        </div>
-      </div>
-      <div><span class="ex-tag ${getTagClass(ex.tag)}">${ex.tag}</span></div>
-      <div class="ex-desc">${ex.desc}</div>
-      <div class="ex-form"><strong>✓ Form tip:</strong> ${ex.form}</div>
-      ${ex.gif ? `
-      <button class="gif-toggle" onclick="toggleGif(this)">
-        <span class="gif-toggle-icon">▶</span>
-        <span class="gif-toggle-label">Show exercise demo</span>
-      </button>
-      <div class="gif-reveal">
-        <img src="${ex.gif}" alt="${ex.name} demonstration" loading="lazy">
-        <div class="gif-credit">via Giphy / Tenor</div>
-      </div>` : ''}
-    </div>`).join('');
-}
-
-function showMuscle(m, btn){
-  currentMuscle = m;
-  document.querySelectorAll('.muscle-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  renderExercises();
-}
-
-function showPanel(id, btn){
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('panel-'+id).classList.add('active');
-  btn.classList.add('active');
-  if(id==='circuits') renderCircuit();
-  if(id==='bodygroups') renderBodyGroups();
-}
-
-function showGroup(id, btn){
-  currentGroup = id;
-  document.querySelectorAll('.group-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  renderBodyGroups();
-}
-
-function renderBodyGroups(){
-  const grp = BODY_GROUPS.find(g=>g.id===currentGroup);
-  document.getElementById('group-selector').innerHTML = BODY_GROUPS.map(g=>
-    `<button class="group-btn${g.id===currentGroup?' active':''}" onclick="showGroup('${g.id}',this)">${g.icon} ${g.label}</button>`
-  ).join('');
-  document.getElementById('group-content').innerHTML = `
-    <div class="group-header">
-      <div class="group-icon">${grp.icon}</div>
-      <div>
-        <div class="group-title">${grp.label}</div>
-        <div class="group-meta">${grp.desc} · Ranked #1–${grp.exercises.length} by effectiveness</div>
-      </div>
-    </div>
-    <div class="rank-cards-grid">
-      ${grp.exercises.map((ex,i)=>`
-        <div class="rank-card grp-${grp.id}">
-          <div class="rank-card-header">
-            <div class="rank-badge">${i+1}</div>
-            <div class="rank-info">
-              <div class="rank-name">${ex.name}</div>
-              <div class="muscle-chips">${ex.muscles.map(m=>`<span class="muscle-chip">${m}</span>`).join('')}</div>
-            </div>
-          </div>
-          <div class="rank-card-body">
-            <div class="rank-tag-row"><span class="ex-tag ${getTagClass(ex.tag)}">${ex.tag}</span></div>
-            <div class="rank-why">${ex.why}</div>
-            <div class="rank-sets">
-              <div class="sets-row"><span class="sets-level sets-beg">Beginner</span><span class="sets-val">${ex.beg}</span></div>
-              <div class="sets-row"><span class="sets-level sets-int">Intermediate</span><span class="sets-val">${ex.int}</span></div>
-              <div class="sets-row"><span class="sets-level sets-adv">Advanced</span><span class="sets-val">${ex.adv}</span></div>
-            </div>
-          </div>
-        </div>`).join('')}
-    </div>`;
-}
-
-function showLevel(level, btn){
-  currentLevel = level; currentDay = 0;
-  document.querySelectorAll('.circuit-tab').forEach(t=>t.classList.remove('active'));
-  btn.classList.add('active');
-  renderCircuit();
-}
-
-function selectDay(i){ currentDay = i; renderCircuit(); }
-
-function renderCircuit(){
-  const days = CIRCUITS[currentLevel].days;
-  document.getElementById('day-selector').innerHTML = days.map((d,i)=>
-    `<button class="day-btn${i===currentDay?' active':''}" onclick="selectDay(${i})">${d.label}</button>`).join('');
-  const day = days[currentDay];
-  const optClasses = ['opt-a','opt-b','opt-c'];
-  const optLetters = ['A','B','C'];
-  document.getElementById('circuit-content').innerHTML = `
-    <div class="circuit-header">
-      <div class="circuit-icon">${day.icon}</div>
-      <div>
-        <div class="circuit-title">${day.title}</div>
-        <div class="circuit-meta">${day.meta} · ${currentLevel.charAt(0).toUpperCase()+currentLevel.slice(1)} · Rest 60–90 sec between rounds</div>
-      </div>
-    </div>
-    <div class="options-grid">
-      ${day.options.map((opt,oi)=>`
-        <div class="option-card ${optClasses[oi]}">
-          <div class="option-header">
-            <div class="option-header-top"><span class="opt-dot"></span>Option ${optLetters[oi]} — ${opt.label}</div>
-            <div class="option-desc">${opt.desc}</div>
-            <div class="muscle-chips">${opt.muscles.map(m=>`<span class="muscle-chip">${m}</span>`).join('')}</div>
-          </div>
-          <div class="option-body">
-            ${opt.exercises.map((ex,i)=>`
-              <div class="compact-row">
-                <span class="compact-num">${i+1}</span>
-                <span class="compact-name">${ex.n}</span>
-                <span class="compact-detail">${ex.d}</span>
-              </div>`).join('')}
-          </div>
-        </div>`).join('')}
-    </div>
-    <div class="tip-box">💬 <strong>Coach\'s note:</strong> ${day.tip}</div>`;
-}
-
-function applyTheme(dark){
-  document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-  document.getElementById('theme-btn').textContent = dark ? '☀️' : '🌙';
-}
-function toggleTheme(){
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  localStorage.setItem('theme', isDark ? 'light' : 'dark');
-  applyTheme(!isDark);
-}
-applyTheme(localStorage.getItem('theme') === 'dark');
-
-renderExercises();
-renderCircuit();
-renderBodyGroups();
-</script>
 </body>
 </html>

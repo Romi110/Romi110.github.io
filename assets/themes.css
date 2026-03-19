@@ -1,0 +1,84 @@
+/*
+  themes.css — Site-wide color palettes
+  Each page sets data-theme on <html> to select its palette.
+
+  Palettes:
+    home      — landing page (pure dark, minimal)
+    kb-light  — kettlebell guide light mode
+    kb-dark   — kettlebell guide dark mode
+
+  ─────────────────────────────────────────────────────────
+  CONTRAST RULES — follow these when adding new themes
+  ─────────────────────────────────────────────────────────
+  1. --ink is a TEXT color, not a background color.
+     If you use --ink as a background (e.g. active button), you MUST
+     pair it with --on-ink as the text color, not a hardcoded #fff/#000.
+     In light themes --ink is dark → --on-ink is white.
+     In dark themes --ink is light → --on-ink is dark.
+
+  2. --muted must achieve ≥ 4:1 contrast ratio against --bg (WCAG AA).
+     Use it only for secondary/decorative text, never for primary content.
+
+  3. Never hardcode #fff or #000 as text on a theme-variable background.
+     Always use the paired variable (--on-ink, --on-accent, etc.).
+
+  4. Hero / banner backgrounds: use a fixed dark color, not --ink.
+     --ink flips between light/dark across themes — a fixed value is safe.
+  ─────────────────────────────────────────────────────────
+*/
+
+/* ── HOME ── pure dark, minimal, no accent color */
+[data-theme="home"] {
+  --bg:      #0a0a0a;
+  --bg2:     #111111;
+  --bg3:     #1c1c1c;   /* card / surface level */
+  --border:  #252525;
+  --ink:     #e0e0e0;   /* off-white — avoids glare on pure black */
+  --on-ink:  #111111;   /* text ON an --ink-colored background */
+  --muted:   #6e6e6e;   /* ~4:1 contrast on bg, fine for secondary text */
+  --radius:  12px;
+}
+
+/* ── KETTLEBELL LIGHT ── warm off-white with orange accent */
+[data-theme="kb-light"] {
+  --ink:            #1a1a1a;
+  --on-ink:         #ffffff;   /* white text on dark --ink background */
+  --muted:          #666666;   /* 5.7:1 on white — WCAG AA ✓ */
+  --bg:             #ffffff;
+  --bg2:            #f5f4f1;
+  --border:         rgba(0,0,0,0.1);
+  --accent:         #D85A30;
+  --accent2:        #1D9E75;
+  --accent3:        #378ADD;
+  --gold:           #BA7517;
+  --radius:         12px;
+  --opt-a-bg:       #FFF7F4;
+  --opt-a-border:   #D85A30;
+  --opt-a-header:   #FAECE7;
+  --opt-b-bg:       #F3F8FF;
+  --opt-b-border:   #378ADD;
+  --opt-b-header:   #E6F1FB;
+  --opt-c-bg:       #F2FBF7;
+  --opt-c-border:   #1D9E75;
+  --opt-c-header:   #E1F5EE;
+}
+
+/* ── KETTLEBELL DARK ── warm dark with orange accent */
+[data-theme="kb-dark"] {
+  --ink:            #EDECE8;   /* warm off-white — 13:1 on bg ✓ */
+  --on-ink:         #1a1a1a;   /* dark text ON near-white --ink background */
+  --muted:          #909090;   /* 5.5:1 on bg ✓ */
+  --bg:             #1E1E1E;
+  --bg2:            #161616;
+  --border:         rgba(255,255,255,0.1);
+  /* accent vars are unchanged — they render fine on dark bg */
+  --opt-a-bg:       #2A1F1B;
+  --opt-a-border:   #C04E28;
+  --opt-a-header:   #321F18;
+  --opt-b-bg:       #192030;
+  --opt-b-border:   #2E72BB;
+  --opt-b-header:   #1A2840;
+  --opt-c-bg:       #162420;
+  --opt-c-border:   #178A63;
+  --opt-c-header:   #182E27;
+}

@@ -1,11 +1,11 @@
-# CLAUDE.md — Kettlebell Guide
+# CLAUDE.md — Romesh's Website
 
 ## Project Overview
 
-A self-contained single-page kettlebell fitness application. No build tools, no frameworks, no dependencies beyond Google Fonts. Open `index.html` directly in a browser.
+A static multi-page personal website hosted on GitHub Pages. No build tools, no frameworks, no dependencies beyond Google Fonts. Each page is a self-contained HTML file with embedded CSS and JS.
 
 **Stack:** Pure HTML + embedded CSS + embedded JavaScript
-**Assets:** `gifs/` — 21 exercise demonstration GIFs (~65 MB)
+**Shared assets:** `assets/` — images, GIFs, and the shared `themes.css`
 
 ---
 
@@ -13,11 +13,13 @@ A self-contained single-page kettlebell fitness application. No build tools, no 
 
 ```
 Romi110.github.io/
-├── index.html      # Entire application (CSS + JS embedded)
-└── gifs/           # Exercise demo GIFs (one per exercise)
-    ├── deadlift.gif
-    ├── swing.gif
-    └── ... (21 total)
+├── index.html          # Landing page (Romesh's Website)
+├── kettlebell.html     # Kettlebell Guide app
+└── assets/
+    ├── themes.css          # Shared color palettes (all themes live here)
+    ├── gifs/               # Exercise demo GIFs (21 total)
+    ├── tips assests/       # Form tip images (15 images)
+    └── completeKBgifs/     # Full organised gif library
 ```
 
 ---
@@ -84,12 +86,31 @@ Each group has 4 ranked exercises with beginner / intermediate / advanced set-re
 
 ## Theme System
 
-CSS custom properties on `:root` (light) and `[data-theme="dark"]`:
+All palettes live in `assets/themes.css`. Each page sets `data-theme` on `<html>` to pick its palette. Pages with a light/dark toggle switch between two named themes.
+
+| Theme | Used by | Character |
+|---|---|---|
+| `home` | `index.html` | Pure black, minimal, no accent |
+| `kb-light` | `kettlebell.html` (default) | White bg, warm orange accent |
+| `kb-dark` | `kettlebell.html` (toggled) | Dark warm bg, orange accent |
+
+**Adding a new page theme:** add a `[data-theme="mytheme"]` block to `assets/themes.css` and set `data-theme="mytheme"` on the page's `<html>` element.
+
+### Core variables (required in every theme)
 
 | Variable | Purpose |
 |---|---|
-| `--ink`, `--muted` | Text colors |
-| `--bg`, `--bg2`, `--border` | Surface and border colors |
+| `--ink` | Primary text color |
+| `--on-ink` | Text color FOR USE ON an `--ink`-colored background |
+| `--muted` | Secondary/decorative text (≥ 4:1 contrast on `--bg`) |
+| `--bg`, `--bg2` | Page and section backgrounds |
+| `--border` | Borders and dividers |
+| `--radius` | Base border-radius (12px) |
+
+### Kettlebell-specific variables
+
+| Variable | Purpose |
+|---|---|
 | `--accent` | Orange (#D85A30) — primary accent |
 | `--accent2` | Green (#1D9E75) |
 | `--accent3` | Blue (#378ADD) |
@@ -97,7 +118,17 @@ CSS custom properties on `:root` (light) and `[data-theme="dark"]`:
 | `--opt-a-*` / `--opt-b-*` / `--opt-c-*` | Option card colors (A=orange, B=blue, C=green) |
 | `--grp-color`, `--grp-header`, `--grp-bg` | Set per `.grp-{id}` class on rank cards |
 
-Theme preference persisted in `localStorage` key `theme`. Toggle with `toggleTheme()`.
+Kettlebell theme preference persisted in `localStorage` key `kb-theme`. Toggle with `toggleTheme()`.
+
+### Contrast rules — follow when adding new themes or buttons
+
+1. **`--ink` is a text color, not a background.** If you use `--ink` as a background (e.g. active/selected button), pair it with `--on-ink` as the text color — never hardcode `#fff` or `#000`. `--ink` flips between dark and light across themes; `--on-ink` always provides safe contrast against it.
+
+2. **`--muted` must achieve ≥ 4:1 contrast against `--bg`** (WCAG AA). Use it only for secondary/decorative text.
+
+3. **Hero / banner backgrounds: use a fixed dark color, not `--ink`.** `--ink` flips between themes — a hardcoded value (e.g. `#1a1a1a`) is reliably dark in all contexts.
+
+4. **Never hardcode `#fff` or `#000` as text on a theme variable background.** Always use the paired variable.
 
 ---
 

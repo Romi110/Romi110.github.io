@@ -468,6 +468,56 @@ Six circuits total across two tiers. Complete all three Tier 1 circuits comforta
 
 ---
 
+## Tier 3 — Capstone Circuits
+
+---
+
+### Circuit 7 — The Architect
+
+**Theme:** Structure, precision, building from the ground up
+**Color:** Deep forest green / slate (`#080F0A` bg, `#4CAF7A` accent)
+**Icon:** 🏛️
+**Tagline:** *Floor to standing. Nowhere to hide.*
+
+**What makes it unique:** The Turkish Get-Up appears in none of the six existing circuits. It is the most technically complete KB movement — seven distinct positions from lying flat to standing overhead, every one demanding full-body stability. This circuit is entirely floor-based or slow-stability work. No explosive movement. No ballistics. The anti-thesis of The Storm. Where every other circuit trains strength or conditioning, this one trains integration — the nervous system's ability to stabilise a load through unfamiliar positions. The Windmill pairs naturally: a lateral overhead hinge that shares the shoulder-as-anchor demand of the TGU.
+
+| Order | Exercise | Reps | Note |
+|---|---|---|---|
+| 1 | Turkish Get-Up | 3 each side | Full 7-position — no shortcuts, no rushing |
+| 2 | Windmill | 5 each side | Eye on the bell — lateral hinge, not a lean |
+| 3 | Half Get-Up | 5 each side | Elbow → hand → reverse — keep the bell locked |
+| 4 | Single-Arm Deadlift | 8 each side | Hips square — anti-rotation active throughout |
+| 5 | Racked Squat | 6 each side | Full depth — bell as counterweight, not a problem |
+| 6 | Farmer's Carry | 60s | Decompress — walk tall, let the shoulders settle |
+
+**Format:** 3–4 rounds. Rest 2–3 min between rounds. Use a lighter bell than usual — technique is the load.
+**Prerequisite:** TGU must be technically sound before attempting. Practice it standalone first.
+
+---
+
+### Circuit 8 — The Twin
+
+**Theme:** Duality, symmetry, maximum bilateral force
+**Color:** Deep brass / dark gold (`#0D0900` bg, `#C9A227` accent)
+**Icon:** ⚖️
+**Tagline:** *Two bells. No excuses.*
+
+**What makes it unique:** Every circuit in the current set uses one bell. Two kettlebells is not simply more weight — it is a fundamentally different neurological challenge. Bilateral loading eliminates the anti-rotation advantage that single-arm work demands. The nervous system must stabilise symmetrically, and the total load is significantly heavier. Double Clean, Double Press, and Double Front Squat recruit more total muscle mass than any single-bell variation. This circuit also requires owning two separate weights, making it a genuine progression gate — you must earn the second bell.
+
+| Order | Exercise | Reps | Note |
+|---|---|---|---|
+| 1 | Double Swing | 15 | Two bells, one explosion — hips drive both |
+| 2 | Double Clean | 6 | Both bells into rack simultaneously — tight elbows |
+| 3 | Double Press | 6 | Press together — biceps by ears, crush the handles |
+| 4 | Double Front Squat | 8 | Bells in rack — full depth, elbows high |
+| 5 | Double Row | 8 | Hinge position — pull both to hips, pause at top |
+| 6 | Double Farmer's Carry | 60s | Heaviest carry possible — stand perfectly tall |
+
+**Format:** 3–4 rounds. Rest 3 min between rounds. Both bells must be the same weight.
+**Prerequisite:** All Tier 1 and Tier 2 circuits. The Double is a capstone, not a starting point.
+
+---
+
 ## Implementation Notes
 
 ### Beginner data structure (circuits.js)

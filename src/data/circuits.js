@@ -538,5 +538,32 @@ export const CIRCUITS = {
         { order:5, name:'Single-Arm Row',      reps:'1 rep → repeat',       note:'From hinge — pull to hip, then clean again' },
       ],
     },
+    /* ── TIER 3 — Capstone circuits ── */
+    {
+      id:'architect', name:'The Architect', tagline:'Floor to standing. Nowhere to hide.', icon:'🏛️', theme:'architect', tier:3,
+      desc:'The Turkish Get-Up appears in none of the other circuits. Seven positions, floor to standing, bell overhead throughout. No explosiveness — only integration. Where every other circuit trains strength or conditioning, this one trains the nervous system itself.',
+      rounds:'3–4 rounds', rest:'Rest 2–3 min between rounds · use a lighter bell than usual',
+      exercises:[
+        { order:1, name:'Turkish Get-Up',      reps:'3 each side',   note:'Full 7-position — no shortcuts, no rushing' },
+        { order:2, name:'Windmill',            reps:'5 each side',   note:'Eye on the bell — lateral hinge, not a lean' },
+        { order:3, name:'Half Get-Up',         reps:'5 each side',   note:'Elbow → hand → reverse — keep the bell locked' },
+        { order:4, name:'Single-Arm Deadlift', reps:'8 each side',   note:'Hips square — anti-rotation active throughout' },
+        { order:5, name:'Racked Squat',        reps:'6 each side',   note:'Full depth — bell as counterweight, not a problem' },
+        { order:6, name:"Farmer's Carry",      reps:'60 sec',        note:'Decompress — walk tall, let the shoulders settle' },
+      ],
+    },
+    {
+      id:'twin', name:'The Twin', tagline:'Two bells. No excuses.', icon:'⚖️', theme:'twin', tier:3,
+      desc:'Every circuit in the set uses one bell. Two kettlebells is not simply more weight — bilateral loading eliminates anti-rotation, demands symmetrical stabilisation, and hits significantly more total muscle mass. You must earn the second bell.',
+      rounds:'3–4 rounds', rest:'Rest 3 min between rounds · both bells must match',
+      exercises:[
+        { order:1, name:'Double Swing',         reps:'15 reps',  note:'Two bells, one explosion — hips drive both' },
+        { order:2, name:'Double Clean',         reps:'6 reps',   note:'Both into rack simultaneously — tight elbows' },
+        { order:3, name:'Double Press',         reps:'6 reps',   note:'Press together — biceps by ears, crush the handles' },
+        { order:4, name:'Double Front Squat',   reps:'8 reps',   note:'Bells in rack — full depth, elbows high' },
+        { order:5, name:'Double Row',           reps:'8 reps',   note:'Hinge position — pull both to hips, pause at top' },
+        { order:6, name:"Double Farmer's Carry",reps:'60 sec',   note:'Heaviest carry possible — stand perfectly tall' },
+      ],
+    },
   ]},
 };

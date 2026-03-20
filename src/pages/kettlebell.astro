@@ -460,6 +460,7 @@ function renderAdvancedCircuits() {
   const circuits = CIRCUITS.advanced.circuits;
   const tier1 = circuits.filter(c => c.tier === 1);
   const tier2 = circuits.filter(c => c.tier === 2);
+  const tier3 = circuits.filter(c => c.tier === 3);
   const cardHtml = c => `
     <div class="adv-card theme-${c.theme}">
       <div class="adv-card-header">
@@ -497,7 +498,15 @@ function renderAdvancedCircuits() {
       </div>
       <p class="adv-tier-sub">Only attempt these once The Chain, The Grind, and The Storm feel automatic. Each introduces a demand the first three never test.</p>
     </div>
-    <div class="adv-circuits">${tier2.map(cardHtml).join('')}</div>`;
+    <div class="adv-circuits">${tier2.map(cardHtml).join('')}</div>
+    <div class="adv-tier-divider">
+      <div class="adv-tier-label adv-tier2-label">
+        <span class="adv-tier-badge adv-tier3-badge">Tier 3</span>
+        <span class="adv-tier-title">Capstone — complete Tier 2 first</span>
+      </div>
+      <p class="adv-tier-sub">The Architect introduces the Turkish Get-Up — the most technically complete KB movement, absent from every other circuit. The Twin adds a second bell. Both demand everything the previous six have built.</p>
+    </div>
+    <div class="adv-circuits adv-circuits-2">${tier3.map(cardHtml).join('')}</div>`;
 }
 
 function renderCircuit(){

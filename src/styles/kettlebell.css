@@ -420,6 +420,8 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg2); color: var(--
   margin-top: 4px;
 }
 @media (max-width: 860px) { .adv-circuits { grid-template-columns: 1fr; } }
+.adv-circuits-2 { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 860px) { .adv-circuits-2 { grid-template-columns: 1fr; } }
 
 .adv-card {
   border-radius: 16px; overflow: hidden;
@@ -494,6 +496,29 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg2); color: var(--
   --adv-row-alt: #120C00;
 }
 
+/* Architect — deep forest green */
+.adv-card.theme-architect {
+  --adv-border:  #1A3D28;
+  --adv-bg:      #080F0A;
+  --adv-header:  #0D1810;
+  --adv-accent:  #4CAF7A;
+  --adv-ink:     #C0E0CC;
+  --adv-muted:   #5A9070;
+  --adv-num-bg:  #122A1C;
+  --adv-row-alt: #0A130C;
+}
+/* Twin — deep brass / dark gold */
+.adv-card.theme-twin {
+  --adv-border:  #4A3800;
+  --adv-bg:      #0D0900;
+  --adv-header:  #160E00;
+  --adv-accent:  #C9A227;
+  --adv-ink:     #EDD98A;
+  --adv-muted:   #907530;
+  --adv-num-bg:  #261A00;
+  --adv-row-alt: #100B00;
+}
+
 /* Tier divider */
 .adv-tier-divider {
   margin: 28px 0 8px;
@@ -514,6 +539,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg2); color: var(--
   padding: 2px 10px; border-radius: 20px;
 }
 .adv-tier2-badge { background: var(--muted); }
+.adv-tier3-badge { background: #4CAF7A; color: #080F0A; }
 .adv-tier-title {
   font-size: 13px; font-weight: 700; text-transform: uppercase;
   letter-spacing: .8px; color: var(--ink);

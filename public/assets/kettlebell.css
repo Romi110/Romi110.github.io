@@ -12,8 +12,8 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg2); color: var(--
 .hero-sub { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; margin-top: 8px; }
 
 /* ── MUSCLE NAV ── */
-.muscle-nav { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; margin-bottom: 1.5rem; }
-.muscle-btn { padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); font-size: 13px; font-family: 'DM Sans', sans-serif; cursor: pointer; text-align: left; transition: all .2s; color: var(--ink); }
+.muscle-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.5rem; justify-content: center; }
+.muscle-btn { padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); font-size: 13px; font-family: 'DM Sans', sans-serif; cursor: pointer; text-align: left; transition: all .2s; color: var(--ink); min-width: 130px; }
 .muscle-btn:hover, .muscle-btn.active { background: var(--ink); color: var(--on-ink); border-color: transparent; }
 .muscle-emoji { display: block; font-size: 20px; margin-bottom: 4px; }
 
@@ -62,10 +62,10 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg2); color: var(--
 .gif-credit { font-size: 10px; color: var(--muted); text-align: right; margin-top: 3px; opacity: .6; }
 
 /* ── CIRCUIT TABS / DAY SELECTOR ── */
-.circuit-tabs { display: flex; gap: 6px; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.circuit-tabs { display: flex; gap: 6px; margin-bottom: 1.5rem; flex-wrap: wrap; justify-content: center; }
 .circuit-tab { padding: 7px 16px; border-radius: 8px; border: 1px solid var(--border); font-size: 12px; font-family: 'DM Sans', sans-serif; cursor: pointer; color: var(--muted); background: var(--bg); transition: all .2s; text-transform: uppercase; letter-spacing: .5px; }
 .circuit-tab.active { background: var(--accent); color: #fff; border-color: transparent; }
-.day-selector { display: flex; gap: 6px; margin-bottom: 1.25rem; flex-wrap: wrap; }
+.day-selector { display: flex; gap: 6px; margin-bottom: 1.25rem; flex-wrap: wrap; justify-content: center; }
 .day-btn { padding: 8px 16px; border-radius: 8px; border: 1px solid var(--border); font-size: 13px; font-family: 'DM Sans', sans-serif; cursor: pointer; color: var(--muted); background: var(--bg); transition: all .2s; }
 .day-btn.active { color: var(--ink); font-weight: 500; border-color: var(--ink); background: var(--bg); }
 
@@ -110,7 +110,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg2); color: var(--
 .theme-toggle:hover { transform: scale(1.1); }
 
 /* ── BODY GROUP WORKOUTS ── */
-.group-selector { display: flex; gap: 6px; margin-bottom: 1.25rem; flex-wrap: wrap; }
+.group-selector { display: flex; gap: 6px; margin-bottom: 1.25rem; flex-wrap: wrap; justify-content: center; }
 .group-btn { padding: 8px 14px; border-radius: 8px; border: 1px solid var(--border); font-size: 12px; font-family: 'DM Sans', sans-serif; cursor: pointer; color: var(--muted); background: var(--bg); transition: all .2s; }
 .group-btn.active { color: var(--ink); font-weight: 500; border-color: var(--ink); }
 .group-header { display: flex; align-items: center; gap: 14px; margin-bottom: 1rem; }
@@ -185,7 +185,74 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg2); color: var(--
 .warmup-detail { font-size: 12px; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
 .tip-img-placeholder { background: var(--bg2); border: 1px dashed var(--border); border-radius: 8px; padding: 18px; text-align: center; font-size: 12px; color: var(--muted); margin-top: 8px; }
 
+/* ── FREE EXERCISES VIEWER ── */
+.free-cat-nav { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1.25rem; justify-content: center; }
+.free-cat-btn {
+  padding: 8px 16px; border-radius: 8px; border: 1px solid var(--border);
+  font-size: 13px; font-family: 'DM Sans', sans-serif; cursor: pointer;
+  color: var(--muted); background: var(--bg); transition: all .2s;
+}
+.free-cat-btn.active { background: var(--ink); color: var(--on-ink); border-color: transparent; font-weight: 500; }
+.free-cat-btn:hover:not(.active) { background: var(--bg2); color: var(--ink); }
+
+.free-card {
+  background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius);
+  overflow: hidden;
+}
+.free-gif-wrap {
+  background: #111; display: flex; align-items: center; justify-content: center;
+  min-height: 280px; max-height: 480px; overflow: hidden;
+}
+.free-gif {
+  width: 100%; max-height: 480px; object-fit: contain; display: block;
+}
+.free-info {
+  padding: 1.25rem 1.25rem 1rem;
+}
+.free-name {
+  font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 1.5px;
+  color: var(--ink); line-height: 1; margin-bottom: 10px;
+}
+.free-chip {
+  background: var(--bg2); border: 1px solid var(--border); color: var(--muted);
+}
+.free-desc {
+  font-size: 13px; color: var(--muted); line-height: 1.7; margin-top: 4px;
+}
+.free-nav-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 1.25rem; border-top: 1px solid var(--border);
+  background: var(--bg2);
+}
+.free-nav-btn {
+  padding: 8px 20px; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--bg); font-size: 13px; font-family: 'DM Sans', sans-serif;
+  font-weight: 500; color: var(--ink); cursor: pointer; transition: all .2s;
+}
+.free-nav-btn:hover { background: var(--ink); color: var(--on-ink); border-color: transparent; }
+.free-counter {
+  font-family: 'Bebas Neue', sans-serif; font-size: 20px;
+  color: var(--muted); letter-spacing: 1px;
+}
+.free-dot-nav {
+  display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;
+  padding: 10px 1.25rem 14px; background: var(--bg2);
+  border-top: 1px solid var(--border);
+}
+.free-dot-btn {
+  width: 90px; min-height: 52px; border-radius: 8px;
+  border: 1px solid var(--border); background: var(--bg);
+  font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; line-height: 1.3;
+  color: var(--muted); cursor: pointer; transition: all .2s;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: 6px 6px; word-break: break-word; hyphens: auto;
+}
+.free-dot-btn:hover:not(.active) { background: var(--bg2); color: var(--ink); }
+.free-dot-btn.active { background: var(--ink); color: var(--on-ink); border-color: transparent; font-weight: 600; }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 500px) {
   .hero { padding: 2rem .75rem 1.5rem; border-radius: 8px; }
+  .free-gif-wrap { min-height: 200px; }
+  .free-name { font-size: 22px; }
 }

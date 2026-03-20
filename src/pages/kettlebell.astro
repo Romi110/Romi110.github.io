@@ -7,6 +7,7 @@ import MistakeItem from '../components/MistakeItem.astro';
 import { EXERCISES } from '../data/exercises.js';
 import { CIRCUITS } from '../data/circuits.js';
 import { BODY_GROUPS } from '../data/bodyGroups.js';
+import { FREE_EXERCISE_GROUPS } from '../data/freeExercises.js';
 ---
 <Base title="Kettlebell Guide | Full Body Strength & Conditioning" theme="kb-light">
   <link slot="head" rel="stylesheet" href="/assets/kettlebell.css">
@@ -25,6 +26,7 @@ import { BODY_GROUPS } from '../data/bodyGroups.js';
     <button class="tab" onclick="showPanel('circuits', this)">Workout Circuits</button>
     <button class="tab" onclick="showPanel('bodygroups', this)">Body Group Workouts</button>
     <button class="tab" onclick="showPanel('tips', this)">Tips & Strategies</button>
+    <button class="tab" onclick="showPanel('free', this)">Free Exercises</button>
   </div>
 
   <!-- ── EXERCISES PANEL — pre-rendered at build time ── -->
@@ -216,6 +218,16 @@ import { BODY_GROUPS } from '../data/bodyGroups.js';
     </div>
   </div>
 
+  <!-- ── FREE EXERCISES PANEL — JS rendered ── -->
+  <div class="panel" id="panel-free">
+    <div class="callout">
+      <div class="callout-icon">🎬</div>
+      <div class="callout-text"><strong>Exercise library:</strong> Browse all exercises by category. Use the arrows to step through each movement — see the demo GIF, muscle targets, and coaching cue.</div>
+    </div>
+    <div class="free-cat-nav" id="free-cat-nav"></div>
+    <div id="free-viewer"></div>
+  </div>
+
   <!-- ── BODY GROUP WORKOUTS PANEL — JS rendered ── -->
   <div class="panel" id="panel-bodygroups">
     <div class="callout">
@@ -227,10 +239,11 @@ import { BODY_GROUPS } from '../data/bodyGroups.js';
   </div>
 </div>
 
-<div id="kb-data" data-kb={JSON.stringify({ CIRCUITS, BODY_GROUPS })} hidden></div>
+<div id="kb-data" data-kb={JSON.stringify({ CIRCUITS, BODY_GROUPS, FREE_EXERCISE_GROUPS })} hidden></div>
 <script is:inline>
-const { CIRCUITS, BODY_GROUPS } = JSON.parse(document.getElementById('kb-data').dataset.kb);
+const { CIRCUITS, BODY_GROUPS, FREE_EXERCISE_GROUPS } = JSON.parse(document.getElementById('kb-data').dataset.kb);
 let currentLevel = 'beginner', currentDay = 0, currentGroup = 'hinge';
+let currentFreeGroup = FREE_EXERCISE_GROUPS[0].id, currentFreeIndex = 0;
 
 function getScoreColor(s){ return s>=9?'#D85A30':s>=7?'#BA7517':'#888780'; }
 function getMuscleAccent(m){ return {hinge:'#D85A30',squat:'#378ADD',push:'#1D9E75',pull:'#BA7517',core:'#534AB7',total:'#D4537E'}[m]||'#888'; }
@@ -265,6 +278,7 @@ function showPanel(id, btn){
   btn.classList.add('active');
   if(id==='circuits') renderCircuit();
   if(id==='bodygroups') renderBodyGroups();
+  if(id==='free') renderFreeExercises();
 }
 
 function showGroup(id, btn){
@@ -364,6 +378,58 @@ function toggleTheme(){
   localStorage.setItem('kb-theme', isDark ? 'kb-light' : 'kb-dark');
   applyTheme(!isDark);
 }
+function showFreeGroup(id) {
+  currentFreeGroup = id;
+  currentFreeIndex = 0;
+  renderFreeExercises();
+}
+function freeNav(dir) {
+  const grp = FREE_EXERCISE_GROUPS.find(g => g.id === currentFreeGroup);
+  currentFreeIndex = (currentFreeIndex + dir + grp.exercises.length) % grp.exercises.length;
+  renderFreeViewer(grp);
+}
+function freeGoTo(i) {
+  currentFreeIndex = i;
+  const grp = FREE_EXERCISE_GROUPS.find(g => g.id === currentFreeGroup);
+  renderFreeViewer(grp);
+}
+function renderFreeViewer(grp) {
+  const ex = grp.exercises[currentFreeIndex];
+  const path = `/assets/completeKBgifs/${encodeURIComponent(grp.folder)}/${ex.file}`;
+  document.getElementById('free-viewer').innerHTML = `
+    <div class="free-card">
+      <div class="free-gif-wrap">
+        <img class="free-gif" src="${path}" alt="${ex.name}">
+      </div>
+      <div class="free-info">
+        <div class="free-name">${ex.name}</div>
+        <div class="muscle-chips" style="margin-bottom:10px">
+          ${ex.muscles.map(m => `<span class="muscle-chip free-chip">${m}</span>`).join('')}
+        </div>
+        <div class="free-desc">${ex.desc}</div>
+      </div>
+      <div class="free-nav-bar">
+        <button class="free-nav-btn" onclick="freeNav(-1)">&#8592; Prev</button>
+        <span class="free-counter">${currentFreeIndex + 1} / ${grp.exercises.length}</span>
+        <button class="free-nav-btn" onclick="freeNav(1)">Next &#8594;</button>
+      </div>
+      <div class="free-dot-nav">
+        ${grp.exercises.map((e, i) =>
+          `<button class="free-dot-btn${i === currentFreeIndex ? ' active' : ''}" onclick="freeGoTo(${i})">${e.name}</button>`
+        ).join('')}
+      </div>
+    </div>`;
+}
+function renderFreeExercises() {
+  document.getElementById('free-cat-nav').innerHTML = FREE_EXERCISE_GROUPS.map(g =>
+    `<button class="free-cat-btn${g.id === currentFreeGroup ? ' active' : ''}" onclick="showFreeGroup('${g.id}')">
+      ${g.icon} ${g.label}
+    </button>`
+  ).join('');
+  const grp = FREE_EXERCISE_GROUPS.find(g => g.id === currentFreeGroup);
+  renderFreeViewer(grp);
+}
+
 applyTheme(localStorage.getItem('kb-theme') === 'kb-dark');
 
 renderCircuit();

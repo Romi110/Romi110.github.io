@@ -27,7 +27,8 @@ Romi110.github.io/
 │   ├── data/
 │   │   ├── exercises.js        # EXERCISES array (22 items) + helper fns
 │   │   ├── circuits.js         # CIRCUITS object (3 levels × 3 days × 3 options)
-│   │   └── bodyGroups.js       # BODY_GROUPS array (6 groups × 4 exercises)
+│   │   ├── bodyGroups.js       # BODY_GROUPS array (6 groups × 4 exercises)
+│   │   └── freeExercises.js    # FREE_EXERCISE_GROUPS array (6 categories, 50+ GIF exercises)
 │   └── lib/
 │       └── supabase.js         # Supabase client (env vars via PUBLIC_ prefix)
 ├── public/
@@ -95,6 +96,7 @@ const myData = JSON.parse(document.getElementById('page-data').dataset.json);
 | Workout circuits | JS-rendered into `#circuit-content` from `CIRCUITS` data |
 | Body group rank cards | JS-rendered into `#group-content` from `BODY_GROUPS` data |
 | Tips panel | Static Astro components (`TipCard`, `MistakeItem`) |
+| Free exercises viewer | JS-rendered into `#free-viewer` from `FREE_EXERCISE_GROUPS` data |
 
 ---
 
@@ -149,6 +151,17 @@ Three levels: `beginner`, `intermediate`, `advanced`. Three days per level. Thre
   exercises: [{ name, tag, muscles[], why, beg, int, adv }]  // 4 exercises, ranked
 }
 ```
+
+### `FREE_EXERCISE_GROUPS` (array, 6 objects) — `src/data/freeExercises.js`
+
+```js
+{
+  id: 'core', label: 'Core', folder: 'Core', icon: '🏋️',
+  exercises: [{ file, name, muscles[], desc }]  // GIF filename relative to /assets/completeKBgifs/{folder}/
+}
+```
+
+Six categories: `core`, `hip-hinge`, `knee-bend`, `pull`, `push`, `warmup`. GIFs live at `/assets/completeKBgifs/{folder}/{file}`.
 
 ---
 
@@ -226,15 +239,22 @@ Props: `label`, `imgSrc?`, `imgAlt?`, `accent` (boolean — `true` uses `--accen
 | `showGroup(id, btn)` | Switch active body group |
 | `toggleGif(btn)` | Expand/collapse GIF demo (`.open` class toggle) |
 | `toggleTheme()` / `applyTheme(dark)` | Dark mode — persisted to `localStorage` key `kb-theme` |
+| `renderFreeExercises()` | Render category nav + call `renderFreeViewer` for current group/index |
+| `renderFreeViewer(grp)` | JS-render current exercise (GIF, muscles, desc, nav bar, dot nav) into `#free-viewer` |
+| `showFreeGroup(id)` | Switch active free exercise category; resets index to 0 |
+| `freeNav(dir)` | Step prev/next through exercises in current category (+1 / -1, wraps) |
+| `freeGoTo(i)` | Jump directly to exercise at index `i` in current category |
 
 ---
 
 ## State Variables (kettlebell page)
 
 ```js
-let currentLevel = 'beginner'; // Circuits panel difficulty
-let currentDay   = 0;          // Circuits panel day index
-let currentGroup = 'hinge';    // Body Groups panel active group
+let currentLevel     = 'beginner';                  // Circuits panel difficulty
+let currentDay       = 0;                           // Circuits panel day index
+let currentGroup     = 'hinge';                     // Body Groups panel active group
+let currentFreeGroup = FREE_EXERCISE_GROUPS[0].id;  // Free Exercises active category
+let currentFreeIndex = 0;                           // Free Exercises active exercise index
 ```
 
 ---
@@ -246,6 +266,7 @@ let currentGroup = 'hinge';    // Body Groups panel active group
 - **Spacing:** 8px base unit
 - **Transitions:** 0.2s hover states, 0.35s GIF reveal animation
 - **Mobile breakpoints:** 680px (option grid), 600px (exercise grid / rank cards), 500px (hero / tabs)
+- **Button group alignment:** All button rows (tabs, muscle filter, circuit level/day, group selector, category nav, dot nav) use `justify-content: center` so they wrap symmetrically on all screen sizes.
 
 ---
 
@@ -279,6 +300,7 @@ Add an object to `EXERCISES` in `src/data/exercises.js`. It will automatically a
 | Workout Circuits | `panel-circuits` | 3-level × 3-day × 3-option structured circuits |
 | Body Group Workouts | `panel-bodygroups` | Top 4 ranked exercises per muscle group |
 | Tips & Strategies | `panel-tips` | Beginner guide — form, weight selection, progressions, safety |
+| Free Exercises | `panel-free` | GIF viewer — browse all exercises by category with dot-nav |
 
 ---
 

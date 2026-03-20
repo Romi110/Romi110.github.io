@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://romi.dev',
+  site: 'https://romesh.dev',
   output: 'static',
 });

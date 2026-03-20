@@ -1,0 +1,20 @@
+---
+const { icon, title, imgSrc, imgAlt } = Astro.props;
+---
+
+<div class="tip-card">
+  <div class="tip-card-icon">{icon}</div>
+  <div class="tip-card-title">{title}</div>
+  <div class="tip-card-body"><slot /></div>
+  {imgSrc && (
+    <>
+      <button class="gif-toggle" onclick="toggleGif(this)">
+        <span class="gif-toggle-icon">▶</span>
+        <span class="gif-toggle-label">Show example</span>
+      </button>
+      <div class="gif-reveal">
+        <img src={imgSrc} alt={imgAlt} />
+      </div>
+    </>
+  )}
+</div>

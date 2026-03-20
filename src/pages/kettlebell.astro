@@ -1,0 +1,373 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import ExerciseCard from '../components/ExerciseCard.astro';
+import TipCard from '../components/TipCard.astro';
+import MistakeItem from '../components/MistakeItem.astro';
+import { EXERCISES } from '../data/exercises.js';
+import { CIRCUITS } from '../data/circuits.js';
+import { BODY_GROUPS } from '../data/bodyGroups.js';
+---
+<Base title="Kettlebell Guide | Full Body Strength & Conditioning" theme="kb-light">
+  <link slot="head" rel="stylesheet" href="/assets/kettlebell.css">
+  <Nav slot="nav" label="Home">
+    <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn" title="Toggle dark mode">🌙</button>
+  </Nav>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="hero-title">Kettlebell <span>Guide</span></div>
+    <div class="hero-sub">Full Body Strength &amp; Conditioning &middot; Beginner Friendly</div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showPanel('exercises', this)">Exercises by Muscle</button>
+    <button class="tab" onclick="showPanel('circuits', this)">Workout Circuits</button>
+    <button class="tab" onclick="showPanel('bodygroups', this)">Body Group Workouts</button>
+    <button class="tab" onclick="showPanel('tips', this)">Tips & Strategies</button>
+  </div>
+
+  <!-- ── EXERCISES PANEL — pre-rendered at build time ── -->
+  <div class="panel active" id="panel-exercises">
+    <div class="callout">
+      <div class="callout-icon">💡</div>
+      <div class="callout-text"><strong>Brand new to kettlebells?</strong> Start with exercises tagged "Form Builder" first. These build the foundational movement patterns that make all other lifts safe and effective. Spend 2–3 weeks here before progressing to heavier or more complex moves.</div>
+    </div>
+    <div class="muscle-nav">
+      <button class="muscle-btn active" onclick="showMuscle('all',this)"><span class="muscle-emoji">🔥</span>All Exercises</button>
+      <button class="muscle-btn" onclick="showMuscle('hinge',this)"><span class="muscle-emoji">🍑</span>Hinge / Glutes</button>
+      <button class="muscle-btn" onclick="showMuscle('squat',this)"><span class="muscle-emoji">🦵</span>Quads / Legs</button>
+      <button class="muscle-btn" onclick="showMuscle('push',this)"><span class="muscle-emoji">💪</span>Push / Chest</button>
+      <button class="muscle-btn" onclick="showMuscle('pull',this)"><span class="muscle-emoji">🔙</span>Pull / Back</button>
+      <button class="muscle-btn" onclick="showMuscle('core',this)"><span class="muscle-emoji">🏋️</span>Core</button>
+      <button class="muscle-btn" onclick="showMuscle('total',this)"><span class="muscle-emoji">⚡</span>Total Body</button>
+    </div>
+    <div class="exercises-grid" id="ex-grid">
+      {EXERCISES.map(ex => <ExerciseCard exercise={ex} />)}
+    </div>
+  </div>
+
+  <!-- ── CIRCUITS PANEL — JS rendered ── -->
+  <div class="panel" id="panel-circuits">
+    <div class="callout">
+      <div class="callout-icon">📋</div>
+      <div class="callout-text"><strong>How to use these circuits:</strong> Pick Option A, B, or C based on your energy and goals that day. Aim for 3 rounds (beginners) or 4–5 rounds (intermediate/advanced). Rest 60–90 sec between rounds. Train 3 days per week with rest days between sessions.</div>
+    </div>
+    <div class="circuit-tabs">
+      <button class="circuit-tab active" onclick="showLevel('beginner',this)">Beginner</button>
+      <button class="circuit-tab" onclick="showLevel('intermediate',this)">Intermediate</button>
+      <button class="circuit-tab" onclick="showLevel('advanced',this)">Advanced</button>
+    </div>
+    <div class="day-selector" id="day-selector"></div>
+    <div id="circuit-content"></div>
+  </div>
+
+  <!-- ── TIPS & STRATEGIES PANEL — Astro components ── -->
+  <div class="panel" id="panel-tips">
+    <div class="callout">
+      <div class="callout-icon">🎓</div>
+      <div class="callout-text"><strong>New to kettlebells?</strong> This guide covers everything you need to train safely and effectively from day one. Work through each section before your first session — 10 minutes here will prevent months of wasted effort and avoidable injury.</div>
+    </div>
+
+    <div class="tips-section">
+      <div class="tips-section-title">📐 General Form Fundamentals</div>
+      <div class="tips-grid">
+        <TipCard icon="🫁" title="Brace like you're about to get punched" imgSrc="/assets/tips/bracecore.png" imgAlt="Core bracing demonstration">
+          Before every rep, imagine someone is about to punch you in the stomach — take a breath and tighten your whole midsection as if to brace for impact. <strong>That hardness is your core being on.</strong> This creates intra-abdominal pressure that acts like an internal weight belt, protecting your spine under load. Without it, your lower back absorbs forces it was never meant to handle.
+        </TipCard>
+        <TipCard icon="🦴" title="A string is pulling your head to the ceiling" imgSrc="/assets/tips/posture.webp" imgAlt="Neutral spine posture cue">
+          Imagine a string attached to the very top of your skull pulling straight up toward the ceiling. This one cue fixes more problems than almost any other: your chin tucks slightly, your neck lengthens, your chest opens, and your spine stacks naturally. <strong>The moment your head drops forward, the whole chain collapses.</strong> Use it during carries, squats, rows — everything.
+        </TipCard>
+        <TipCard icon="🔩" title="Squeeze everything before you move" imgSrc="/assets/tips/russian-kettlebell-swing.gif" imgAlt="Full body tension demonstration">
+          Before each rep: crush the handle, squeeze your glutes, brace your abs. This "irradiation" effect — tension in one muscle radiating to neighbouring muscles — makes you measurably stronger without adding any weight. Think of it like <strong>tightening every bolt before you drive.</strong> A loose body is a weak and vulnerable body.
+        </TipCard>
+        <TipCard icon="👣" title="Screw your feet into the floor" imgSrc="/assets/tips/activatefeet.jpg" imgAlt="Foot rooting demonstration">
+          Press all four corners of each foot down and imagine screwing them outward — like trying to rip the floor apart beneath you (without actually moving your feet). This creates rotational torque through the hip that activates your glutes and locks your knees in the correct path. <strong>Strong floor contact = strong lift.</strong> Try it and feel your glutes switch on immediately.
+        </TipCard>
+        <TipCard icon="🧱" title="Tuck your shoulder blades into your back pockets" imgSrc="/assets/tips/shoulderblades.jpeg" imgAlt="Scapula retraction demonstration">
+          Before any press, row, or carry, pull your shoulder blades down and together — like you are trying to slide them into your back trouser pockets. This depresses and retracts the scapulae, creating a stable base for the arm and protecting the rotator cuff. <strong>Shrugged, elevated shoulders during pressing is how people get injured.</strong> Set them down first, every single time.
+        </TipCard>
+        <TipCard icon="🐢" title="Lower like you're lowering a sleeping child" imgSrc="/assets/tips/slowcontrol.gif" imgAlt="Slow eccentric demonstration">
+          The lowering (eccentric) phase builds more muscle than lifting. Take 2–3 seconds on the way down on every press, squat, and row — as if you are gently lowering something you cannot afford to drop. Most people fling the weight down and waste half the rep. <strong>Slow eccentrics also make you more aware of where your form breaks</strong> — the moment you rush, you stop feeling what is working.
+        </TipCard>
+      </div>
+    </div>
+
+    <div class="tips-section">
+      <div class="tips-section-title">🎯 Exercise-Specific Form Tips</div>
+      <div class="callout" style="margin-bottom:1rem">
+        <div class="callout-icon">💡</div>
+        <div class="callout-text">Each exercise has one or two make-or-break cues. Nail these and the rest tends to fall into place. Film yourself against these checkpoints — what you feel and what you look like are often very different things.</div>
+      </div>
+      <div class="mistake-list">
+        <MistakeItem accent label="🔄 Kettlebell Swing" imgSrc="/assets/tips/2-3-H-Two-Handed-Kettlebell-Swing-683x1024.png" imgAlt="Kettlebell swing form guide">
+          <strong>Hike, snap, float.</strong> The bell hikes back between your legs like a football snap, then your hips drive forward like you are slamming a car door with your backside. The arms are just ropes — they go along for the ride. At the top, you should be standing in a perfect plank: glutes locked, abs braced, shoulders packed. The bell floats briefly at chest height from pure momentum. <em>Tired shoulders = your arms are working. Tired lower back = you are squatting instead of hinging.</em>
+        </MistakeItem>
+        <MistakeItem accent label="⬇️ Kettlebell Deadlift" imgSrc="/assets/tips/2-1-H-Kettlebell-Single-Arm-Deadlift-683x1024.png" imgAlt="Kettlebell deadlift form guide">
+          <strong>Push the floor away — don't pull the bell up.</strong> Your legs are a hydraulic press; think of them driving the ground downward rather than your back pulling the bell up. Before you move: big breath, brace your core like you're about to get punched, then lift your chest ("proud chest") to lock your back flat. Hips and shoulders should rise at the same rate — if your hips shoot up first and your chest drops, your lower back is taking over. <em>Think: leg press, not back lift.</em>
+        </MistakeItem>
+        <MistakeItem accent label="🏆 Goblet Squat" imgSrc="/assets/tips/3-1-H-Kettlebell-Goblet-Squat-683x1024.png" imgAlt="Goblet squat form guide">
+          <strong>Elbows pry knees apart; sit between your heels.</strong> At the bottom, use your elbows to actively push your knees out — as if prying open a door. Your goal is to sit <em>between</em> your heels, not above them. Imagine the floor is a drain and you are squatting down over it, spreading your feet to let the water through. Hold a 3-second pause at the bottom each rep for the first two weeks — your body will quickly learn where it needs to be.
+        </MistakeItem>
+        <MistakeItem accent label="🎯 Overhead Press" imgSrc="/assets/tips/4-3-H-Kettlebell-Overhead-Press-683x1024.png.webp" imgAlt="Overhead press form guide">
+          <strong>Juice the handle; press your body away from the floor.</strong> Before the press: crush the handle as hard as you can, glutes squeezed, abs braced like you're about to be punched, shoulder packed into its socket. As you press, think of pushing yourself down through the floor rather than pushing the bell up — this engages your lats and keeps the bar path vertical. Your bicep should finish beside your ear. If it is in front of your face, you have lost your lat and the shoulder is unprotected at lockout.
+        </MistakeItem>
+        <MistakeItem accent label="🚣 Single-Arm Row" imgSrc="/assets/tips/5-1-H-Kettlebell-Bent-Over-Row-683x1024.png" imgAlt="Kettlebell row form guide">
+          <strong>Elbow to back pocket — imagine you are starting a lawnmower slowly.</strong> The elbow drives back and down along your ribcage, finishing near your hip bone — not flaring out wide toward your ear. At the top, pause for one second and actively try to squeeze your shoulder blade toward your spine. Keep your torso completely flat — if you rotate to heave the weight, you are no longer rowing with your back, you are spinning with your oblique. <em>If you have to twist, the weight is too heavy.</em>
+        </MistakeItem>
+        <MistakeItem accent label="🧹 Farmer's Carry">
+          <strong>A string pulls your head up; the bell cannot tilt you.</strong> The whole point of this exercise is to resist the side-bend the weight wants to force on you. Walk as if someone has that string attached to the top of your skull pulling straight up — shoulders perfectly level, gaze forward, deliberate medium steps. Squeeze the handle the entire duration. The moment you lean away from the bell, your core has given out — that is your signal to put it down, not push through.
+          <div class="tip-img-placeholder">📷 Image coming soon</div>
+        </MistakeItem>
+        <MistakeItem accent label="🔁 Kettlebell Clean" imgSrc="/assets/tips/2-6-H-Kettlebell-Clean-683x1024.png" imgAlt="Kettlebell clean form guide">
+          <strong>Zip the bell up the centre line; receive it like an egg.</strong> The bell travels in a tight arc close to your body — think of a zip running up the centre of your torso that you are pulling the bell along. At the top, the bell "racks" softly on your forearm and shoulder as you rotate your hand — land it as gently as you would catch an egg. If it bangs your wrist, the arc went too wide or you skipped the hand rotation. Spend time just practicing the rack position before adding speed.
+        </MistakeItem>
+        <MistakeItem accent label="🌀 Turkish Get-Up" imgSrc="/assets/tips/6-1-H-Kettlebell-Turkish-Get-Up.png" imgAlt="Turkish get-up form guide">
+          <strong>Eyes on the bell — always. Move like you are underwater.</strong> Looking at the bell is not optional — it is the mechanism that keeps your shoulder stable. There are 7 distinct positions in a TGU; treat each one as its own pause before continuing. Imagine you are moving underwater — that speed is correct. If the bell wobbles or drifts, you have moved too fast. Master each stage with a shoe balanced on your fist before adding any weight.
+        </MistakeItem>
+        <MistakeItem accent label="🏹 Single-Leg RDL" imgSrc="/assets/tips/2-2-H-Kettlebell-Single-Leg-Deadlift-683x1024.png" imgAlt="Single-leg RDL form guide">
+          <strong>Seesaw with a headlamp pointing forward.</strong> Imagine a headlamp strapped to your chest — as you hinge forward, it should point at the wall in front of you, not at the floor. Your free leg and your torso form the two arms of a seesaw with your standing hip as the pivot point. Keep your hips level — imagine a tray of drinks balanced across them that you cannot spill. Move glacially; balance collapses when you rush. A slight bend in the standing knee is correct.
+        </MistakeItem>
+        <MistakeItem accent label="💨 Thruster" imgSrc="/assets/tips/7-2-H-Kettlebell-thruster-683x1024.png" imgAlt="Thruster form guide">
+          <strong>Catch the rebound from the squat and ride it overhead.</strong> Think of the thruster as one continuous arc, not two separate movements. As you drive up from the squat, your legs are a coiled spring — the moment they release, that energy travels up through your core and into the press. Begin pressing while you are still rising, catching the momentum like a surfer catching a wave. If you pause at the top of the squat before pressing, the wave has already passed — you are now pressing with arms only.
+        </MistakeItem>
+      </div>
+    </div>
+
+    <div class="tips-section">
+      <div class="tips-section-title">⚖️ Choosing Your First Kettlebell</div>
+      <div class="callout" style="margin-bottom:1rem">
+        <div class="callout-icon">💡</div>
+        <div class="callout-text">Most beginners go too light. A bell that feels challenging at rep 5 will feel easy at rep 15 after two weeks. Start heavier than your gut says — you can always set it down, but you cannot make a light bell harder.</div>
+      </div>
+      <table class="weight-table">
+        <thead><tr><th>Who You Are</th><th>Suggested Starting Weight</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>Woman, new to training</td><td>8 kg (18 lb)</td><td>Safe entry point for swings and deadlifts</td></tr>
+          <tr><td>Woman, gym-active</td><td>12 kg (26 lb)</td><td>Challenging without compromising form</td></tr>
+          <tr><td>Man, new to training</td><td>12–16 kg (26–35 lb)</td><td>Substantial enough for real hip hinge work</td></tr>
+          <tr><td>Man, gym-active</td><td>20–24 kg (44–53 lb)</td><td>Honest challenge across all basic movements</td></tr>
+          <tr><td>For overhead pressing (all)</td><td>Go 4–8 kg lighter</td><td>Pressing demands more shoulder control</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tips-section">
+      <div class="tips-section-title">📅 Your First 4 Weeks</div>
+      <div class="steps-list">
+        <div class="step-item"><div class="step-num">1</div><div class="step-content"><div class="step-title">Week 1–2: Master the Deadlift &amp; Goblet Squat</div><div class="step-desc">Do nothing else for the first two sessions. <strong>Two-Hand KB Deadlift</strong> and <strong>Goblet Squat</strong> teach you the two fundamental movement patterns — the hip hinge and the squat. Every other exercise in this guide is built on these foundations. Do 3–4 sets of 8 reps each, rest as long as you need between sets.</div></div></div>
+        <div class="step-item"><div class="step-num">2</div><div class="step-content"><div class="step-title">Week 2–3: Add the Swing &amp; Single-Arm Row</div><div class="step-desc">Once your hip hinge feels solid, add the <strong>Kettlebell Swing</strong>. It is the king of KB exercises but requires a good hinge first — the swing is a hinge with power, not a front raise. Also add the <strong>Single-Arm Row</strong> for your back. You now have all major patterns covered.</div></div></div>
+        <div class="step-item"><div class="step-num">3</div><div class="step-content"><div class="step-title">Week 3–4: Add the Press &amp; Farmer's Carry</div><div class="step-desc">Introduce the <strong>Single-Arm Overhead Press</strong> and <strong>Farmer's Carry</strong>. The press builds overhead stability. The carry trains your core, grip, and posture all at once and is the most underrated exercise in existence. At this point you have a complete beginner program.</div></div></div>
+        <div class="step-item"><div class="step-num">4</div><div class="step-content"><div class="step-title">After Week 4: Follow the Beginner Circuits</div><div class="step-desc">Head to the <strong>Workout Circuits</strong> tab and start with the Beginner circuits. You now have enough movement competency to follow structured workouts safely. Train <strong>3 days per week</strong> with at least one rest day between sessions.</div></div></div>
+      </div>
+    </div>
+
+    <div class="tips-section">
+      <div class="tips-section-title">🔒 6 Golden Safety Rules</div>
+      <div class="tips-grid">
+        <TipCard icon="🏗️" title="Form before weight, always">Never chase reps at the cost of form. A perfect rep with a lighter bell builds more strength than a sloppy rep with a heavier one — and won't hurt your back. <strong>When form breaks, stop the set.</strong></TipCard>
+        <TipCard icon="🔋" title="Always warm up">Cold muscles and joints don't move well. Do 5–10 minutes of light movement before every session. The warm-up protocol below takes less than 7 minutes and dramatically reduces injury risk.</TipCard>
+        <TipCard icon="👁️" title="Film yourself occasionally">You cannot feel what you look like. Set your phone sideways and record a set from the side. You will immediately spot things you'd never notice — a rounding back, collapsed knee, or shallow range of motion.</TipCard>
+        <TipCard icon="😴" title="Rest days are not optional">Strength is built during recovery, not during the workout. Training 3 days per week with rest days between sessions produces faster results than training 5–6 days. <strong>More is not always better.</strong></TipCard>
+        <TipCard icon="⚡" title="End sets before failure">Leave 2–3 reps in reserve on most working sets. Training to absolute failure every set causes excessive fatigue and increases injury risk. Save max-effort sets for experienced lifters who manage recovery well.</TipCard>
+        <TipCard icon="🎯" title="Train patterns, not muscles">KB training organizes around movement: hinge, squat, push, pull, carry, rotate. One exercise from each pattern per session trains your entire body and nothing gets missed.</TipCard>
+      </div>
+    </div>
+
+    <div class="tips-section">
+      <div class="tips-section-title">⚠️ Common Beginner Mistakes</div>
+      <div class="mistake-list">
+        <MistakeItem label="❌ Squatting the swing">The swing is a hinge, not a squat. Your hips go <em>back</em>, not down. If your shins are tilting forward and knees are bending deeply, you are squatting. <strong>Fix:</strong> Think "snap your hips forward" — the goblet squat trains quads, swings train glutes and hamstrings.</MistakeItem>
+        <MistakeItem label="❌ Using your arms in the swing">The arms only guide the bell — they do not pull it up. If your shoulders are burning from swings, you are muscling it with your arms. <strong>Fix:</strong> Think of your arms as ropes attached to your hips. The hip snap creates all the force.</MistakeItem>
+        <MistakeItem label="❌ Rounding the lower back on deadlifts">A rounded lower back under load is how people get hurt. <strong>Fix:</strong> Before you pull, take a big breath and brace your core hard. Think "proud chest" — lift your chest before you lift the bell. Your back should feel like a rigid board.</MistakeItem>
+        <MistakeItem label="❌ Going too heavy too soon">Ego lifting is the most common beginner mistake. <strong>Fix:</strong> Spend 2–3 weeks with a weight that lets you move perfectly. Form must be automatic before you add weight. The goal in month one is to become a better mover, not to lift more.</MistakeItem>
+        <MistakeItem label="❌ Neglecting the pull pattern">Most beginners do too much pressing and not enough pulling, leading to shoulder imbalances and poor posture. <strong>Fix:</strong> For every pressing rep you do, match it with a pulling rep (row or pullover). Aim for a 1:1 or 2:1 pull-to-push ratio.</MistakeItem>
+        <MistakeItem label="❌ Skipping the Farmer's Carry">It looks too simple so beginners skip it. This is a mistake. <strong>Fix:</strong> Add Farmer's Carries to every session. Pick up something genuinely heavy, stand tall, and walk. 3 sets of 30–45 seconds will transform your core strength faster than almost anything else.</MistakeItem>
+      </div>
+    </div>
+
+    <div class="tips-section">
+      <div class="tips-section-title">🔥 Warm-Up Every Session (7 min)</div>
+      <div class="callout" style="margin-bottom:1rem">
+        <div class="callout-icon">⏱️</div>
+        <div class="callout-text">Do this before every kettlebell session. It primes your joints, activates your core, and gets blood moving to the muscles you are about to use. It is 7 minutes and non-negotiable.</div>
+      </div>
+      <div class="warmup-container">
+        <div class="warmup-row"><span class="warmup-name">World's Greatest Stretch</span><span class="warmup-detail">5 reps each side · ~60 sec</span></div>
+        <div class="warmup-row"><span class="warmup-name">Hip 90/90 Rotations</span><span class="warmup-detail">10 reps each side · ~60 sec</span></div>
+        <div class="warmup-row"><span class="warmup-name">Bodyweight Hip Hinge (deadlift pattern)</span><span class="warmup-detail">10 reps · ~45 sec</span></div>
+        <div class="warmup-row"><span class="warmup-name">Bodyweight Goblet Squat (3 sec hold at bottom)</span><span class="warmup-detail">8 reps · ~60 sec</span></div>
+        <div class="warmup-row"><span class="warmup-name">Halo (light bell or hands clasped)</span><span class="warmup-detail">5 each direction · ~45 sec</span></div>
+        <div class="warmup-row"><span class="warmup-name">Arm Circles + Shoulder Rolls</span><span class="warmup-detail">10 each direction · ~30 sec</span></div>
+        <div class="warmup-row"><span class="warmup-name">KB Dead Bug (no weight, focus on breathing)</span><span class="warmup-detail">5 reps each side · ~45 sec</span></div>
+      </div>
+    </div>
+
+    <div class="tips-section">
+      <div class="tips-section-title">📈 How to Progress Week Over Week</div>
+      <div class="tips-grid">
+        <TipCard icon="📊" title="The 2-for-2 Rule">If you complete 2 extra reps on your last set for <strong>2 consecutive sessions</strong>, it is time to increase weight. Progression should be earned, not rushed. This rule prevents jumping weight before you are ready.</TipCard>
+        <TipCard icon="📝" title="Track Your Workouts">Write down what you lifted, how many reps, and how it felt. Without a log you will forget and stagnate. Even a simple notes app works. Seeing progress on paper is also one of the most motivating things you can do.</TipCard>
+        <TipCard icon="🔄" title="Deload Every 4th Week">Every fourth week, reduce volume and intensity by about 40%. Use lighter weights and fewer sets. This clears accumulated fatigue and you will feel stronger the week after. <strong>Deloads are where gains happen.</strong></TipCard>
+        <TipCard icon="🎯" title="One New Exercise Per Week Max">Do not try to learn everything at once. Introduce <strong>one new exercise per week</strong>, practice it until automatic, then add the next. Consistency with fewer exercises beats randomness with many.</TipCard>
+        <TipCard icon="💤" title="Sleep Is Your Best Supplement">Strength gains, fat loss, and skill learning all accelerate with adequate sleep. 7–9 hours consistently will do more for your progress than any supplement or extra workout session.</TipCard>
+        <TipCard icon="🧠" title="Mind-Muscle Connection">Actively think about which muscles should be working. During swings, consciously squeeze your glutes at the top. During rows, think "elbow to back pocket." <strong>Intentional movement builds faster.</strong></TipCard>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BODY GROUP WORKOUTS PANEL — JS rendered ── -->
+  <div class="panel" id="panel-bodygroups">
+    <div class="callout">
+      <div class="callout-icon">🎯</div>
+      <div class="callout-text"><strong>Targeted body group training:</strong> Exercises ranked #1–5 by effectiveness for each muscle group. Use the set/rep prescriptions as your starting point — increase weight when the top end of the range feels easy for two consecutive sessions.</div>
+    </div>
+    <div class="group-selector" id="group-selector"></div>
+    <div id="group-content"></div>
+  </div>
+</div>
+
+<div id="kb-data" data-kb={JSON.stringify({ CIRCUITS, BODY_GROUPS })} hidden></div>
+<script is:inline>
+const { CIRCUITS, BODY_GROUPS } = JSON.parse(document.getElementById('kb-data').dataset.kb);
+let currentLevel = 'beginner', currentDay = 0, currentGroup = 'hinge';
+
+function getScoreColor(s){ return s>=9?'#D85A30':s>=7?'#BA7517':'#888780'; }
+function getMuscleAccent(m){ return {hinge:'#D85A30',squat:'#378ADD',push:'#1D9E75',pull:'#BA7517',core:'#534AB7',total:'#D4537E'}[m]||'#888'; }
+function getTagClass(t){
+  if(t==='Form Builder') return 'tag-form';
+  if(t==='Essential') return 'tag-essential';
+  if(t==='Technical'||t==='Advanced'||t==='Mastery Move') return 'tag-technical';
+  return 'tag-default';
+}
+
+function toggleGif(btn){
+  const reveal = btn.nextElementSibling;
+  const isOpen = reveal.classList.contains('open');
+  reveal.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open', !isOpen);
+  btn.querySelector('.gif-toggle-label').textContent = isOpen ? 'Show exercise demo' : 'Hide demo';
+}
+
+// Filter pre-rendered exercise cards by muscle group
+function showMuscle(m, btn){
+  document.querySelectorAll('.muscle-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#ex-grid .ex-card').forEach(card => {
+    card.style.display = (m === 'all' || card.dataset.muscle === m) ? '' : 'none';
+  });
+}
+
+function showPanel(id, btn){
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  btn.classList.add('active');
+  if(id==='circuits') renderCircuit();
+  if(id==='bodygroups') renderBodyGroups();
+}
+
+function showGroup(id, btn){
+  currentGroup = id;
+  document.querySelectorAll('.group-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderBodyGroups();
+}
+
+function renderBodyGroups(){
+  const grp = BODY_GROUPS.find(g => g.id === currentGroup);
+  document.getElementById('group-selector').innerHTML = BODY_GROUPS.map(g =>
+    `<button class="group-btn${g.id===currentGroup?' active':''}" onclick="showGroup('${g.id}',this)">${g.icon} ${g.label}</button>`
+  ).join('');
+  document.getElementById('group-content').innerHTML = `
+    <div class="group-header">
+      <div class="group-icon">${grp.icon}</div>
+      <div>
+        <div class="group-title">${grp.label}</div>
+        <div class="group-meta">${grp.desc} · Ranked #1–${grp.exercises.length} by effectiveness</div>
+      </div>
+    </div>
+    <div class="rank-cards-grid">
+      ${grp.exercises.map((ex,i) => `
+        <div class="rank-card grp-${grp.id}">
+          <div class="rank-card-header">
+            <div class="rank-badge">${i+1}</div>
+            <div class="rank-info">
+              <div class="rank-name">${ex.name}</div>
+              <div class="muscle-chips">${ex.muscles.map(m=>`<span class="muscle-chip">${m}</span>`).join('')}</div>
+            </div>
+          </div>
+          <div class="rank-card-body">
+            <div class="rank-tag-row"><span class="ex-tag ${getTagClass(ex.tag)}">${ex.tag}</span></div>
+            <div class="rank-why">${ex.why}</div>
+            <div class="rank-sets">
+              <div class="sets-row"><span class="sets-level sets-beg">Beginner</span><span class="sets-val">${ex.beg}</span></div>
+              <div class="sets-row"><span class="sets-level sets-int">Intermediate</span><span class="sets-val">${ex.int}</span></div>
+              <div class="sets-row"><span class="sets-level sets-adv">Advanced</span><span class="sets-val">${ex.adv}</span></div>
+            </div>
+          </div>
+        </div>`).join('')}
+    </div>`;
+}
+
+function showLevel(level, btn){
+  currentLevel = level; currentDay = 0;
+  document.querySelectorAll('.circuit-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  renderCircuit();
+}
+
+function selectDay(i){ currentDay = i; renderCircuit(); }
+
+function renderCircuit(){
+  const days = CIRCUITS[currentLevel].days;
+  document.getElementById('day-selector').innerHTML = days.map((d,i) =>
+    `<button class="day-btn${i===currentDay?' active':''}" onclick="selectDay(${i})">${d.label}</button>`).join('');
+  const day = days[currentDay];
+  const optClasses = ['opt-a','opt-b','opt-c'];
+  const optLetters = ['A','B','C'];
+  document.getElementById('circuit-content').innerHTML = `
+    <div class="circuit-header">
+      <div class="circuit-icon">${day.icon}</div>
+      <div>
+        <div class="circuit-title">${day.title}</div>
+        <div class="circuit-meta">${day.meta} · ${currentLevel.charAt(0).toUpperCase()+currentLevel.slice(1)} · Rest 60–90 sec between rounds</div>
+      </div>
+    </div>
+    <div class="options-grid">
+      ${day.options.map((opt,oi) => `
+        <div class="option-card ${optClasses[oi]}">
+          <div class="option-header">
+            <div class="option-header-top"><span class="opt-dot"></span>Option ${optLetters[oi]} — ${opt.label}</div>
+            <div class="option-desc">${opt.desc}</div>
+            <div class="muscle-chips">${opt.muscles.map(m=>`<span class="muscle-chip">${m}</span>`).join('')}</div>
+          </div>
+          <div class="option-body">
+            ${opt.exercises.map((ex,i) => `
+              <div class="compact-row">
+                <span class="compact-num">${i+1}</span>
+                <span class="compact-name">${ex.n}</span>
+                <span class="compact-detail">${ex.d}</span>
+              </div>`).join('')}
+          </div>
+        </div>`).join('')}
+    </div>
+    <div class="tip-box">💬 <strong>Coach's note:</strong> ${day.tip}</div>`;
+}
+
+function applyTheme(dark){
+  document.documentElement.setAttribute('data-theme', dark ? 'kb-dark' : 'kb-light');
+  document.getElementById('theme-btn').textContent = dark ? '☀️' : '🌙';
+}
+function toggleTheme(){
+  const isDark = document.documentElement.getAttribute('data-theme') === 'kb-dark';
+  localStorage.setItem('kb-theme', isDark ? 'kb-light' : 'kb-dark');
+  applyTheme(!isDark);
+}
+applyTheme(localStorage.getItem('kb-theme') === 'kb-dark');
+
+renderCircuit();
+renderBodyGroups();
+
+</script>
+</Base>

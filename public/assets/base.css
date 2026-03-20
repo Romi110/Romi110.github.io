@@ -1,0 +1,36 @@
+/*
+  base.css — Shared utility styles across all pages
+  Loaded by Base.astro on every page.
+  Page-specific styles live in their own CSS files (e.g. kettlebell.css).
+*/
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Page wrapper ── */
+.wrap { max-width: 960px; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+
+/* ── Panel show/hide system ── */
+.panel { display: none; }
+.panel.active { display: block; }
+
+/* ── Tab bar ── */
+.tabs { display: flex; gap: 8px; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.tab {
+  padding: 10px 20px;
+  border-radius: 50px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all .2s;
+}
+.tab.active { background: var(--ink); color: var(--on-ink); border-color: transparent; }
+.tab:hover:not(.active) { background: var(--bg2); color: var(--ink); border-color: var(--border); }
+
+@media (max-width: 500px) {
+  .tabs { gap: 6px; }
+  .tab { padding: 8px 14px; font-size: 13px; }
+}

@@ -1,0 +1,37 @@
+---
+import { getScoreColor, getMuscleAccent, getTagClass } from '../data/exercises.js';
+
+const { exercise: ex } = Astro.props;
+const scoreColor  = getScoreColor(ex.score);
+const accentColor = getMuscleAccent(ex.muscle);
+const tagClass    = getTagClass(ex.tag);
+---
+
+<div class="ex-card" data-muscle={ex.muscle}>
+  <div class="ex-card-accent" style={`background:${accentColor}`}></div>
+  <div class="ex-top">
+    <div class="ex-name">{ex.name}</div>
+    <div class="ex-badge">
+      <div class="ex-score" style={`color:${scoreColor}`}>{ex.score}</div>
+      <div class="ex-score-label">/ 10</div>
+      <div class="score-bar">
+        <div class="score-fill" style={`width:${ex.score * 10}%;background:${scoreColor}`}></div>
+      </div>
+    </div>
+  </div>
+  <div><span class={`ex-tag ${tagClass}`}>{ex.tag}</span></div>
+  <div class="ex-desc">{ex.desc}</div>
+  <div class="ex-form"><strong>✓ Form tip:</strong> {ex.form}</div>
+  {ex.gif && (
+    <>
+      <button class="gif-toggle" onclick="toggleGif(this)">
+        <span class="gif-toggle-icon">▶</span>
+        <span class="gif-toggle-label">Show exercise demo</span>
+      </button>
+      <div class="gif-reveal">
+        <img src={ex.gif} alt={`${ex.name} demonstration`} loading="lazy">
+        <div class="gif-credit">via Giphy / Tenor</div>
+      </div>
+    </>
+  )}
+</div>

@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="home">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Romesh's Website</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/themes.css">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="hi :3" theme="home">
+  <style is:global>
     body {
       font-family: 'DM Sans', sans-serif;
       background: var(--bg);
@@ -109,8 +102,6 @@
       color: var(--muted);
     }
   </style>
-</head>
-<body>
 
   <h1 class="site-name">hi :3</h1>
 
@@ -138,11 +129,9 @@
 
   <!-- Project buttons -->
   <div class="projects">
-    <a class="project-btn" href="kettlebell.html" title="Kettlebell Guide">
+    <a class="project-btn" href="/kettlebell" title="Kettlebell Guide">
       <span class="btn-icon">🏋️</span>
       <span class="btn-label">Kettlebell Guide</span>
     </a>
   </div>
-
-</body>
-</html>
+</Base>

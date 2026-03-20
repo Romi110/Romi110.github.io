@@ -1,0 +1,23 @@
+---
+const { label, imgSrc, imgAlt, accent = false } = Astro.props;
+// accent=true uses --accent2 (green) for exercise-specific tips
+// accent=false uses --accent (orange) for common mistakes
+const borderColor = accent ? 'var(--accent2)' : 'var(--accent)';
+const labelColor  = accent ? 'var(--accent2)' : 'var(--accent)';
+---
+
+<div class="mistake-item" style={`border-left-color:${borderColor}`}>
+  <div class="mistake-label" style={`color:${labelColor}`}>{label}</div>
+  <div class="mistake-fix"><slot /></div>
+  {imgSrc && (
+    <>
+      <button class="gif-toggle" onclick="toggleGif(this)">
+        <span class="gif-toggle-icon">▶</span>
+        <span class="gif-toggle-label">Show example</span>
+      </button>
+      <div class="gif-reveal">
+        <img src={imgSrc} alt={imgAlt} />
+      </div>
+    </>
+  )}
+</div>

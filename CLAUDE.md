@@ -31,12 +31,14 @@ Romi110.github.io/
 │   │   └── freeExercises.js    # FREE_EXERCISE_GROUPS array (6 categories, 50+ GIF exercises)
 │   └── lib/
 │       └── supabase.js         # Supabase client (env vars via PUBLIC_ prefix)
-├── public/
-│   └── assets/
+├── src/
+│   └── styles/
 │       ├── themes.css          # Color palettes (data-theme selectors)
 │       ├── base.css            # Shared utilities: reset, .wrap, .panel, .tabs
-│       ├── kettlebell.css      # Kettlebell-page-specific styles
-│       └── gifs/ tips/         # Static media assets
+│       └── kettlebell.css      # Kettlebell-page-specific styles
+├── public/
+│   └── assets/
+│       └── gifs/ tips/ completeKBgifs/   # Static media assets
 ├── .github/workflows/
 │   └── deploy.yml              # Build → upload artifact → deploy to Pages
 ├── astro.config.mjs
@@ -106,11 +108,13 @@ Three layers, loaded in order:
 
 | File | Purpose |
 |---|---|
-| `themes.css` | Color palette variables per `data-theme` |
-| `base.css` | Reset, `.wrap`, `.panel`, `.tabs` — shared across all pages |
-| `{page}.css` | Page-specific styles (e.g. `kettlebell.css`) |
+| `src/styles/themes.css` | Color palette variables per `data-theme` |
+| `src/styles/base.css` | Reset, `.wrap`, `.panel`, `.tabs` — shared across all pages |
+| `src/styles/{page}.css` | Page-specific styles (e.g. `kettlebell.css`) |
 
-**Adding styles for a new page:** create `public/assets/{page}.css` and link it via `<link slot="head">` in the page's `<Base>` call. Never put page-specific styles in `base.css`.
+CSS lives in `src/styles/` and is imported in Astro frontmatter (`import '../styles/foo.css'`). Astro/Vite processes these files and outputs them with **content-hashed filenames**, ensuring browsers always fetch fresh CSS after a deploy. Never link CSS from `public/` — those files are not hashed and will be stale-cached.
+
+**Adding styles for a new page:** create `src/styles/{page}.css` and import it in the page frontmatter. Never put page-specific styles in `base.css`.
 
 ---
 
@@ -274,12 +278,16 @@ let currentFreeIndex = 0;                           // Free Exercises active exe
 
 1. Create `src/pages/mypage.astro`
 2. Import `Base` and `Nav`
-3. Create `public/assets/mypage.css` for page-specific styles
-4. Add theme to `themes.css` if needed
-5. Pass the CSS and Nav via slots:
+3. Create `src/styles/mypage.css` for page-specific styles
+4. Add theme to `src/styles/themes.css` if needed
+5. Import the CSS in the page frontmatter and pass Nav via slot:
    ```astro
+   ---
+   import '../styles/mypage.css';
+   import Base from '../layouts/Base.astro';
+   import Nav from '../components/Nav.astro';
+   ---
    <Base title="My Page" theme="mytheme">
-     <link slot="head" rel="stylesheet" href="/assets/mypage.css">
      <Nav slot="nav" label="Home" />
      <!-- page content -->
    </Base>

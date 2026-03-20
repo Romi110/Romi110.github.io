@@ -51,7 +51,7 @@ import '../styles/kettlebell.css';
 
   <!-- ── CIRCUITS PANEL — JS rendered ── -->
   <div class="panel" id="panel-circuits">
-    <div class="callout">
+    <div class="callout" id="circuit-callout">
       <div class="callout-icon">📋</div>
       <div class="callout-text"><strong>How to use these circuits:</strong> Pick Option A, B, or C based on your energy and goals that day. Aim for 3 rounds (beginners) or 4–5 rounds (intermediate/advanced). Rest 60–90 sec between rounds. Train 3 days per week with rest days between sessions.</div>
     </div>
@@ -331,21 +331,104 @@ function showLevel(level, btn){
   renderCircuit();
 }
 
-function selectDay(i){ currentDay = i; renderCircuit(); }
+function selectDay(i){
+  currentDay = i;
+  if (currentLevel === 'intermediate') {
+    const typeColors = {hinge:'#C04820',conditioning:'#534AB7',push:'#1D9E75',pull:'#A06010',squat:'#2B74C7',rest:'#999794'};
+    const days = CIRCUITS.intermediate.days;
+    document.querySelectorAll('.int-day-chip').forEach((el,j) => el.classList.toggle('active', j===i));
+    renderIntDay(days[i], typeColors[days[i].type]);
+    return;
+  }
+  renderCircuit();
+}
 
-function renderCircuit(){
-  const days = CIRCUITS[currentLevel].days;
-  document.getElementById('day-selector').innerHTML = days.map((d,i) =>
-    `<button class="day-btn${i===currentDay?' active':''}" onclick="selectDay(${i})">${d.label}</button>`).join('');
-  const day = days[currentDay];
+function renderBeginnerCircuit() {
+  const weeks = CIRCUITS.beginner.weeks;
+  document.getElementById('circuit-callout').innerHTML = `
+    <div class="callout-icon">📋</div>
+    <div class="callout-text"><strong>75-day progressive plan:</strong> Every day laid out below, Day 1 through Day 75. Follow in order — each week builds on the last. Colors show training focus: <span style="color:#C04820;font-weight:500">orange = hinge/foundation</span> · <span style="color:#2B74C7;font-weight:500">blue = squat</span> · <span style="color:#A06010;font-weight:500">amber = pull</span> · <span style="color:#1D9E75;font-weight:500">green = push</span> · <span style="color:#0E8F8F;font-weight:500">teal = carry/recovery</span> · <span style="color:#534AB7;font-weight:500">purple = skill</span>.</div>`;
+  document.getElementById('day-selector').innerHTML = '';
+  document.getElementById('circuit-content').innerHTML = `
+    <div class="beg-plan">
+      ${weeks.map(week => `
+        <div class="week-row">
+          <div class="week-sidebar">
+            <div class="week-num-badge">Week ${week.week} of 11</div>
+            <div class="week-title">${week.title}</div>
+            <div class="week-sub">${week.subtitle}</div>
+            <div class="week-note">💬 ${week.coachNote}</div>
+          </div>
+          <div class="week-days week-days-${week.days.length}">
+            ${week.days.map(d => `
+              <div class="day-card type-${d.type}">
+                <div class="day-card-head">
+                  <span class="day-num">${d.day}</span>
+                  <span class="day-label">${d.label}</span>
+                </div>
+                ${d.type === 'rest' ? `
+                  <div class="day-rest-body">Rest</div>
+                ` : `
+                  ${d.meta ? `<div class="day-meta">${d.meta}</div>` : ''}
+                  <div class="day-exs">
+                    ${d.exercises.map(ex => `
+                      <div class="day-ex">
+                        <span class="day-ex-name">${ex.n}</span>
+                        <span class="day-ex-detail">${ex.d}</span>
+                        ${ex.cue ? `<span class="day-ex-cue">${ex.cue}</span>` : ''}
+                      </div>
+                    `).join('')}
+                  </div>
+                `}
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `).join('')}
+    </div>`;
+}
+
+function renderIntermediateCircuit() {
+  document.getElementById('circuit-callout').innerHTML = `
+    <div class="callout-icon">📅</div>
+    <div class="callout-text"><strong>7-day weekly split:</strong> Two evenly spaced rest days (Wed & Sat). Training days each have 3 options — pick based on your energy and goals. Aim for 4 rounds. The same week repeats — get stronger each cycle.</div>`;
+  const days = CIRCUITS.intermediate.days;
+  const sel = days[currentDay];
+  document.getElementById('day-selector').innerHTML = '';
+  const typeColors = {hinge:'#C04820',conditioning:'#534AB7',push:'#1D9E75',pull:'#A06010',squat:'#2B74C7',rest:'#999794'};
+  document.getElementById('circuit-content').innerHTML = `
+    <div class="int-week">
+      ${days.map((d,i) => `
+        <div class="int-day-chip type-${d.type}${i===currentDay?' active':''}" onclick="${d.type!=='rest'?`selectDay(${i})`:''}">
+          <span class="iday-icon">${d.icon}</span>
+          <span class="iday-name">${d.label}</span>
+          <span class="iday-title">${d.title}</span>
+        </div>`).join('')}
+    </div>
+    <div class="int-content" id="int-content"></div>`;
+  renderIntDay(sel, typeColors[sel.type]);
+}
+
+function renderIntDay(day, color) {
   const optClasses = ['opt-a','opt-b','opt-c'];
   const optLetters = ['A','B','C'];
-  document.getElementById('circuit-content').innerHTML = `
-    <div class="circuit-header">
-      <div class="circuit-icon">${day.icon}</div>
+  const el = document.getElementById('int-content');
+  if (day.type === 'rest') {
+    el.innerHTML = `
+      <div class="int-rest-panel">
+        <div class="int-rest-title">🧘 ${day.title}</div>
+        <div class="int-mobility-list">
+          ${day.mobility.map(m => `<div class="int-mobility-item">${m}</div>`).join('')}
+        </div>
+      </div>`;
+    return;
+  }
+  el.innerHTML = `
+    <div class="int-day-header" style="--iday-color:${color}">
+      <span class="int-day-icon">${day.icon}</span>
       <div>
-        <div class="circuit-title">${day.title}</div>
-        <div class="circuit-meta">${day.meta} · ${currentLevel.charAt(0).toUpperCase()+currentLevel.slice(1)} · Rest 60–90 sec between rounds</div>
+        <div class="int-day-info-title">${day.label} — ${day.title}</div>
+        <div class="int-day-info-meta">${day.meta} · Intermediate · Rest 60–90 sec between rounds</div>
       </div>
     </div>
     <div class="options-grid">
@@ -367,6 +450,47 @@ function renderCircuit(){
         </div>`).join('')}
     </div>
     <div class="tip-box">💬 <strong>Coach's note:</strong> ${day.tip}</div>`;
+}
+
+function renderAdvancedCircuits() {
+  document.getElementById('circuit-callout').innerHTML = `
+    <div class="callout-icon">⚔️</div>
+    <div class="callout-text"><strong>Three elite circuits — pick one per session.</strong> Complete all exercises with no rest between movements. Rest 2–3 minutes between rounds. 3–5 rounds = one complete workout. Every circuit hits the entire body.</div>`;
+  document.getElementById('day-selector').innerHTML = '';
+  const circuits = CIRCUITS.advanced.circuits;
+  document.getElementById('circuit-content').innerHTML = `
+    <div class="adv-circuits">
+      ${circuits.map(c => `
+        <div class="adv-card theme-${c.theme}">
+          <div class="adv-card-header">
+            <div class="adv-icon">${c.icon}</div>
+            <div class="adv-name">${c.name}</div>
+            <div class="adv-tagline">${c.tagline}</div>
+            <div class="adv-desc">${c.desc}</div>
+          </div>
+          <div class="adv-card-body">
+            ${c.exercises.map(ex => `
+              <div class="adv-ex-row">
+                <div class="adv-ex-num">${ex.order}</div>
+                <div class="adv-ex-info">
+                  <div class="adv-ex-name">${ex.name}</div>
+                  <div class="adv-ex-note">${ex.note}</div>
+                </div>
+                <div class="adv-ex-reps">${ex.reps}</div>
+              </div>`).join('')}
+          </div>
+          <div class="adv-card-footer">
+            <div class="adv-footer-rounds">${c.rounds}</div>
+            <div class="adv-footer-rest">${c.rest}</div>
+          </div>
+        </div>`).join('')}
+    </div>`;
+}
+
+function renderCircuit(){
+  if (currentLevel === 'beginner')     { renderBeginnerCircuit();   return; }
+  if (currentLevel === 'intermediate') { renderIntermediateCircuit(); return; }
+  if (currentLevel === 'advanced')     { renderAdvancedCircuits();   return; }
 }
 
 function applyTheme(dark){

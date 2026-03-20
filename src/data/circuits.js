@@ -459,8 +459,9 @@ export const CIRCUITS = {
     ], tip:'Sunday is the heavy leg day — two rest days this week means you should feel fresh. Push the squat weight hard; use the carry as your core finisher.' },
   ]},
   advanced: { circuits: [
+    /* ── TIER 1 — Start here ── */
     {
-      id:'chain', name:'The Chain', tagline:'Classic movement-pattern flow', icon:'🌊', theme:'chain',
+      id:'chain', name:'The Chain', tagline:'Classic movement-pattern flow', icon:'🌊', theme:'chain', tier:1,
       desc:'Hinge → push → pull → squat → carry. One bell, full body, no gaps. Each movement feeds the next like links in a chain.',
       rounds:'3–5 rounds', rest:'Rest 2–3 min between rounds',
       exercises:[
@@ -473,7 +474,7 @@ export const CIRCUITS = {
       ],
     },
     {
-      id:'grind', name:'The Grind', tagline:'Heavy, slow, maximum tension', icon:'🔥', theme:'grind',
+      id:'grind', name:'The Grind', tagline:'Heavy, slow, maximum tension', icon:'🔥', theme:'grind', tier:1,
       desc:'Strength-focused. Every rep is a battle. Low reps, heavy weight, maximum irradiation. Nothing fast, nothing sloppy.',
       rounds:'3–4 rounds', rest:'Rest 3 min between rounds',
       exercises:[
@@ -486,7 +487,7 @@ export const CIRCUITS = {
       ],
     },
     {
-      id:'storm', name:'The Storm', tagline:'Ballistic, explosive, relentless', icon:'⚡', theme:'storm',
+      id:'storm', name:'The Storm', tagline:'Ballistic, explosive, relentless', icon:'⚡', theme:'storm', tier:1,
       desc:'Hip power drives everything. Fast, explosive, no deceleration. This circuit separates those who train from those who compete.',
       rounds:'3–5 rounds', rest:'Rest 2–3 min between rounds',
       exercises:[
@@ -496,6 +497,45 @@ export const CIRCUITS = {
         { order:4, name:'Alternating Swing',   reps:'16 reps',       note:'Hand release at top — stay explosive' },
         { order:5, name:'Thruster',            reps:'8 reps',        note:'Catch the squat rebound — ride it up' },
         { order:6, name:"Farmer's Carry",      reps:'45 sec',        note:'Earn the rest — walk with intention' },
+      ],
+    },
+    /* ── TIER 2 — Master the three above first ── */
+    {
+      id:'void', name:'The Void', tagline:'Volume that hollows you out', icon:'🌑', theme:'void', tier:2,
+      desc:'Not rounds — one relentless 20-minute window. Rest only when you must. Tests work capacity and mental endurance above all else. The bell never stops; only you do.',
+      rounds:'AMRAP 20 minutes', rest:'Rest only when needed — walk, breathe, go again',
+      exercises:[
+        { order:1, name:'Two-Handed Swing',  reps:'15 reps',       note:'Hip snap — breathe sharp on every rep' },
+        { order:2, name:'Goblet Squat',      reps:'12 reps',       note:'Full depth — own the bottom, stay tall' },
+        { order:3, name:'Clean',             reps:'6 each side',   note:'Tight arc — no crashing into the rack' },
+        { order:4, name:'Push Press',        reps:'6 each side',   note:'Leg drive earns every rep' },
+        { order:5, name:'Single-Arm Row',    reps:'8 each side',   note:'Pause at top — don\'t let fatigue win' },
+        { order:6, name:"Farmer's Carry",    reps:'30 sec',        note:'Walk steady — this is your only rest' },
+      ],
+    },
+    {
+      id:'blade', name:'The Blade', tagline:'One side. No hiding.', icon:'⚔️', theme:'blade', tier:2,
+      desc:'Every exercise is single-arm or single-leg. The weaker side cannot borrow from the stronger. Anti-rotation is not an exercise here — it is the entire workout.',
+      rounds:'3–4 rounds', rest:'Rest 2 min between rounds',
+      exercises:[
+        { order:1, name:'Single-Arm Deadlift', reps:'8 each side',   note:'Hips square — not a single degree of twist' },
+        { order:2, name:'Single-Arm Swing',    reps:'10 each side',  note:'Hip snap identical both sides — compare honestly' },
+        { order:3, name:'Single-Arm Row',      reps:'10 each side',  note:'Elbow to back pocket — pause, don\'t jerk' },
+        { order:4, name:'Overhead Press',      reps:'6 each side',   note:'Grind it — bicep by ear at lockout' },
+        { order:5, name:'Racked Squat',        reps:'8 each side',   note:'Bell in rack — full depth, no lean' },
+        { order:6, name:'Suitcase Carry',      reps:'40s each side', note:'No side bend — walk as if the bell weighs nothing' },
+      ],
+    },
+    {
+      id:'crucible', name:'The Crucible', tagline:'The bell never drops', icon:'🔨', theme:'crucible', tier:2,
+      desc:'Five movements. One hand. No resting the bell between them. Clean → Press → Racked Squat → Single-Arm Deadlift → Row — back to back. Grip, oxygen, and technique must all survive simultaneously.',
+      rounds:'4 complexes per side · 3 rounds', rest:'Rest 90s between sides, 2 min between rounds',
+      exercises:[
+        { order:1, name:'Clean',               reps:'1 rep → into complex', note:'Hike, snap, soft rack — start sharp' },
+        { order:2, name:'Overhead Press',      reps:'1 rep',                note:'From rack — grind it up, own the lockout' },
+        { order:3, name:'Racked Squat',        reps:'1 rep',                note:'Bell stays racked — full depth, controlled' },
+        { order:4, name:'Single-Arm Deadlift', reps:'1 rep',                note:'Hinge cleanly back to floor — hips square' },
+        { order:5, name:'Single-Arm Row',      reps:'1 rep → repeat',       note:'From hinge — pull to hip, then clean again' },
       ],
     },
   ]},

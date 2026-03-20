@@ -321,56 +321,150 @@ Pick one circuit. Complete all exercises with no rest between movements.
 Rest 2–3 minutes between rounds. Do 3–5 rounds = complete workout.
 Every circuit hits the entire body.
 
+Six circuits total across two tiers. Complete all three Tier 1 circuits comfortably before attempting Tier 2.
+
+---
+
+## Tier 1 — Start Here
+
 ---
 
 ### Circuit 1 — The Chain
 
-Classic movement-pattern flow. Hinge → push → pull → squat → carry. One bell.
+**Theme:** Sequence, flow, movement-pattern chain
+**Color:** Grey/black with ocean blue accent (`#0D1117` bg, `#4BAFD6` accent)
+**Icon:** 🌊
+**Tagline:** *Classic movement-pattern flow*
 
-| Order | Exercise | Reps |
-|---|---|---|
-| 1 | Two-Handed Swing | 15 |
-| 2 | Clean | 6 each |
-| 3 | Overhead Press | 6 each |
-| 4 | Single-Arm Row | 8 each |
-| 5 | Goblet Squat | 10 |
-| 6 | Farmer's Carry | 45s |
+**What makes it unique:** The foundational advanced circuit. Hinge → push → pull → squat → carry — each movement feeds directly into the next. No pattern is skipped, no muscle group neglected. The cleanest full-body circuit in the set.
 
-Rest 2–3 min. Repeat 3–5 rounds.
+| Order | Exercise | Reps | Note |
+|---|---|---|---|
+| 1 | Two-Handed Swing | 15 | Explosive — power the whole chain |
+| 2 | Clean | 6 each | Tight arc — hike to rack, no bang |
+| 3 | Overhead Press | 6 each | Bicep beside ear at lockout |
+| 4 | Single-Arm Row | 8 each | Elbow to back pocket — pause at top |
+| 5 | Goblet Squat | 10 | Full depth — own the bottom |
+| 6 | Farmer's Carry | 45s | Walk tall — shoulders perfectly level |
+
+**Format:** 3–5 rounds. Rest 2–3 min between rounds.
 
 ---
 
 ### Circuit 2 — The Grind
 
-Heavy, slow, strength-focused. Maximum tension every rep.
+**Theme:** Forge, fire, heavy strength
+**Color:** Crimson deep red (`#120608` bg, `#E03030` accent)
+**Icon:** 🔥
+**Tagline:** *Heavy, slow, maximum tension*
 
-| Order | Exercise | Reps |
-|---|---|---|
-| 1 | Single-Arm Deadlift | 8 each |
-| 2 | Overhead Press | 6 each |
-| 3 | Racked Squat | 8 each |
-| 4 | Single-Arm Row | 10 each |
-| 5 | Clean | 5 each |
-| 6 | Farmer's Carry | 60s |
+**What makes it unique:** Every rep is a deliberate battle. Low reps, heavy weight, maximum irradiation — every muscle you're not moving is helping the ones you are. Nothing fast, nothing sloppy. The Chain is a flow; The Grind is a test of will.
 
-Rest 3 min. Repeat 3–4 rounds.
+| Order | Exercise | Reps | Note |
+|---|---|---|---|
+| 1 | Single-Arm Deadlift | 8 each | Anti-rotation — stay perfectly square |
+| 2 | Overhead Press | 6 each | Crush the handle — grind every inch |
+| 3 | Front Rack Squat | 8 each | 3s lower, 1s hold — own the bottom |
+| 4 | Single-Arm Row | 10 each | Maximum lat engagement — pause at top |
+| 5 | Clean | 5 each | Deliberate — hip to rack, controlled |
+| 6 | Farmer's Carry | 60s | Heaviest you can carry with perfect posture |
+
+**Format:** 3–4 rounds. Rest 3 min between rounds.
 
 ---
 
 ### Circuit 3 — The Storm
 
-Ballistic and explosive. Hip drive powers everything.
+**Theme:** Thunder, electricity, ballistic power
+**Color:** Electric blue (`#05080F` bg, `#3B82F6` accent)
+**Icon:** ⚡
+**Tagline:** *Ballistic, explosive, relentless*
 
-| Order | Exercise | Reps |
-|---|---|---|
-| 1 | Two-Handed Swing | 20 |
-| 2 | Clean & Push Press | 6 each |
-| 3 | Snatch | 5 each |
-| 4 | Alternating Swing | 16 |
-| 5 | Thruster | 8 |
-| 6 | Farmer's Carry | 45s |
+**What makes it unique:** Hip power drives everything. This is the only circuit that includes the Snatch and Thruster — both demand total-body explosive coordination. Fast, no deceleration. The Chain covers every pattern; The Storm demands athleticism in every rep.
 
-Rest 2–3 min. Repeat 3–5 rounds.
+| Order | Exercise | Reps | Note |
+|---|---|---|---|
+| 1 | Two-Handed Swing | 20 | Full power — every rep identical |
+| 2 | Clean & Push Press | 6 each | Catch the leg drive — one fluid arc |
+| 3 | Snatch | 5 each | Punch through at top — control descent |
+| 4 | Alternating Swing | 16 | Hand release at top — stay explosive |
+| 5 | Thruster | 8 | Catch the squat rebound — ride it up |
+| 6 | Farmer's Carry | 45s | Earn the rest — walk with intention |
+
+**Format:** 3–5 rounds. Rest 2–3 min between rounds.
+
+---
+
+## Tier 2 — Master Tier 1 First
+
+> Only attempt these once The Chain, The Grind, and The Storm feel automatic. Each circuit below introduces a demand the first three never test.
+
+---
+
+### Circuit 4 — The Void
+
+**Theme:** Deep space, metabolic abyss, emptiness
+**Color:** Deep purple (`#0D080F` bg, `#9B59B6` accent)
+**Icon:** 🌑
+**Tagline:** *Volume that hollows you out*
+
+**What makes it unique:** The existing three circuits are round-based with defined rest. The Void is an AMRAP — 20 minutes, continuous, rest only when you must. It tests work capacity and mental endurance, not max strength or explosive power. Full body burn via sustained output.
+
+| Order | Exercise | Reps | Note |
+|---|---|---|---|
+| 1 | Two-Handed Swing | 15 | Hip snap — breathe sharp on every rep |
+| 2 | Goblet Squat | 12 | Full depth — own the bottom, stay tall |
+| 3 | Clean | 6 each | Tight arc — no crashing into the rack |
+| 4 | Push Press | 6 each | Leg drive earns every rep |
+| 5 | Single-Arm Row | 8 each | Pause at top — don't let fatigue win |
+| 6 | Farmer's Carry | 30s | Walk steady — this is your only rest |
+
+**Format:** AMRAP 20 minutes. Count completed rounds. No set rest — walk when you must, go again when ready.
+
+---
+
+### Circuit 5 — The Blade
+
+**Theme:** Forge-hardened steel, unilateral precision, asymmetry exposed
+**Color:** Silver / cold steel (`#0E0F12` bg, `#8E9AAF` accent)
+**Icon:** ⚔️
+**Tagline:** *One side. No hiding.*
+
+**What makes it unique:** Every exercise is single-arm or single-leg. The weaker side cannot borrow from the stronger. No bilateral compensation. Anti-rotation is not an exercise here — it IS the entire workout. Exposes every imbalance the other circuits let you cheat past.
+
+| Order | Exercise | Reps | Note |
+|---|---|---|---|
+| 1 | Single-Arm Deadlift | 8 each | Hips square — not a single degree of twist |
+| 2 | Single-Arm Swing | 10 each | Hip snap identical both sides — compare honestly |
+| 3 | Single-Arm Row | 10 each | Elbow to back pocket — pause, don't jerk |
+| 4 | Overhead Press | 6 each | Grind it — bicep by ear at lockout |
+| 5 | Racked Squat | 8 each | Bell in rack — full depth, no lean |
+| 6 | Suitcase Carry | 40s each | No side bend — walk as if the bell weighs nothing |
+
+**Format:** Complete all reps left side, then right side = 1 round. 3–4 rounds. Rest 2 min between rounds.
+
+---
+
+### Circuit 6 — The Crucible
+
+**Theme:** Alchemist's fire, transformation, the bell never drops
+**Color:** Amber / molten gold (`#0F0900` bg, `#E6A817` accent)
+**Icon:** 🔨
+**Tagline:** *The bell never drops*
+
+**What makes it unique:** A true KB complex — 5 movements performed in sequence without setting the bell down. Each rep of the complex is a single-sided 5-move chain. The hardest format in kettlebell training: grip, oxygen, and technique must all survive simultaneously. Nothing in the original three prepares you for this specific demand.
+
+**One complex (one side):** Clean → Press → Racked Squat → Single-Arm Deadlift → Row (bell never touches floor between movements)
+
+| Order | Movement | Reps | Note |
+|---|---|---|---|
+| 1 | Clean | 1 rep → into complex | Hike, snap, soft rack — start sharp |
+| 2 | Overhead Press | 1 rep | From rack — grind it up, own the lockout |
+| 3 | Racked Squat | 1 rep | Bell stays racked — full depth, controlled |
+| 4 | Single-Arm Deadlift | 1 rep | Hinge cleanly back to floor — hips square |
+| 5 | Single-Arm Row | 1 rep → repeat | From hinge — pull to hip, then clean again |
+
+**Format:** 4 complexes per side = 1 round. 3 rounds. Rest 90s between sides, 2 min between rounds.
 
 ---
 

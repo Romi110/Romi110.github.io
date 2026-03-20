@@ -460,6 +460,67 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg2); color: var(--
   --adv-num-bg:  #0E1A38;
   --adv-row-alt: #090E1A;
 }
+/* Void — deep purple metabolic abyss */
+.adv-card.theme-void {
+  --adv-border:  #2D1A4A;
+  --adv-bg:      #0D080F;
+  --adv-header:  #120A18;
+  --adv-accent:  #9B59B6;
+  --adv-ink:     #D8C0E8;
+  --adv-muted:   #7A5A90;
+  --adv-num-bg:  #1F1030;
+  --adv-row-alt: #100A14;
+}
+/* Blade — cold steel unilateral */
+.adv-card.theme-blade {
+  --adv-border:  #3A3F4A;
+  --adv-bg:      #0E0F12;
+  --adv-header:  #13151A;
+  --adv-accent:  #8E9AAF;
+  --adv-ink:     #CDD4E0;
+  --adv-muted:   #6A7585;
+  --adv-num-bg:  #1C2030;
+  --adv-row-alt: #111318;
+}
+/* Crucible — molten amber complex */
+.adv-card.theme-crucible {
+  --adv-border:  #4A3000;
+  --adv-bg:      #0F0900;
+  --adv-header:  #160E00;
+  --adv-accent:  #E6A817;
+  --adv-ink:     #F0D89A;
+  --adv-muted:   #A07830;
+  --adv-num-bg:  #2A1A00;
+  --adv-row-alt: #120C00;
+}
+
+/* Tier divider */
+.adv-tier-divider {
+  margin: 28px 0 8px;
+  padding: 20px 24px;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--bg);
+}
+.adv-tier-label {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 0;
+}
+.adv-tier1-label { margin-bottom: 10px; }
+.adv-tier2-label { margin-bottom: 10px; }
+.adv-tier-badge {
+  font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 1.5px;
+  background: var(--accent); color: var(--on-accent, #fff);
+  padding: 2px 10px; border-radius: 20px;
+}
+.adv-tier2-badge { background: var(--muted); }
+.adv-tier-title {
+  font-size: 13px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .8px; color: var(--ink);
+}
+.adv-tier-sub {
+  font-size: 12px; color: var(--muted); line-height: 1.6; margin: 0;
+}
 
 .adv-card-header {
   background: var(--adv-header);

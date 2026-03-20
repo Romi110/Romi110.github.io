@@ -455,36 +455,49 @@ function renderIntDay(day, color) {
 function renderAdvancedCircuits() {
   document.getElementById('circuit-callout').innerHTML = `
     <div class="callout-icon">⚔️</div>
-    <div class="callout-text"><strong>Three elite circuits — pick one per session.</strong> Complete all exercises with no rest between movements. Rest 2–3 minutes between rounds. 3–5 rounds = one complete workout. Every circuit hits the entire body.</div>`;
+    <div class="callout-text"><strong>Six elite circuits across two tiers.</strong> Start with The Chain, The Grind, and The Storm. Once all three feel like second nature, the next tier unlocks. Every circuit hits the entire body — no rest between exercises, full rest between rounds.</div>`;
   document.getElementById('day-selector').innerHTML = '';
   const circuits = CIRCUITS.advanced.circuits;
-  document.getElementById('circuit-content').innerHTML = `
-    <div class="adv-circuits">
-      ${circuits.map(c => `
-        <div class="adv-card theme-${c.theme}">
-          <div class="adv-card-header">
-            <div class="adv-icon">${c.icon}</div>
-            <div class="adv-name">${c.name}</div>
-            <div class="adv-tagline">${c.tagline}</div>
-            <div class="adv-desc">${c.desc}</div>
-          </div>
-          <div class="adv-card-body">
-            ${c.exercises.map(ex => `
-              <div class="adv-ex-row">
-                <div class="adv-ex-num">${ex.order}</div>
-                <div class="adv-ex-info">
-                  <div class="adv-ex-name">${ex.name}</div>
-                  <div class="adv-ex-note">${ex.note}</div>
-                </div>
-                <div class="adv-ex-reps">${ex.reps}</div>
-              </div>`).join('')}
-          </div>
-          <div class="adv-card-footer">
-            <div class="adv-footer-rounds">${c.rounds}</div>
-            <div class="adv-footer-rest">${c.rest}</div>
-          </div>
-        </div>`).join('')}
+  const tier1 = circuits.filter(c => c.tier === 1);
+  const tier2 = circuits.filter(c => c.tier === 2);
+  const cardHtml = c => `
+    <div class="adv-card theme-${c.theme}">
+      <div class="adv-card-header">
+        <div class="adv-icon">${c.icon}</div>
+        <div class="adv-name">${c.name}</div>
+        <div class="adv-tagline">${c.tagline}</div>
+        <div class="adv-desc">${c.desc}</div>
+      </div>
+      <div class="adv-card-body">
+        ${c.exercises.map(ex => `
+          <div class="adv-ex-row">
+            <div class="adv-ex-num">${ex.order}</div>
+            <div class="adv-ex-info">
+              <div class="adv-ex-name">${ex.name}</div>
+              <div class="adv-ex-note">${ex.note}</div>
+            </div>
+            <div class="adv-ex-reps">${ex.reps}</div>
+          </div>`).join('')}
+      </div>
+      <div class="adv-card-footer">
+        <div class="adv-footer-rounds">${c.rounds}</div>
+        <div class="adv-footer-rest">${c.rest}</div>
+      </div>
     </div>`;
+  document.getElementById('circuit-content').innerHTML = `
+    <div class="adv-tier-label adv-tier1-label">
+      <span class="adv-tier-badge">Tier 1</span>
+      <span class="adv-tier-title">Start Here</span>
+    </div>
+    <div class="adv-circuits">${tier1.map(cardHtml).join('')}</div>
+    <div class="adv-tier-divider">
+      <div class="adv-tier-label adv-tier2-label">
+        <span class="adv-tier-badge adv-tier2-badge">Tier 2</span>
+        <span class="adv-tier-title">Master the three above first</span>
+      </div>
+      <p class="adv-tier-sub">Only attempt these once The Chain, The Grind, and The Storm feel automatic. Each introduces a demand the first three never test.</p>
+    </div>
+    <div class="adv-circuits">${tier2.map(cardHtml).join('')}</div>`;
 }
 
 function renderCircuit(){

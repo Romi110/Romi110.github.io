@@ -461,7 +461,7 @@ export const CIRCUITS = {
   advanced: { circuits: [
     /* ── TIER 1 — Start here ── */
     {
-      id:'chain', name:'The Chain', tagline:'Classic movement-pattern flow', icon:'🌊', theme:'chain', tier:1,
+      id:'chain', name:'The Chain', tagline:'Classic movement-pattern flow', icon:'⛓️', theme:'chain', tier:1,
       desc:'Hinge → push → pull → squat → carry. One bell, full body, no gaps. Each movement feeds the next like links in a chain.',
       rounds:'3–5 rounds', rest:'Rest 2–3 min between rounds',
       exercises:[

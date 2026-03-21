@@ -429,16 +429,16 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg2); color: var(--
   display: flex; flex-direction: column;
 }
 
-/* Chain — grey/black ocean */
+/* Chain — platinum / ice white */
 .adv-card.theme-chain {
-  --adv-border:  #3A4A58;
-  --adv-bg:      #0D1117;
-  --adv-header:  #111820;
-  --adv-accent:  #4BAFD6;
-  --adv-ink:     #C8DCE8;
-  --adv-muted:   #7A9AAD;
-  --adv-num-bg:  #1A2D3A;
-  --adv-row-alt: #111E28;
+  --adv-border:  #4A5060;
+  --adv-bg:      #080A0C;
+  --adv-header:  #0E1014;
+  --adv-accent:  #D0DCE8;
+  --adv-ink:     #EEF2F6;
+  --adv-muted:   #7A8898;
+  --adv-num-bg:  #141820;
+  --adv-row-alt: #0C0E12;
 }
 /* Grind — crimson fire */
 .adv-card.theme-grind {
@@ -473,16 +473,16 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg2); color: var(--
   --adv-num-bg:  #1F1030;
   --adv-row-alt: #100A14;
 }
-/* Blade — cold steel unilateral */
+/* Blade — military navy steel */
 .adv-card.theme-blade {
-  --adv-border:  #3A3F4A;
-  --adv-bg:      #0E0F12;
-  --adv-header:  #13151A;
-  --adv-accent:  #8E9AAF;
-  --adv-ink:     #CDD4E0;
-  --adv-muted:   #6A7585;
-  --adv-num-bg:  #1C2030;
-  --adv-row-alt: #111318;
+  --adv-border:  #1A2E48;
+  --adv-bg:      #040810;
+  --adv-header:  #070E1C;
+  --adv-accent:  #4A7AAA;
+  --adv-ink:     #B0C8E0;
+  --adv-muted:   #3A5A78;
+  --adv-num-bg:  #0C1A2C;
+  --adv-row-alt: #060A14;
 }
 /* Crucible — molten amber complex */
 .adv-card.theme-crucible {
@@ -507,16 +507,16 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg2); color: var(--
   --adv-num-bg:  #122A1C;
   --adv-row-alt: #0A130C;
 }
-/* Twin — deep brass / dark gold */
+/* Twin — deep rose */
 .adv-card.theme-twin {
-  --adv-border:  #4A3800;
-  --adv-bg:      #0D0900;
-  --adv-header:  #160E00;
-  --adv-accent:  #C9A227;
-  --adv-ink:     #EDD98A;
-  --adv-muted:   #907530;
-  --adv-num-bg:  #261A00;
-  --adv-row-alt: #100B00;
+  --adv-border:  #4A1828;
+  --adv-bg:      #0D0608;
+  --adv-header:  #160A0E;
+  --adv-accent:  #C06070;
+  --adv-ink:     #EAC0C8;
+  --adv-muted:   #804048;
+  --adv-num-bg:  #220C12;
+  --adv-row-alt: #100508;
 }
 
 /* Tier divider */

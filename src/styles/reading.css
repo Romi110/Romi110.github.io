@@ -243,7 +243,7 @@ body {
 .spine-solo {
   display: flex;
   flex-direction: column;
-  margin-right: 0.4rem;
+  margin-right: 1.25rem;
   flex-shrink: 0;
 }
 .spine-solo:last-child { margin-right: 0; }
@@ -261,30 +261,54 @@ body {
   justify-content: center;
   position: relative;
   transition: transform 0.18s ease, box-shadow 0.18s ease;
-  border-right: 1px solid rgba(0,0,0,0.3);
+  border-right: none;
+  border-top:    3px solid color-mix(in srgb, var(--spine-text) 40%, transparent);
+  border-bottom: 3px solid color-mix(in srgb, var(--spine-text) 30%, transparent);
   flex-shrink: 0;
   user-select: none;
-  /* Subtle inner lighting — left edge slightly lighter */
+  /* Cloth texture: headbands keyed to spine accent + left-edge light + paper grain */
   background-image:
-    linear-gradient(90deg,
-      rgba(255,255,255,0.06) 0%,
-      transparent 20%,
-      transparent 80%,
-      rgba(0,0,0,0.2) 100%
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--spine-text) 55%, transparent) 0px,
+      color-mix(in srgb, var(--spine-text) 55%, transparent) 7px,
+      transparent 7px),
+    linear-gradient(0deg,
+      color-mix(in srgb, var(--spine-text) 45%, transparent) 0px,
+      color-mix(in srgb, var(--spine-text) 45%, transparent) 7px,
+      transparent 7px),
+    linear-gradient(90deg, rgba(255,255,255,0.12) 0%, transparent 18%, rgba(0,0,0,0.25) 100%),
+    repeating-linear-gradient(180deg,
+      transparent 0px, transparent 3px,
+      rgba(0,0,0,0.025) 3px, rgba(0,0,0,0.025) 4px
     );
   /* Drop shadow at base — books always cast a shadow on the shelf */
   box-shadow: 2px 0 0 rgba(0,0,0,0.15);
 }
 
+/* Thin seam between books in a series — visible crack, clears the headbands */
+.spine::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: rgba(0,0,0,0.5);
+  pointer-events: none;
+}
+/* Only show seam on inner (non-last) books within a group; never on standalones */
+.spine-group-books .spine:last-child::after,
+.spine-solo .spine::after { display: none; }
+
 /* Rounded corners on first/last of a group */
 .spine-group-books .spine:first-child { border-radius: 3px 0 0 2px; }
-.spine-group-books .spine:last-child  { border-radius: 0 3px 2px 0; border-right: none; }
-.spine-group-books .spine:only-child  { border-radius: 3px 3px 2px 2px; border-right: none; }
-.spine-solo .spine                    { border-radius: 3px 3px 2px 2px; border-right: none; }
+.spine-group-books .spine:last-child  { border-radius: 0 3px 2px 0; }
+.spine-group-books .spine:only-child  { border-radius: 3px 3px 2px 2px; }
+.spine-solo .spine                    { border-radius: 3px 3px 2px 2px; }
 
 .spine:hover {
   transform: translateY(-12px);
-  box-shadow: 0 16px 28px rgba(0,0,0,0.55), 2px 0 0 rgba(0,0,0,0.15);
+  box-shadow: 0 16px 28px rgba(0,0,0,0.55);
   z-index: 2;
 }
 .spine.active {

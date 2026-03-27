@@ -32,6 +32,23 @@ const totalRead    = BOOKS.filter(b => b.status === 'read').length;
 const totalReading = BOOKS.filter(b => b.status === 'reading').length;
 const totalTbr     = tbrBooks.length;
 
+// ── Spine height ──────────────────────────────────────────────────────────
+// Toggle: true = scale by book.pages (Goodreads first edition count);
+//         false = deterministic hash of id (organic variation, no data needed)
+const USE_PAGE_HEIGHT = true;
+
+function spineHeightPx(book) {
+  if (USE_PAGE_HEIGHT && book.pages) {
+    // Range: 190px (150 pages) → 248px (1400+ pages)
+    const MIN_PX = 190, MAX_PX = 248, MIN_P = 150, MAX_P = 1400;
+    return Math.round(MIN_PX + (Math.min(book.pages, MAX_P) - MIN_P) / (MAX_P - MIN_P) * (MAX_PX - MIN_PX));
+  }
+  // Hash fallback — stable per book, no data needed
+  const hash = [...book.id].reduce((n, c) => n + c.charCodeAt(0), 0);
+  return 210 + (hash % 20); // 210–229px
+}
+function spineHeight(book) { return spineHeightPx(book) + 'px'; }
+
 // Spine width in px — longest word must fit on one line without clipping
 function spineWidthPx(title) {
   const longest = Math.max(...title.split(' ').map(w => w.length));
@@ -149,7 +166,7 @@ const booksForClient = BOOKS.map(b => ({ ...b, spineColor: getSpineColor(b) }));
                           const c = getSpineColor(b);
                           return (
                             <div class="spine" data-id={b.id} data-status={b.status}
-                              style={`--spine-bg:${c.bg};--spine-text:${c.text};width:${spineWidth(b.title)}`}
+                              style={`--spine-bg:${c.bg};--spine-text:${c.text};width:${spineWidth(b.title)};height:${spineHeight(b)}`}
                               onclick={`openDetail('${b.id}')`} title={b.title}>
                               <span class="spine-title">{b.title}</span>
                               {b.seriesOrder && <span class="spine-num">{b.seriesOrder}</span>}
@@ -164,7 +181,7 @@ const booksForClient = BOOKS.map(b => ({ ...b, spineColor: getSpineColor(b) }));
                     <div class="spine-solo">
                       <div class="spine-solo-spacer"></div>
                       <div class="spine" data-id={b.id} data-status={b.status}
-                        style={`--spine-bg:${c.bg};--spine-text:${c.text};width:${spineWidth(b.title)}`}
+                        style={`--spine-bg:${c.bg};--spine-text:${c.text};width:${spineWidth(b.title)};height:${spineHeight(b)}`}
                         onclick={`openDetail('${b.id}')`} title={b.title}>
                         <span class="spine-title">{b.title}</span>
                       </div>

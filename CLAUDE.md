@@ -18,7 +18,8 @@ Romi110.github.io/
 │   │   └── Base.astro          # Shared HTML shell (fonts, themes.css, base.css, nav slot)
 │   ├── pages/
 │   │   ├── index.astro         # Landing page (home theme)
-│   │   └── kettlebell.astro    # Kettlebell Guide (kb-light / kb-dark themes)
+│   │   ├── kettlebell.astro    # Kettlebell Guide (kb-light / kb-dark themes)
+│   │   └── reading.astro       # Bookshelf page (reading / reading-dark themes)
 │   ├── components/
 │   │   ├── Nav.astro           # Sticky back-link nav bar (used on inner pages)
 │   │   ├── ExerciseCard.astro  # Pre-rendered exercise card (build time)
@@ -28,14 +29,19 @@ Romi110.github.io/
 │   │   ├── exercises.js        # EXERCISES array (22 items) + helper fns
 │   │   ├── circuits.js         # CIRCUITS object (3 levels × 3 days × 3 options)
 │   │   ├── bodyGroups.js       # BODY_GROUPS array (6 groups × 4 exercises)
-│   │   └── freeExercises.js    # FREE_EXERCISE_GROUPS array (6 categories, 50+ GIF exercises)
+│   │   ├── freeExercises.js    # FREE_EXERCISE_GROUPS array (6 categories, 50+ GIF exercises)
+│   │   └── books.js            # BOOKS array + helper fns (reading page)
 │   └── lib/
 │       └── supabase.js         # Supabase client (env vars via PUBLIC_ prefix)
 ├── src/
 │   └── styles/
 │       ├── themes.css          # Color palettes (data-theme selectors)
 │       ├── base.css            # Shared utilities: reset, .wrap, .panel, .tabs
-│       └── kettlebell.css      # Kettlebell-page-specific styles
+│       ├── kettlebell.css      # Kettlebell-page-specific styles
+│       └── reading.css         # Reading/bookshelf page styles
+├── docs/
+│   ├── reading-layout-options.md  # Layout design options considered for reading page
+│   └── reading-page-plan.md       # Implementation plan for reading page
 ├── public/
 │   └── assets/
 │       └── gifs/ tips/ completeKBgifs/   # Static media assets
@@ -99,6 +105,9 @@ const myData = JSON.parse(document.getElementById('page-data').dataset.json);
 | Body group rank cards | JS-rendered into `#group-content` from `BODY_GROUPS` data |
 | Tips panel | Static Astro components (`TipCard`, `MistakeItem`) |
 | Free exercises viewer | JS-rendered into `#free-viewer` from `FREE_EXERCISE_GROUPS` data |
+| Bookshelf spines | Pre-rendered at build time from `BOOKS`; rows computed in frontmatter |
+| Bookshelf TBR cards | Pre-rendered at build time; series grouped as `<details>` elements |
+| Bookshelf detail panel | JS-rendered from embedded `booksForClient` JSON on spine/card click |
 
 ---
 
@@ -167,6 +176,38 @@ Three levels: `beginner`, `intermediate`, `advanced`. Three days per level. Thre
 
 Six categories: `core`, `hip-hinge`, `knee-bend`, `pull`, `push`, `warmup`. GIFs live at `/assets/completeKBgifs/{folder}/{file}`.
 
+### `BOOKS` (array) — `src/data/books.js`
+
+```js
+{
+  id:          'sun-eater-1',       // unique slug
+  title:       'Empire of Silence',
+  author:      'Christopher Ruocchio',
+  cover:       null,                // '/assets/covers/foo.jpg' or null
+  status:      'read',              // 'read' | 'reading' | 'tbr'
+  rating:      5,                   // 1–5 or null
+  review:      'Short review...',   // null if unread
+  genre:       'Science Fantasy',   // used for spine color + TBR card display
+  series:      'Sun Eater',         // series name string or null for standalones
+  seriesOrder: 1,                   // 1-based position within series, or null
+  dateRead:    '2024-03',           // 'YYYY-MM' string or null
+  isAuthor:    false,               // true = author-level TBR (no specific book)
+}
+```
+
+Helper functions exported alongside:
+
+| Function | Purpose |
+|---|---|
+| `getShelfBookGroups(books)` | Returns read/reading books grouped by series (insertion order preserved) |
+| `getTbrBooks(books)` | Returns all `status === 'tbr'` books |
+| `getSpineColor(book)` | Returns `{ bg, text }` for a book's spine based on genre |
+| `SPINE_COLORS` | Map of `genre → { bg, text }` used for the genre legend |
+
+**Shelf order rule:** `getShelfBookGroups` preserves array insertion order. To control where a series or standalone appears on the shelf, place it at the correct position in the `BOOKS` array.
+
+**Adding a new book:** append an entry to `BOOKS`. For TBR series, include all books with matching `series` names — the TBR panel will automatically collapse them into one expandable card.
+
 ---
 
 ## Theme System
@@ -178,6 +219,8 @@ All palettes live in `public/assets/themes.css`. Each page sets `data-theme` on 
 | `home` | `index.astro` | Pure black, minimal, no accent |
 | `kb-light` | `kettlebell.astro` (default) | White bg, warm orange accent |
 | `kb-dark` | `kettlebell.astro` (toggled) | Dark warm bg, orange accent |
+| `reading` | `reading.astro` (default) | Warm cream bg, deep forest green, gold accent |
+| `reading-dark` | `reading.astro` (toggled) | Mahogany bg, warm cream text, gold accent |
 
 **Adding a new page theme:** add a `[data-theme="mytheme"]` block to `themes.css` and pass `theme="mytheme"` to `<Base>`.
 
@@ -293,6 +336,51 @@ let currentFreeIndex = 0;                           // Free Exercises active exe
    </Base>
    ```
 6. For interactive data, use the hidden JSON element pattern (see Architecture section above)
+
+## Key Functions (reading page inline script)
+
+| Function | Purpose |
+|---|---|
+| `showPanel(id, btn)` | Switch between Shelf and TBR tabs |
+| `openDetail(id)` | Render and open the slide-in detail panel for a book by id |
+| `closeDetail()` | Close the detail panel and remove active spine highlight |
+| `toggleReadingTheme()` / `applyReadingTheme(dark)` | Dark mode toggle — persisted to `localStorage` key `reading-theme` |
+| `renderStars(r)` | Returns star HTML string (filled + empty) for a 1–5 rating |
+| `esc(s)` | HTML-escape helper used in detail panel innerHTML |
+| `formatDate(ym)` | Formats `'YYYY-MM'` string to `'Mon YYYY'` for detail panel |
+
+### Reading page build-time helpers (frontmatter, not client JS)
+
+| Function | Purpose |
+|---|---|
+| `spineWidthPx(title)` | Returns spine width in px — sized so the longest word fits without clipping |
+| `spineWidth(title)` | Same as above but returns a CSS string (e.g. `'66px'`) |
+| `buildRows(groups, maxRowPx)` | Distributes shelf groups into balanced rows — N = ceil(totalPx / maxRowPx), splits at closest-to-target breakpoints |
+
+### Reading page `tbrGroups` shape (computed in frontmatter)
+
+```js
+// series entry
+{ type: 'series', name: 'The Locked Tomb', author: 'Tamsyn Muir', genre: 'Science Fantasy',
+  books: [/* sorted by seriesOrder */] }
+
+// standalone / author entry
+{ type: 'standalone', book: { /* full BOOKS entry */ } }
+```
+
+---
+
+## How to Add a New Book
+
+Add an entry to `BOOKS` in `src/data/books.js`:
+
+- **Read book:** set `status: 'read'`, fill in `rating`, optionally `review` and `dateRead`
+- **TBR standalone:** set `status: 'tbr'`, `series: null`
+- **TBR series:** add all books with matching `series` name — the TBR panel auto-collapses them into one expandable card
+- **Author TBR:** set `isAuthor: true`, `series: null`, `title` = author name — renders a special gold-badged card
+- **Shelf position:** the book appears on the shelf in the same position it appears in the `BOOKS` array — reorder entries to control shelf layout
+
+---
 
 ## How to Add a New Exercise
 

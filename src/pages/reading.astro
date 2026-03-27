@@ -97,6 +97,25 @@ function buildRows(groups, maxRowPx = 900) {
 }
 const rows = buildRows(shelfGroups);
 
+// ── SORT: by-rating ── DELETE the next 8 lines to remove this sort option ──
+const rowsByRating = buildRows(
+  [...BOOKS]
+    .filter(b => b.status === 'read' || b.status === 'reading')
+    .sort((a, b) => (b.rating ?? -1) - (a.rating ?? -1))
+    .map(b => ({ type: 'standalone', book: b }))
+);
+// ── END SORT: by-rating ────────────────────────────────────────────────────
+
+// ── SORT: by-series ── DELETE the next 10 lines to remove this sort option ─
+const rowsBySeries = buildRows((() => {
+  const g = getShelfBookGroups(BOOKS);
+  const series = g.filter(e => e.type === 'series').sort((a, b) => a.name.localeCompare(b.name));
+  const solos  = g.filter(e => e.type === 'standalone').sort((a, b) =>
+    a.book.title.localeCompare(b.book.title));
+  return [...series, ...solos];
+})());
+// ── END SORT: by-series ────────────────────────────────────────────────────
+
 // Enrich with spine color for client-side detail panel
 const booksForClient = BOOKS.map(b => ({ ...b, spineColor: getSpineColor(b) }));
 ---
@@ -132,8 +151,8 @@ const booksForClient = BOOKS.map(b => ({ ...b, spineColor: getSpineColor(b) }));
     <!-- ── Toolbar: tabs + dark mode ── -->
     <div class="reading-toolbar">
       <div class="reading-tabs">
-        <button class="reading-tab active" onclick="showPanel('shelf', this)">Shelf</button>
-        <button class="reading-tab" onclick="showPanel('tbr', this)">TBR</button>
+        <button class="reading-tab active" onclick="showPanel('shelf', this)">📚 Shelf</button>
+        <button class="reading-tab" onclick="showPanel('tbr', this)">📖 To Read</button>
       </div>
     </div>
 
@@ -150,10 +169,21 @@ const booksForClient = BOOKS.map(b => ({ ...b, spineColor: getSpineColor(b) }));
         ))}
       </div>
 
+      <!-- ── SORT BAR — DELETE this comment block + the div below to remove sort options ──
+           Also delete: rowsByRating + rowsBySeries in frontmatter, and the two shelf-view
+           divs marked below. Keep id="shelf-view-default" but remove the class attribute. -->
+      <div class="shelf-sort-bar">
+        <button class="shelf-sort-btn active" onclick="showShelfSort('default', this)">🗂 Default</button>
+        <button class="shelf-sort-btn" onclick="showShelfSort('rating', this)">⭐ By Rating</button>
+        <button class="shelf-sort-btn" onclick="showShelfSort('series', this)">📖 By Series</button>
+      </div>
+      <!-- ── END SORT BAR ─────────────────────────────────────────────────────────────── -->
+
       <!-- Bookcase frame -->
       <div class="bookcase">
-        <div class="bookcase-interior">
 
+        <!-- Default shelf view (insertion order) -->
+        <div class="bookcase-interior shelf-view active" id="shelf-view-default">
           {rows.map(row => (
             <div class="bookcase-row">
               <div class="shelf-row">
@@ -192,8 +222,77 @@ const booksForClient = BOOKS.map(b => ({ ...b, spineColor: getSpineColor(b) }));
               <div class="shelf-plank"></div>
             </div>
           ))}
-
         </div>
+
+        <!-- ── SORT: by-rating view — DELETE from here to END SORT: by-rating ── -->
+        <div class="bookcase-interior shelf-view" id="shelf-view-rating">
+          {rowsByRating.map(row => (
+            <div class="bookcase-row">
+              <div class="shelf-row">
+                {row.map(entry => {
+                  const b = entry.book; const c = getSpineColor(b);
+                  return (
+                    <div class="spine-solo">
+                      <div class="spine-solo-spacer"></div>
+                      <div class="spine" data-id={b.id} data-status={b.status}
+                        style={`--spine-bg:${c.bg};--spine-text:${c.text};width:${spineWidth(b.title)};height:${spineHeight(b)}`}
+                        onclick={`openDetail('${b.id}')`} title={b.title}>
+                        <span class="spine-title">{b.title}</span>
+                        {b.rating && <span class="spine-num">{b.rating}</span>}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <div class="shelf-plank"></div>
+            </div>
+          ))}
+        </div>
+        <!-- ── END SORT: by-rating ────────────────────────────────────────────── -->
+
+        <!-- ── SORT: by-series view — DELETE from here to END SORT: by-series ── -->
+        <div class="bookcase-interior shelf-view" id="shelf-view-series">
+          {rowsBySeries.map(row => (
+            <div class="bookcase-row">
+              <div class="shelf-row">
+                {row.map(entry => {
+                  if (entry.type === 'series') return (
+                    <div class="spine-group">
+                      <div class="spine-group-label">{entry.name}</div>
+                      <div class="spine-group-books">
+                        {entry.books.map(b => {
+                          const c = getSpineColor(b);
+                          return (
+                            <div class="spine" data-id={b.id} data-status={b.status}
+                              style={`--spine-bg:${c.bg};--spine-text:${c.text};width:${spineWidth(b.title)};height:${spineHeight(b)}`}
+                              onclick={`openDetail('${b.id}')`} title={b.title}>
+                              <span class="spine-title">{b.title}</span>
+                              {b.seriesOrder && <span class="spine-num">{b.seriesOrder}</span>}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                  const b = entry.book; const c = getSpineColor(b);
+                  return (
+                    <div class="spine-solo">
+                      <div class="spine-solo-spacer"></div>
+                      <div class="spine" data-id={b.id} data-status={b.status}
+                        style={`--spine-bg:${c.bg};--spine-text:${c.text};width:${spineWidth(b.title)};height:${spineHeight(b)}`}
+                        onclick={`openDetail('${b.id}')`} title={b.title}>
+                        <span class="spine-title">{b.title}</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <div class="shelf-plank"></div>
+            </div>
+          ))}
+        </div>
+        <!-- ── END SORT: by-series ────────────────────────────────────────────── -->
+
         <div class="bookcase-base"></div>
       </div>
     </div>
@@ -300,6 +399,15 @@ const booksForClient = BOOKS.map(b => ({ ...b, spineColor: getSpineColor(b) }));
       document.getElementById('panel-' + id).classList.add('active');
     };
 
+    // ── Shelf sort — DELETE this block if sort bar is removed ─
+    window.showShelfSort = function(id, btn) {
+      document.querySelectorAll('.shelf-sort-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.shelf-view').forEach(v => v.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('shelf-view-' + id).classList.add('active');
+    };
+    // ── END shelf sort ────────────────────────────────────────
+
     // ── Detail panel ─────────────────────────────────────────
     window.openDetail = function(id) {
       const book = BOOKS.find(b => b.id === id);
@@ -326,7 +434,13 @@ const booksForClient = BOOKS.map(b => ({ ...b, spineColor: getSpineColor(b) }));
         </div>`;
 
       const parts = [];
-      if (book.series)   parts.push(`<div class="detail-series-line">Book ${book.seriesOrder} of the <strong>${esc(book.series)}</strong> series</div>`);
+      if (book.series || book.pages) {
+        const leftHtml = book.series
+          ? `<span class="detail-series-text">Book ${book.seriesOrder} of <strong>${esc(book.series)}</strong></span>`
+          : `<span class="detail-series-text">Standalone</span>`;
+        const pagesHtml = book.pages ? `<span class="detail-series-pages">${book.pages.toLocaleString()} pages</span>` : '';
+        parts.push(`<div class="detail-series-banner" style="--sc:${color.bg};--sct:${color.text}">${leftHtml}${pagesHtml}</div>`);
+      }
       if (book.rating)   parts.push(`<div class="detail-rating">${renderStars(book.rating)}</div>`);
       if (book.review)   parts.push(`<div class="detail-review">${esc(book.review)}</div>`);
       if (book.dateRead) parts.push(`<div class="detail-date">Finished ${formatDate(book.dateRead)}</div>`);
@@ -352,9 +466,8 @@ const booksForClient = BOOKS.map(b => ({ ...b, spineColor: getSpineColor(b) }));
     };
 
     function renderStars(r) {
-      return `<span class="stars" aria-label="${r} out of 5">
-        <span class="stars-filled">${'★'.repeat(r)}</span><span class="stars-empty">${'☆'.repeat(5-r)}</span>
-      </span><span class="stars-num">${r}/5</span>`;
+      const pct = (r / 5 * 100).toFixed(3);
+      return `<span class="stars" aria-label="${r} out of 5"><span class="stars-bg">☆☆☆☆☆</span><span class="stars-fg" style="width:${pct}%">★★★★★</span></span><span class="stars-num">${r}/5</span>`;
     }
     function esc(s) {
       return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');

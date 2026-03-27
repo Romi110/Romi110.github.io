@@ -54,7 +54,7 @@ body {
 .reading-toolbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: 1.5rem 0 0;
   gap: 1rem;
   flex-wrap: wrap;
@@ -63,6 +63,7 @@ body {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
+  justify-content: center;
 }
 .reading-tab {
   padding: 0.45rem 1.4rem;
@@ -78,6 +79,28 @@ body {
 }
 .reading-tab:hover { background: var(--bg2); border-color: var(--accent); }
 .reading-tab.active { background: var(--ink); color: var(--on-ink); border-color: var(--ink); }
+
+/* ── Shelf sort bar — DELETE this block if sort bar is removed ── */
+.shelf-sort-bar {
+  display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: center;
+  padding: 1rem 0 0.5rem;
+}
+.shelf-sort-btn {
+  padding: 0.3rem 1rem;
+  border-radius: 99px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem; font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.shelf-sort-btn:hover { background: var(--bg2); border-color: var(--accent); color: var(--ink); }
+.shelf-sort-btn.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.shelf-view { display: none; }
+.shelf-view.active { display: block; }
+/* ── END shelf sort ─────────────────────────────────────────── */
 
 .theme-toggle-btn {
   padding: 0.4rem 0.9rem;
@@ -269,12 +292,12 @@ body {
   /* Cloth texture: headbands keyed to spine accent + left-edge light + paper grain */
   background-image:
     linear-gradient(180deg,
-      color-mix(in srgb, var(--spine-text) 55%, transparent) 0px,
-      color-mix(in srgb, var(--spine-text) 55%, transparent) 7px,
-      transparent 7px),
-    linear-gradient(0deg,
       color-mix(in srgb, var(--spine-text) 45%, transparent) 0px,
       color-mix(in srgb, var(--spine-text) 45%, transparent) 7px,
+      transparent 7px),
+    linear-gradient(0deg,
+      color-mix(in srgb, var(--spine-text) 35%, transparent) 0px,
+      color-mix(in srgb, var(--spine-text) 35%, transparent) 7px,
       transparent 7px),
     linear-gradient(90deg, rgba(255,255,255,0.12) 0%, transparent 18%, rgba(0,0,0,0.25) 100%),
     repeating-linear-gradient(180deg,
@@ -285,18 +308,22 @@ body {
   box-shadow: 2px 0 0 rgba(0,0,0,0.15);
 }
 
-/* Thin seam between books in a series — visible crack, clears the headbands */
+/* Page-block edge between books — visible paper depth */
 .spine::after {
   content: '';
   position: absolute;
-  right: 0;
-  top: 8px;
-  bottom: 8px;
-  width: 1px;
-  background: rgba(0,0,0,0.5);
+  right: -5px;
+  top: 2px;
+  bottom: 2px;
+  width: 5px;
+  background: linear-gradient(90deg,
+    rgba(220,200,160,0.28) 0%,
+    rgba(180,160,120,0.10) 100%
+  );
+  border-radius: 0 1px 1px 0;
   pointer-events: none;
 }
-/* Only show seam on inner (non-last) books within a group; never on standalones */
+/* Hide pages edge on books that already share a neighbour or are last in a group */
 .spine-group-books .spine:last-child::after,
 .spine-solo .spine::after { display: none; }
 
@@ -453,16 +480,27 @@ body {
   padding: 1.1rem 1.25rem 1.5rem;
   display: flex; flex-direction: column; gap: 1rem; flex: 1;
 }
-.detail-series-line {
-  font-size: 0.8rem; color: var(--muted);
-  background: var(--bg2); border-radius: 8px;
-  padding: 0.55rem 0.85rem;
+.detail-series-banner {
+  display: flex; justify-content: space-between; align-items: center; gap: 0.75rem;
+  background: color-mix(in srgb, var(--sc) 22%, var(--bg2));
+  border-left: 3px solid var(--sc);
+  border-radius: 0 8px 8px 0;
+  padding: 0.6rem 0.9rem;
+}
+.detail-series-text  { font-size: 0.8rem; color: var(--muted); }
+.detail-series-text strong { color: var(--ink); font-weight: 600; }
+.detail-series-pages {
+  font-size: 0.75rem; font-weight: 500; letter-spacing: 0.03em;
+  color: color-mix(in srgb, var(--sct) 80%, transparent);
+  background: color-mix(in srgb, var(--sc) 35%, transparent);
+  border-radius: 5px; padding: 0.2rem 0.5rem;
+  white-space: nowrap; flex-shrink: 0;
 }
 .detail-rating { display: flex; align-items: center; gap: 0.6rem; }
-.stars { font-size: 1.1rem; line-height: 1; }
-.stars-filled { color: var(--accent); }
-.stars-empty  { color: var(--border); opacity: 0.6; }
-.stars-num    { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
+.stars     { position: relative; display: inline-block; font-size: 1.6rem; line-height: 1; white-space: nowrap; }
+.stars-bg  { color: var(--border); opacity: 0.5; }
+.stars-fg  { position: absolute; top: 0; left: 0; overflow: hidden; white-space: nowrap; color: var(--accent); }
+.stars-num { font-size: 0.9rem; color: var(--muted); font-weight: 500; }
 .detail-review {
   font-size: 0.88rem; color: var(--ink); line-height: 1.7;
   border-left: 3px solid var(--accent);

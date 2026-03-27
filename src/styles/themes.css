@@ -39,6 +39,52 @@
   --radius:  12px;
 }
 
+/* ── READING LIGHT ── warm cream with deep forest green */
+[data-theme="reading"] {
+  --ink:       #1a3a2a;   /* deep forest green — headings, primary text */
+  --on-ink:    #f0e8d4;   /* warm cream — text ON --ink background */
+  --muted:     #4a6854;   /* medium forest green — secondary text */
+  --bg:        #f0e8d4;   /* warm cream page background */
+  --bg2:       #e4d8c0;   /* slightly deeper cream — cards, panels */
+  --bg3:       #d8cbb0;   /* hover surface */
+  --border:    #c0b090;   /* warm tan border */
+  --accent:    #c9a84c;   /* gold */
+  --on-accent: #270a0a;
+  --radius:    12px;
+  --hero-bg:        #0e2818;   /* deep forest green banner */
+  --hero-text:      #f0e8d4;   /* warm cream text on green */
+  /* bookcase */
+  --case-frame:     #7a5020;   /* medium walnut frame */
+  --case-frame-lo:  #5a3810;   /* darker frame bottom */
+  --case-interior:  #1e1208;   /* dark walnut backing behind books */
+  --case-plank-hi:  #c8922a;   /* light honey edge of shelf */
+  --case-plank-mid: #8a5e18;   /* mid walnut */
+  --case-plank-lo:  #503808;   /* dark shadow at plank base */
+}
+
+/* ── READING DARK ── warm mahogany (lighter) */
+[data-theme="reading-dark"] {
+  --ink:       #f0e0c4;   /* warm cream text */
+  --on-ink:    #2a1208;   /* dark text ON cream background */
+  --muted:     #b09070;   /* warm tan-brown secondary text */
+  --bg:        #1d1713;   /* lighter mahogany background */
+  --bg2:       #0e0602;   /* medium oak — cards, panels */
+  --bg3:       #4e2e18;   /* hover surface */
+  --border:    #5e3820;   /* lighter border */
+  --accent:    #c9a84c;   /* gold unchanged */
+  --on-accent: #1a0a04;
+  --radius:    12px;
+  --hero-bg:        #2e0000;   /* darkest mahogany for banner contrast */
+  --hero-text:      #f0e0c4;   /* warm cream text on mahogany */
+  /* bookcase */
+  --case-frame:     #2e1208;   /* deep mahogany frame */
+  --case-frame-lo:  #1c0a04;   /* near-black frame bottom */
+  --case-interior:  #0e0602;   /* almost-black backing behind books */
+  --case-plank-hi:  #8a4a18;   /* dark amber edge of shelf */
+  --case-plank-mid: #5a2e0c;   /* dark cherry mid */
+  --case-plank-lo:  #2e1006;   /* near-black shadow at plank base */
+}
+
 /* ── KETTLEBELL LIGHT ── warm off-white with orange accent */
 [data-theme="kb-light"] {
   --ink:            #1a1a1a;

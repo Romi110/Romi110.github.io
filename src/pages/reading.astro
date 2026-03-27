@@ -1,0 +1,353 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import { BOOKS, getShelfBookGroups, getTbrBooks, getSpineColor, SPINE_COLORS } from '../data/books.js';
+import '../styles/reading.css';
+
+const shelfGroups = getShelfBookGroups(BOOKS);
+const tbrBooks    = getTbrBooks(BOOKS);
+
+// Group TBR: series → one expandable entry; standalones/authors → individual cards
+const tbrGroups = (() => {
+  const groups = [], seriesMap = new Map();
+  for (const book of tbrBooks) {
+    if (book.series) {
+      if (!seriesMap.has(book.series)) {
+        const g = { type: 'series', name: book.series, author: book.author, genre: book.genre, books: [] };
+        seriesMap.set(book.series, g);
+        groups.push(g);
+      }
+      seriesMap.get(book.series).books.push(book);
+    } else {
+      groups.push({ type: 'standalone', book });
+    }
+  }
+  for (const g of groups) {
+    if (g.type === 'series') g.books.sort((a, b) => a.seriesOrder - b.seriesOrder);
+  }
+  return groups;
+})();
+
+const totalRead    = BOOKS.filter(b => b.status === 'read').length;
+const totalReading = BOOKS.filter(b => b.status === 'reading').length;
+const totalTbr     = tbrBooks.length;
+
+// Spine width in px — longest word must fit on one line without clipping
+function spineWidthPx(title) {
+  const longest = Math.max(...title.split(' ').map(w => w.length));
+  if (longest >= 10) return 80;
+  if (longest >= 9)  return 74;   // e.g. Labyrinth, Lightning, Ascension
+  if (longest >= 8)  return 66;
+  if (longest >= 6)  return 56;
+  return 48;
+}
+function spineWidth(title) { return spineWidthPx(title) + 'px'; }
+
+// Build rows by pixel width — distributes groups into N evenly-sized rows.
+// N is derived from total width ÷ maxRowPx, so new books naturally cause
+// a new row to form rather than creating a stub at the end.
+function buildRows(groups, maxRowPx = 900) {
+  const GAP_PX = 20;
+  function groupPx(entry) {
+    if (entry.type === 'series')
+      return entry.books.reduce((sum, b) => sum + spineWidthPx(b.title), 0) + GAP_PX;
+    return spineWidthPx(entry.book.title) + GAP_PX;
+  }
+  const widths   = groups.map(groupPx);
+  const totalPx  = widths.reduce((s, w) => s + w, 0);
+  const N        = Math.max(1, Math.ceil(totalPx / maxRowPx));
+  const targetPx = totalPx / N;
+
+  const rows = [];
+  let current = [], rowPx = 0;
+  for (let i = 0; i < groups.length; i++) {
+    const w = widths[i];
+    if (current.length > 0 && rows.length < N - 1) {
+      // Break when adding next item takes us further from the per-row target
+      const distWith    = Math.abs(rowPx + w - targetPx);
+      const distWithout = Math.abs(rowPx - targetPx);
+      if (rowPx >= targetPx || distWith > distWithout) {
+        rows.push(current);
+        current = [];
+        rowPx = 0;
+      }
+    }
+    current.push(groups[i]);
+    rowPx += w;
+  }
+  if (current.length > 0) rows.push(current);
+  return rows;
+}
+const rows = buildRows(shelfGroups);
+
+// Enrich with spine color for client-side detail panel
+const booksForClient = BOOKS.map(b => ({ ...b, spineColor: getSpineColor(b) }));
+---
+
+<Base title="Reading | Romesh's Bookshelf" theme="reading">
+  <Nav slot="nav" label="Home">
+    <button class="theme-toggle-btn" id="theme-btn" onclick="toggleReadingTheme()">☽ Dark</button>
+  </Nav>
+
+  <!-- ── Hero ── -->
+  <div class="reading-hero">
+    <div class="reading-hero-title">The Bookshelf</div>
+    <div class="reading-hero-sub">What I've read, what I'm reading, and what's next</div>
+    <div class="reading-hero-stats">
+      <div class="reading-stat">
+        <span class="reading-stat-num">{totalRead}</span>
+        <span class="reading-stat-label">Read</span>
+      </div>
+      {totalReading > 0 && (
+        <div class="reading-stat">
+          <span class="reading-stat-num">{totalReading}</span>
+          <span class="reading-stat-label">Reading</span>
+        </div>
+      )}
+      <div class="reading-stat">
+        <span class="reading-stat-num">{totalTbr}</span>
+        <span class="reading-stat-label">Up Next</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <!-- ── Toolbar: tabs + dark mode ── -->
+    <div class="reading-toolbar">
+      <div class="reading-tabs">
+        <button class="reading-tab active" onclick="showPanel('shelf', this)">Shelf</button>
+        <button class="reading-tab" onclick="showPanel('tbr', this)">TBR</button>
+      </div>
+    </div>
+
+    <!-- ── SHELF PANEL ── -->
+    <div class="r-panel active" id="panel-shelf">
+
+      <!-- Genre color legend -->
+      <div class="genre-legend">
+        {Object.entries(SPINE_COLORS).map(([genre, color]) => (
+          <span class="genre-legend-item">
+            <span class="genre-legend-swatch" style={`background:${color.bg};color:${color.text}`}>A</span>
+            {genre}
+          </span>
+        ))}
+      </div>
+
+      <!-- Bookcase frame -->
+      <div class="bookcase">
+        <div class="bookcase-interior">
+
+          {rows.map(row => (
+            <div class="bookcase-row">
+              <div class="shelf-row">
+                {row.map(entry => {
+                  if (entry.type === 'series') return (
+                    <div class="spine-group">
+                      <div class="spine-group-label">{entry.name}</div>
+                      <div class="spine-group-books">
+                        {entry.books.map(b => {
+                          const c = getSpineColor(b);
+                          return (
+                            <div class="spine" data-id={b.id} data-status={b.status}
+                              style={`--spine-bg:${c.bg};--spine-text:${c.text};width:${spineWidth(b.title)}`}
+                              onclick={`openDetail('${b.id}')`} title={b.title}>
+                              <span class="spine-title">{b.title}</span>
+                              {b.seriesOrder && <span class="spine-num">{b.seriesOrder}</span>}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                  const b = entry.book; const c = getSpineColor(b);
+                  return (
+                    <div class="spine-solo">
+                      <div class="spine-solo-spacer"></div>
+                      <div class="spine" data-id={b.id} data-status={b.status}
+                        style={`--spine-bg:${c.bg};--spine-text:${c.text};width:${spineWidth(b.title)}`}
+                        onclick={`openDetail('${b.id}')`} title={b.title}>
+                        <span class="spine-title">{b.title}</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <div class="shelf-plank"></div>
+            </div>
+          ))}
+
+        </div>
+        <div class="bookcase-base"></div>
+      </div>
+    </div>
+
+    <!-- ── TBR PANEL ── -->
+    <div class="r-panel" id="panel-tbr">
+      <div class="tbr-section">
+        {tbrGroups.length === 0 ? (
+          <div class="reading-empty">Nothing on the TBR pile yet.</div>
+        ) : (
+          <div class="tbr-grid">
+            {tbrGroups.map(entry => {
+              if (entry.type === 'series') {
+                const color = SPINE_COLORS[entry.genre] || { bg: '#1a1a1a', text: '#c9a84c' };
+                return (
+                  <details class="tbr-card tbr-series-group">
+                    <summary class="tbr-series-summary">
+                      <div class="tbr-cover">
+                        <div class="tbr-cover-placeholder" style={`background:${color.bg};color:${color.text}`}>
+                          <div class="tbr-cover-title">{entry.name}</div>
+                          <div class="tbr-cover-author">{entry.author}</div>
+                        </div>
+                        <span class="tbr-badge">{entry.books.length} Books</span>
+                      </div>
+                      <div class="tbr-card-body">
+                        <div class="tbr-card-title">{entry.name}</div>
+                        <div class="tbr-card-author">{entry.author}</div>
+                        <div class="tbr-card-genre">{entry.genre}</div>
+                        <div class="tbr-expand-hint"><span class="tbr-expand-icon">▸</span> {entry.books.length} books</div>
+                      </div>
+                    </summary>
+                    <div class="tbr-series-books">
+                      {entry.books.map(b => (
+                        <button class="tbr-series-book-row" onclick={`openDetail('${b.id}')`} type="button">
+                          <span class="tbr-series-book-num">{b.seriesOrder}</span>
+                          <span class="tbr-series-book-title">{b.title}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </details>
+                );
+              }
+              const b = entry.book;
+              const color = getSpineColor(b);
+              return (
+                <div class="tbr-card" onclick={`openDetail('${b.id}')`}>
+                  <div class="tbr-cover">
+                    {b.cover
+                      ? <img src={b.cover} alt={`Cover of ${b.title}`} loading="lazy" />
+                      : (
+                        <div class="tbr-cover-placeholder" style={`background:${color.bg};color:${color.text}`}>
+                          <div class="tbr-cover-title">{b.title}</div>
+                          <div class="tbr-cover-author">{b.author}</div>
+                        </div>
+                      )
+                    }
+                    <span class={"tbr-badge" + (b.isAuthor ? " tbr-author-badge" : "")}>{b.isAuthor ? 'Author' : 'TBR'}</span>
+                  </div>
+                  <div class="tbr-card-body">
+                    <div class="tbr-card-title">{b.title}</div>
+                    <div class="tbr-card-author">{b.author}</div>
+                    <div class="tbr-card-genre">{b.genre}</div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Detail panel ── -->
+  <div class="detail-backdrop" id="detail-backdrop" onclick="closeDetail()"></div>
+  <div class="detail-panel" id="detail-panel">
+    <div class="detail-handle"></div>
+    <button class="detail-close" onclick="closeDetail()" aria-label="Close">✕</button>
+    <div class="detail-header" id="detail-header"></div>
+    <div class="detail-body"   id="detail-body"></div>
+  </div>
+
+  <div id="books-data" data-json={JSON.stringify(booksForClient)} hidden></div>
+
+  <script>
+    const BOOKS = JSON.parse(document.getElementById('books-data').dataset.json);
+
+    // ── Dark mode ────────────────────────────────────────────
+    function applyReadingTheme(dark) {
+      document.documentElement.dataset.theme = dark ? 'reading-dark' : 'reading';
+      document.getElementById('theme-btn').textContent = dark ? '☀ Light' : '☽ Dark';
+      localStorage.setItem('reading-theme', dark ? 'dark' : 'light');
+    }
+    window.toggleReadingTheme = function() {
+      applyReadingTheme(document.documentElement.dataset.theme !== 'reading-dark');
+    };
+    // Restore saved theme
+    if (localStorage.getItem('reading-theme') === 'dark') applyReadingTheme(true);
+
+    // ── Tabs ─────────────────────────────────────────────────
+    window.showPanel = function(id, btn) {
+      document.querySelectorAll('.reading-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.r-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('panel-' + id).classList.add('active');
+    };
+
+    // ── Detail panel ─────────────────────────────────────────
+    window.openDetail = function(id) {
+      const book = BOOKS.find(b => b.id === id);
+      if (!book) return;
+      const color = book.spineColor || { bg: '#1a1a1a', text: '#c9a84c' };
+      const statusLabel = { read: 'Read', reading: 'Reading', tbr: 'TBR' };
+
+      const coverHtml = book.cover
+        ? `<img src="${esc(book.cover)}" alt="Cover" />`
+        : `<div class="detail-cover-placeholder" style="background:${color.bg};color:${color.text}">${esc(book.title)}</div>`;
+
+      document.getElementById('detail-header').style.background =
+        `linear-gradient(135deg, ${color.bg} 0%, #0a0804 100%)`;
+
+      document.getElementById('detail-header').innerHTML = `
+        <div class="detail-header-cover">${coverHtml}</div>
+        <div class="detail-header-meta">
+          <div class="detail-title">${esc(book.title)}</div>
+          <div class="detail-author">${esc(book.author)}</div>
+          <div class="detail-tags">
+            <span class="detail-tag genre">${esc(book.genre)}</span>
+            <span class="detail-tag ${book.status}">${statusLabel[book.status]}</span>
+          </div>
+        </div>`;
+
+      const parts = [];
+      if (book.series)   parts.push(`<div class="detail-series-line">Book ${book.seriesOrder} of the <strong>${esc(book.series)}</strong> series</div>`);
+      if (book.rating)   parts.push(`<div class="detail-rating">${renderStars(book.rating)}</div>`);
+      if (book.review)   parts.push(`<div class="detail-review">${esc(book.review)}</div>`);
+      if (book.dateRead) parts.push(`<div class="detail-date">Finished ${formatDate(book.dateRead)}</div>`);
+      if (book.isAuthor) parts.push(`<p class="detail-no-content">Author TBR — haven't picked a series yet.</p>`);
+      else if (!parts.length) parts.push(`<p class="detail-no-content">${book.status === 'tbr' ? 'Not read yet.' : 'No review added yet.'}</p>`);
+
+      document.getElementById('detail-body').innerHTML = parts.join('');
+
+      document.querySelectorAll('.spine').forEach(s => s.classList.remove('active'));
+      const spine = document.querySelector(`.spine[data-id="${id}"]`);
+      if (spine) spine.classList.add('active');
+
+      document.getElementById('detail-backdrop').classList.add('open');
+      document.getElementById('detail-panel').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    };
+
+    window.closeDetail = function() {
+      document.getElementById('detail-backdrop').classList.remove('open');
+      document.getElementById('detail-panel').classList.remove('open');
+      document.querySelectorAll('.spine').forEach(s => s.classList.remove('active'));
+      document.body.style.overflow = '';
+    };
+
+    function renderStars(r) {
+      return `<span class="stars" aria-label="${r} out of 5">
+        <span class="stars-filled">${'★'.repeat(r)}</span><span class="stars-empty">${'☆'.repeat(5-r)}</span>
+      </span><span class="stars-num">${r}/5</span>`;
+    }
+    function esc(s) {
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+    function formatDate(ym) {
+      const [y, m] = ym.split('-');
+      const mo = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      return m ? `${mo[parseInt(m,10)-1]} ${y}` : y;
+    }
+
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
+  </script>
+</Base>

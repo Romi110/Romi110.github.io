@@ -6,6 +6,10 @@
     home      — landing page (pure dark, minimal)
     kb-light  — kettlebell guide light mode
     kb-dark   — kettlebell guide dark mode
+    reading   — bookshelf page light mode
+    reading-dark — bookshelf page dark mode
+    roma      — book of roma light mode
+    roma-dark — book of roma dark mode
 
   ─────────────────────────────────────────────────────────
   CONTRAST RULES — follow these when adding new themes
@@ -83,6 +87,40 @@
   --case-plank-hi:  #8a4a18;   /* dark amber edge of shelf */
   --case-plank-mid: #5a2e0c;   /* dark cherry mid */
   --case-plank-lo:  #2e1006;   /* near-black shadow at plank base */
+}
+
+/* ── ROMA LIGHT ── warm parchment with terra cotta accent */
+[data-theme="roma"] {
+  --bg:        #f5f0e8;
+  --bg2:       #ede7d9;
+  --bg3:       #e0d8c8;   /* hover surface */
+  --border:    #d4c9b5;
+  --ink:       #1c1712;   /* near-black warm brown */
+  --on-ink:    #f5f0e8;   /* parchment text on dark */
+  --muted:     #6b5e4e;   /* warm mid-brown — ~5:1 on --bg */
+  --accent:    #8b4513;   /* saddle brown / terra cotta */
+  --accent2:   #4a6741;   /* muted sage green */
+  --on-accent: #f5f0e8;
+  --radius:    10px;
+  --hero-bg:   #2a1a0e;   /* fixed deep warm brown for hero banner */
+  --hero-text: #f5f0e8;
+}
+
+/* ── ROMA DARK ── deep warm black with amber accent */
+[data-theme="roma-dark"] {
+  --bg:        #1a1610;
+  --bg2:       #23201a;
+  --bg3:       #2e2920;   /* hover surface */
+  --border:    #3a342c;
+  --ink:       #e8dece;   /* warm off-white cream */
+  --on-ink:    #1a1610;   /* dark text on cream */
+  --muted:     #9e8f7a;   /* warm mid-tone — ~5:1 on --bg */
+  --accent:    #c47a45;   /* warm amber-orange */
+  --accent2:   #7aad6e;   /* soft sage */
+  --on-accent: #1a1610;
+  --radius:    10px;
+  --hero-bg:   #0e0a06;   /* near-black for hero banner */
+  --hero-text: #e8dece;
 }
 
 /* ── KETTLEBELL LIGHT ── warm off-white with orange accent */

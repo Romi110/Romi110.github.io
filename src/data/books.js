@@ -37,7 +37,7 @@ export const BOOKS = [
     author: 'Christopher Ruocchio',
     cover: null,
     status: 'read',
-    rating: 4.4,
+    rating: 4.42,
     review: "A slow start but an epic finish. This books captures the essence of hunting for something \
     nobody believes exists. Howling Dark mirrors stories like Treasure Island and really makes you feel \
     the mystery and suspense",
@@ -319,7 +319,7 @@ export const BOOKS = [
     author: 'Arthur C. Clarke',
     cover: null,
     status: 'read',
-    rating: 4.5,
+    rating: 4.4,
     review: "The book that inspired the future. The worlds at the end of every chapter leave you in wonder.",
     genre: 'Science Fiction',
     series: null,

@@ -1,0 +1,1071 @@
+---
+import '../styles/roma.css';
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+
+const romaData = {
+  sevenLines: [
+    "What disturbs you is never the event — it is what you make of it.",
+    "It is not the losing that hurts most — it is the grip.",
+    "The wall between you and everything else is thinner than you think.",
+    "You can only ever be here. Everything else is memory or invention.",
+    "You are not what you intend. You are what you do when it costs something.",
+    "You will not find your purpose. You will build it, through what you repeatedly choose to do.",
+    "The part of you that needs to be right, to be seen, to be safe — that is what is standing between you and clarity."
+  ],
+  tenets: [
+    {
+      id: 'mind',
+      number: 1,
+      shortTitle: 'The Mind',
+      title: 'The Mind Makes the World',
+      statement: "What disturbs you is never the event — it is what you make of it.",
+      quotes: [
+        { text: "Men are disturbed not by the things which happen, but by the opinions about the things.", attr: "Epictetus", source: "Stoic philosopher, ~100 CE" },
+        { text: "The mind is its own place, and in itself can make a heaven of hell, a hell of heaven.", attr: "John Milton", source: "Paradise Lost, 1667" },
+        { text: "Between stimulus and response there is a space. In that space is our power to choose our response. In our response lies our growth and our freedom.", attr: "Viktor Frankl", source: "Man's Search for Meaning, 1946" }
+      ],
+      meaning: [
+        "Something happens. A door slams, a message doesn't come, a plan falls apart. Between that event and the feeling that follows, the mind does something — it interprets, it labels, it builds a story. That story is where the suffering lives. Not in the event itself.",
+        "Two people receive the same criticism at work. One hears it and adjusts. The other hears it and spends three days replaying it, building a case against themselves, projecting into a future where nothing works out. The criticism was identical. The suffering was not. The variable between them was not what happened — it was what each mind did with what happened.",
+        "This is the most repeated observation in the history of human thought. Stoics, Buddhists, Sufis, Existentialists, and modern psychologists arrive at the same place through different roads: the world delivers events. The mind delivers meaning. Meaning is where suffering — and freedom — live."
+      ],
+      realLife: [
+        { bold: "You get cut off in traffic.", body: "The car cutting you off is a fact. It lasted two seconds. The anger you carry for the next twenty minutes — the imagined confrontation, the verdict on humanity — that is entirely your construction. The event ended. You kept it alive." },
+        { bold: "You wake up tired and decide the day is ruined.", body: "The tiredness is real. 'Ruined day' is a story you told before the day existed. The day hasn't happened yet. The suffering is preemptive — manufactured from a prediction." },
+        { bold: "Someone doesn't reply to your message.", body: "The silence is a fact. Every explanation you generate — they're avoiding you, they're angry, you said something wrong — is invention. You are suffering from a story with no evidence, about a situation that may not exist." },
+        { bold: "You lose a job.", body: "The job is gone — that's real. 'I am a failure and I won't recover' is a construction layered on top of the fact. The fact is hard enough on its own. The construction is optional, and it multiplies the damage." }
+      ],
+      notThis: [
+        "This is not saying that suffering is imaginary, that difficult things don't hurt, or that you should feel nothing. Pain is real. Loss is real. Grief is appropriate. The insight is not that your feelings are wrong — it's that most of what we call suffering is an addition the mind makes to what actually happened. The raw event plus the story equals the total weight. You often cannot change the event. You can almost always change the story.",
+        "It is also not a call for suppression. Noticing that the mind is constructing a story is not the same as pushing the story down. You're not trying to feel nothing. You're trying to see clearly — to know the difference between what is real and what the mind added. That distinction is the whole game."
+      ],
+      remember: [
+        "The event and your interpretation of the event are not the same thing.",
+        "Suffering almost always has two layers: what happened, and what you made of it. Only the second is negotiable.",
+        "Two people facing identical circumstances will have different inner experiences. The variable is the mind.",
+        "You cannot always change what happens. You can nearly always change the story you build around it.",
+        "The battlefield is internal. That is bad news and good news at the same time."
+      ]
+    },
+    {
+      id: 'grip',
+      number: 2,
+      shortTitle: 'The Grip',
+      title: 'Holding Tight Makes It Worse',
+      statement: "It is not the losing that hurts most — it is the grip.",
+      quotes: [
+        { text: "The root of suffering is attachment.", attr: "The Buddha", source: "Pali Canon, ~500 BCE" },
+        { text: "You have a right to perform your prescribed duties, but you are not entitled to the fruits of your actions.", attr: "Bhagavad Gita", source: "~200 BCE" },
+        { text: "If you realize that all things change, there is nothing you will try to hold on to.", attr: "Lao Tzu", source: "Tao Te Ching, ~600 BCE" }
+      ],
+      meaning: [
+        "Attachment is not caring. It is something more specific: it is tying your inner stability to something outside yourself staying a certain way. When you are attached, you have made a silent deal — as long as this stays, I am okay. The problem is that everything changes. The job ends, the person changes, the body ages, the plan falls apart. The change is not the wound. The deal is the wound.",
+        "The mechanism is this: you suffer twice. First when you fear losing the thing, and then when you actually lose it. The fear runs constantly in the background — protecting, worrying, controlling — because the mind knows, somewhere, that the thing cannot last. Most of the suffering happens before the loss. It happens in the gripping.",
+        "Every major wisdom tradition identified this. The Buddha called it *tanha* — craving and clinging — and named it the direct cause of suffering. The Stoics called things outside your control *preferred indifferents*: worth pursuing, but not worth your peace if lost. The Taoists said forcing and grasping disrupts the natural movement of things. The language differs. The observation is the same."
+      ],
+      realLife: [
+        { bold: "Your identity is your job title.", body: "When the role disappears — layoff, restructure, career change — it doesn't just feel like a professional setback. It feels like a personal collapse. That's the signature of attachment: losing a thing and losing yourself at the same time. The job was real. You are not the job." },
+        { bold: "You need the argument to go a certain way.", body: "You stop listening. You're not trying to understand — you're trying to win. The attachment is not to truth but to being right, to the image of yourself as someone who is right. The conversation ends badly not because of what was said but because of what you needed it to produce." },
+        { bold: "Things used to be better, and you can't stop going back there.", body: "The old neighborhood, the old relationship, the version of yourself from five years ago. Nostalgia at low doses is human. As a residence, it is suffering — you are living in a place that no longer exists, and the present pays the price." },
+        { bold: "You're afraid to fully commit because then you could really lose it.", body: "Holding back from a relationship, a project, a city — keeping one foot out so the fall won't be as far. This is attachment in reverse: you protect yourself from loss by refusing to fully arrive. The grip is still there. It's just pointed inward." }
+      ],
+      notThis: [
+        "This does not mean you should care about nothing, love no one, or pursue nothing with intensity. That misreading turns a life philosophy into a prescription for numbness. The Stoics loved deeply — Marcus Aurelius was devastated by the deaths of his children. The Buddhists built an entire ethics around compassion. Full engagement with life is not the problem. The problem is the white-knuckle grip — the need for things to stay, which is different from wanting them to.",
+        "Detachment is not indifference. It is full presence without the demand that things be other than they are. You show up completely, you care genuinely, and you hold it all loosely enough that when it changes — as it will — you are not destroyed by the change. That is not coldness. That is the only way to be fully in your life without spending most of it in fear."
+      ],
+      remember: [
+        "The grip, not the loss, is where most suffering lives.",
+        "You can love something fully without needing it to be permanent.",
+        "Attachment means your peace depends on something outside you staying a certain way. That is a fragile foundation.",
+        "Detachment is not indifference — it is engagement without the demand that things comply.",
+        "What you are most afraid to lose is worth examining. The fear is the signal."
+      ]
+    },
+    {
+      id: 'wall',
+      number: 3,
+      shortTitle: 'The Wall',
+      title: 'You Are Not Alone in Here',
+      statement: "The wall between you and everything else is thinner than you think.",
+      quotes: [
+        { text: "We are all leaves of one tree. We are all waves of one sea.", attr: "Thich Nhat Hanh", source: "Buddhist monk, 20th century" },
+        { text: "When we try to pick out anything by itself, we find it hitched to everything else in the universe.", attr: "John Muir", source: "naturalist, 1911" },
+        { text: "What injures the hive injures the bee.", attr: "Marcus Aurelius", source: "Meditations, ~170 CE" }
+      ],
+      meaning: [
+        "The sense of being a separate, enclosed self — a mind behind your eyes, looking out at a world that is not you — is so constant and so familiar that it feels like a fact. It is not a fact. It is a construction, and not a particularly accurate one.",
+        "Look at what you are actually made of. The language you think in was invented by people long dead. The values you hold came from your family, your culture, the books you read, the people who shaped you. The food that built your body was grown in soil by other people. Your earliest sense of yourself came from being seen and responded to by others — before you had language, you existed in relationship. You did not arrive as a finished, separate self and then encounter the world. You were built by it, from it, continuously.",
+        "This does not erase your individuality. You are distinct. Your experience is yours. But the degree of separation you feel — the sense of being fundamentally alone in a private interior — is overstated by the ordinary mind, and that overstatement has costs. It makes compassion feel like effort. It makes generosity feel like sacrifice. It makes loneliness feel structural rather than situational. When the boundary softens — even briefly — the entire emotional landscape shifts."
+      ],
+      realLife: [
+        { bold: "You walk into a room where someone is in a bad mood.", body: "You didn't choose it. You feel it anyway. The boundary between their internal state and yours is not solid — emotion moves through shared space without asking permission. You are already more porous than you act like." },
+        { bold: "Someone you love is suffering and you cannot sleep.", body: "Not because of a decision you made, but because the line between their pain and yours has gone thin. This is not weakness. It is the boundary working as it actually works, not as the story of radical separateness says it should." },
+        { bold: "You are in nature — a forest, an ocean, a wide open sky — and something quiets.", body: "The chatter that runs constantly in the separate self slows down. This is not mystical. It is what happens when the part of the mind that is busy defending and managing a separate self gets a rest. What's underneath is not nothing. It is spacious." },
+        { bold: "You hurt someone and you feel it in yourself.", body: "Not guilt in the abstract — actual discomfort, like something misaligned. That signal is the connection working. The boundary was never as solid as it looked." }
+      ],
+      notThis: [
+        "This is not a call to dissolve into other people, to lose your own perspective in a crowd, or to stop making individual choices. You are a distinct person. Your experience is irreducibly yours. The point is not that the self doesn't exist — it's that the degree of separation you feel is greater than what is actually there. You are distinct. You are not isolated. Both are true, and one of them gets drastically underweighted.",
+        "It is also not an argument for ignoring your own needs in service of others. Recognizing interconnection doesn't mean your interior life matters less. It means the hard line between 'my wellbeing' and 'the wellbeing of what's around me' is less absolute than the isolated self insists. Taking care of yourself and taking care of others are less opposed than they look when you believe the wall is solid."
+      ],
+      remember: [
+        "The self is real. The isolation of the self is mostly a story.",
+        "You were built by others — their language, care, attention, and culture. Separation was never the baseline.",
+        "Emotion moves between people without permission. You are already more connected than you act.",
+        "Compassion is not effort when the boundary is understood correctly. It is the natural response.",
+        "The wall is real enough to stand on. It is not real enough to live behind."
+      ]
+    },
+    {
+      id: 'present',
+      number: 4,
+      shortTitle: 'The Present',
+      title: 'Now Is the Only Place',
+      statement: "You can only ever be here. Everything else is memory or invention.",
+      quotes: [
+        { text: "Confine yourself to the present.", attr: "Marcus Aurelius", source: "Meditations, ~170 CE" },
+        { text: "The present moment is the only moment available to us, and it is the door to all moments.", attr: "Thich Nhat Hanh", source: "Buddhist monk, 20th century" },
+        { text: "Past and future veil God from our sight; burn up both of them with fire.", attr: "Rumi", source: "Sufi poet, 13th century" },
+        { text: "Forever is composed of nows.", attr: "Emily Dickinson", source: "~1863" }
+      ],
+      meaning: [
+        "The past no longer exists. It lives now only as memory — a thought occurring in the present. The future does not yet exist. It lives now only as imagination — another thought occurring in the present. Both are mental events happening right now. The actual past and the actual future are unreachable. There is only ever this moment, and what the mind is doing inside it.",
+        "This sounds simple. It is not easy. The ordinary mind spends most of its time somewhere other than where the body is. It replays old conversations, rehearses future arguments, worries about outcomes that haven't arrived, and mourns versions of life that are already gone. All of this is happening while the actual present — the meal, the walk, the person in front of you, the work in your hands — passes unattended. You are alive in one place. You are rarely there.",
+        "Every tradition that takes mental training seriously converges on this. Buddhist mindfulness (*sati*) is entirely about returning attention to what is happening now — breath, sensation, sound — before the mind layers story over it. The Stoic practice of *memento mori* collapses the future back into the present by forcing the question: if not now, when? The Taoist concept of *wu wei* cannot be practiced in memory or anticipation — it is only ever available in this moment. The target is always the same: be where you are."
+      ],
+      realLife: [
+        { bold: "You are at dinner with someone and completely elsewhere.", body: "Reviewing something that happened at work. Half-composing tomorrow's to-do list. The food is in front of you, the person is talking, and you are not in the room. The dinner happens anyway. You won't remember it." },
+        { bold: "It is 2am and you cannot sleep.", body: "Your mind is running a conversation that took place three days ago, trying different versions of what you should have said. Or it is building a scenario for next week that may never occur. Either way, the suffering is happening now, about something that is not happening now. The body needs rest. The mind has other plans." },
+        { bold: "You finish a workout and have no memory of it.", body: "You were somewhere else the entire time — planning, worrying, narrating. The physical thing happened. You were absent for it. This is what it looks like to be alive without being present: the events occur, but no one is home to receive them." },
+        { bold: "Someone is talking to you and you are already forming your response.", body: "You stopped listening somewhere in the second sentence. What they are saying now — the actual words, the actual meaning — you are not hearing. You are in a future moment where it is your turn to speak. The conversation is happening. You have already left it." }
+      ],
+      notThis: [
+        "This is not an argument against planning, memory, or thinking about the future. Planning is a present-moment activity — you do it now, with the mind you have now. Learning from the past is a present-moment activity. The insight is not that the past and future are irrelevant — it is that they only ever exist as thoughts, and those thoughts are happening now. The question is whether the mind is using those thoughts as tools, or being dragged around by them.",
+        "It is also not a prescription for impulsiveness — for ignoring consequences or living only for immediate gratification. Being present means bringing your full attention to what is actually happening, which includes the real weight of decisions and their effects on the future. A person fully present to a difficult choice is more capable, not less, than one whose mind is scattered across ten imaginary scenarios. Presence is not naivety. It is clarity."
+      ],
+      remember: [
+        "The past is a memory. The future is a prediction. Only this moment is real.",
+        "Rumination is suffering about the past. Anxiety is suffering about the future. Both are optional.",
+        "Regret is a mind living in the past. Anxiety is a mind living in the future.",
+        "Planning is something you do now. You are always doing everything now.",
+        "Most of what you've missed in your life, you missed while it was happening.",
+        "You cannot arrive anywhere other than here. You are always already here."
+      ]
+    },
+    {
+      id: 'action',
+      number: 5,
+      shortTitle: 'The Action',
+      title: 'You Become What You Do',
+      statement: "You are not what you intend. You are what you do when it costs something.",
+      quotes: [
+        { text: "We are what we repeatedly do. Excellence, then, is not an act but a habit.", attr: "Will Durant, summarizing Aristotle", source: "1926" },
+        { text: "Waste no more time arguing about what a good man should be. Be one.", attr: "Marcus Aurelius", source: "Meditations, ~170 CE" },
+        { text: "I hear and I forget. I see and I remember. I do and I understand.", attr: "Confucius", source: "~500 BCE" }
+      ],
+      meaning: [
+        "Character is not a possession. It is not something you arrive at through understanding, or inherit through good intentions, or establish through self-image. It is a practice — a pattern of behavior repeated until it becomes the default response. You do not become courageous by believing in courage. You become courageous by doing the courageous thing repeatedly, especially when afraid, until courage is what your body reaches for first.",
+        "This was understood early. Aristotle built his entire ethics on it: virtue is *ethos*, habit, the groove worn into character by repeated action. The Stoics called the practice *askesis* — deliberate daily exercise of the principles, not just their contemplation. Marcus Aurelius didn't read Stoicism and become a Stoic emperor. He journaled every morning to realign his conduct with his values, day after day, for decades. Confucianism is almost entirely an ethics of conduct — the exemplary person is defined by what they do in relationships, not by what they privately believe. The Buddha offered a path, not a creed — right action, right speech, right livelihood, practiced, not professed.",
+        "The hard truth this tenet contains is that it is entirely possible to understand every wisdom tradition discussed in this book, to find it compelling, to be able to argue for it fluently — and to have your character unchanged by any of it. Insight without practice is just sophisticated self-deception. The question is never what you know. It is what you do."
+      ],
+      realLife: [
+        { bold: "You know you should exercise. You've known for years.", body: "Knowing did nothing. Reading about it did nothing. The decision, made once and not followed through, did nothing. Getting up and doing it three times this week did something — small, early, cumulative. Knowledge informed the choice. Action built the habit. Only one of them changed anything." },
+        { bold: "You consider yourself an honest person.", body: "But you haven't said the difficult true thing to the person who needed to hear it in months. You've softened, deflected, and gone along with things you didn't believe. The identity and the actions have separated. The identity is a story. The actions are the truth." },
+        { bold: "You intend to be more patient.", body: "You've intended it for a long time. Intention without practice produces nothing — the next time it's hard, you respond the same way you always have, because patience is not a decision, it's a trained response, and it hasn't been trained. The intention was real. It just wasn't enough." },
+        { bold: "You consume information about the thing instead of doing the thing.", body: "Podcasts about discipline, books about habits, conversations about what you're going to build. The consumption feels like progress. It is not progress. It is preparation that has mistaken itself for action. At some point the reading has to stop and the doing has to start." }
+      ],
+      notThis: [
+        "This is not about perfectionism or an unbroken streak of correct behavior. Everyone acts against their values sometimes — exhausted, afraid, provoked into an old pattern. A single failure doesn't undo what has been built, and the response to failure is itself part of the practice. What matters is not whether you are always right but whether your direction is consistent. The question is not 'did I do it perfectly?' It is 'am I becoming the person I am trying to be, or am I standing still?'",
+        "It is also not a dismissal of reflection, understanding, or inner work. Knowing what you value, examining your failures, understanding why you act as you do — all of this matters. But it matters as preparation for action, not as a substitute for it. The purpose of understanding yourself is to act better. If the understanding never changes the action, it has produced nothing but a more articulate version of the same person."
+      ],
+      remember: [
+        "You are not what you intend. You are what you do when it's inconvenient, when no one is watching, when you're tired.",
+        "Knowing is not doing. The gap between them is where character is built or lost.",
+        "Every repeated action is a vote for the person you are becoming.",
+        "Consistency over intensity — small things done regularly reshape character. Occasional bursts do not.",
+        "The reading, the planning, the intention — all of it is preparation. At some point, preparation has to become action."
+      ]
+    },
+    {
+      id: 'making',
+      number: 6,
+      shortTitle: 'The Making',
+      title: 'Meaning Is Made, Not Found',
+      statement: "You will not find your purpose. You will build it, through what you repeatedly choose to do.",
+      quotes: [
+        { text: "Let yourself be silently drawn by the strange pull of what you really love. It will not lead you astray.", attr: "Rumi", source: "Sufi poet, 13th century" },
+        { text: "He who has a why to live can bear almost any how.", attr: "Friedrich Nietzsche", source: "~1880s" },
+        { text: "The man who moves a mountain begins by carrying away small stones.", attr: "Confucius", source: "~500 BCE" },
+        { text: "One must imagine Sisyphus happy.", attr: "Albert Camus", source: "The Myth of Sisyphus, 1942" }
+      ],
+      meaning: [
+        "There is a version of yourself waiting for the signal — the moment of clarity, the calling, the feeling of certainty that tells you what your life is for. Most people wait a long time. Many wait indefinitely. The signal rarely comes, and when it does, it usually comes not before the commitment but well after it — as a quiet recognition, in the middle of already doing the thing, that this is what matters.",
+        "This is the deepest split in the history of philosophy: whether meaning is something you discover (already out there, waiting) or something you create (brought into existence through choice and action). Plato said the Good exists prior to you. Aristotle said *eudaimonia* is an activity — the active exercise of human capacities — not a state you arrive at. Camus looked at the absurdity of a universe that offers no answers and concluded the only honest response is to keep going anyway, passionately, without appeal to an answer that may never come. He called this revolt. Not despair. Not resignation. Revolt — full, defiant engagement with a life that has no guaranteed meaning, creating meaning by the fact of the engagement itself.",
+        "The practical observation — regardless of your metaphysics — is this: meaning behaves like something that responds to action. It shows up where you show up. It deepens in things you have worked at, struggled with, returned to after failure. It is almost never waiting at the beginning. It accumulates in the doing. The people who report the most meaning in their lives are not the ones who found the right thing first — they are the ones who committed to something and stayed."
+      ],
+      realLife: [
+        { bold: "You are waiting to feel called to your work before committing to it.", body: "The feeling doesn't arrive. You study it, read about it, think about it — but you haven't built anything yet, haven't struggled through the hard middle of it, haven't felt the specific satisfaction of getting something right after getting it wrong. The calling comes from inside the work, not before it. The waiting is the obstacle." },
+        { bold: "Someone becomes a parent without planning on it being the thing that gives their life meaning.", body: "They didn't choose it for that reason. But the daily showing up — the repetition, the difficulty, the love built through action rather than declaration — becomes the most meaningful thing in their life. The meaning wasn't there first. It was made through the doing." },
+        { bold: "You start a creative project with no certainty it matters.", body: "Six months later, having struggled through the middle, having solved problems you didn't know you could solve, you find that it matters deeply — not because the world validated it, but because you built something real and the building changed you. The meaning arrived inside the work. It was not there at the start." },
+        { bold: "You walk away from something unfulfilling and wait for the next right thing to appear.", body: "Months pass. Nothing announces itself. The clarity you expected doesn't come in stillness — it comes when you start doing something, anything, with full commitment, and pay attention to what moves inside you when you do. The doing reveals the direction. The waiting reveals nothing." }
+      ],
+      notThis: [
+        "This is not a claim that inherent meaning doesn't exist, or that spiritual and religious traditions are wrong to locate it in something larger than the individual. That is a metaphysical question this tenet does not settle. What it does say is that regardless of where meaning ultimately comes from — God, the universe, the structure of things, or human choice — it behaves, in practice, like something that responds to engagement. Passive waiting does not produce it. Committed action tends to.",
+        "It is also not saying that any engagement will do — that meaning is arbitrary, that one path is as good as another, or that you should simply throw yourself at random things. Some things move you and some things don't. That signal is worth paying attention to. The point is that you discover which is which by engaging, not by theorizing. You cannot think your way to knowing what matters to you. You have to touch it."
+      ],
+      remember: [
+        "Meaning is not waiting somewhere to be found. It accumulates in the doing.",
+        "Waiting to feel ready, called, or certain is how years disappear.",
+        "Commit to something. The clarity comes from inside the commitment, not before it.",
+        "Meaning is often retrospective — you see it looking back, rarely looking forward.",
+        "The engagement doesn't have to feel meaningful first. Often it doesn't. Often it does later."
+      ]
+    },
+    {
+      id: 'ego',
+      number: 7,
+      shortTitle: 'The Humility',
+      title: 'The Ego Gets in the Way',
+      statement: "The part of you that needs to be right, to be seen, to be safe — that is what is standing between you and clarity.",
+      quotes: [
+        { text: "Knowing others is intelligence; knowing yourself is true wisdom. Mastering others is strength; mastering yourself is true power.", attr: "Lao Tzu", source: "Tao Te Ching, ~600 BCE" },
+        { text: "He who conquers himself is the mightiest warrior.", attr: "Confucius", source: "~500 BCE" },
+        { text: "Humility is not thinking less of yourself. It is thinking of yourself less.", attr: "C.S. Lewis", source: "Mere Christianity, 1952" },
+        { text: "The ego is not master in its own house.", attr: "Sigmund Freud", source: "Introductory Lectures on Psychoanalysis, 1917" }
+      ],
+      meaning: [
+        "Every tradition in this book has a name for it. The Stoics called it the *passions* — irrational reactions driven by false judgments about what matters. Buddhism calls it *ahamkara*, the I-making faculty — the part of the mind that constructs and then desperately defends a fixed identity. The Sufis map it in seven stages, from the *nafs al-ammara* — the commanding lower self that acts from pure appetite and fear — to the purified self that has stopped fighting. Existentialists call it bad faith: the self that hides from its own freedom by pretending it has no choice. Christianity names it pride — the root sin, the one that generates the others. Different traditions. The same observation.",
+        "What they are all pointing at is not the self as a whole. It is a specific mode of the self — the reactive, defended, status-managing part that operates from fear rather than clarity. This is the part that needs to win arguments it knows are wrong. That can't ask for help because needing help means not having it together. That performs confidence it doesn't feel and dismisses feedback it knows is accurate. That stays in situations past the point of sense because leaving would mean admitting the entry was a mistake. The ego, in this sense, is not strength. It is the armor that has forgotten it is armor and started believing it is skin.",
+        "When this part is running — which for most people is most of the time — several things become impossible. You cannot learn, because learning requires being wrong first, and being wrong is what the ego most fears. You cannot connect, because genuine connection requires being seen, and being seen without control is exposure. You cannot act clearly, because the question 'how will this look?' arrives before 'what is actually right?' The ego does not just create suffering. It corrupts perception. You see what you need to see to keep the self-image intact, not what is actually there."
+      ],
+      realLife: [
+        { bold: "You are in a meeting and you know your idea isn't working.", body: "But you've been its advocate, and backing down feels like losing. So you defend it past the point where you believe it. The argument is no longer about the idea. It is about not being seen as someone who was wrong. The ego has replaced the work." },
+        { bold: "Someone offers you honest feedback and you get defensive.", body: "Not because the feedback is wrong — somewhere you know it isn't — but because receiving it without deflecting feels like a verdict on your worth. The feedback was about the work. The ego made it about you. The thing that could have helped you improve becomes the thing you spend energy arguing against." },
+        { bold: "You cannot ask for help.", body: "To need help is to not have it handled, and to not have it handled is to be exposed as someone who doesn't have it handled. So you struggle longer than necessary, produce less than you could, and protect an image of competence that the people who know you can already see through. The armor is costing more than the vulnerability would." },
+        { bold: "You stay in something too long because leaving means admitting you were wrong to start.", body: "The job, the project, the position. The sunk cost is real, but the reason you don't leave is not the sunk cost — it's that leaving is a public admission. The ego would rather keep losing than accept the loss." }
+      ],
+      notThis: [
+        "This is not about self-erasure — becoming passive, agreeable, without standards or preferences. The goal is not to have no self. It is to have a self that is not constantly frightened. The Stoic sage, the Zen master, the Confucian exemplary person — none of them are characterized by the absence of self. They are characterized by the absence of the anxious, grasping, reactive self. What remains is not nothing. It is something more stable, more spacious, and more effective than the defended version.",
+        "It is also not a call for false humility — performing smallness to seem enlightened, undermining your own work, refusing to take credit or hold positions with confidence. Genuine humility is not the performance of lowness. It is the absence of the need to manage how you appear. A person genuinely free of ego can be decisive, confident, and direct — without any of it being about protecting an image. That is different from ego in the same way that courage is different from aggression."
+      ],
+      remember: [
+        "The ego is not who you are. It is the part of you that is afraid of finding out.",
+        "When you cannot be wrong, you cannot learn. The cost of certainty is growth.",
+        "The defended self is not stronger than the open one. It only feels that way.",
+        "Notice the voice that needs to win, to be seen, to protect its position. That is the obstacle.",
+        "What remains when the ego quiets is not nothing. It is more."
+      ]
+    }
+  ],
+  stories: [
+    {
+      id: 'two-brothers',
+      title: 'The Two Brothers',
+      tenets: [1, 4],
+      excerpt: "Two brothers were caught in a storm on a trail above the tree line. One pushed through; the other sat, listened to the rain, and remembered it.",
+      paragraphs: [
+        "Two brothers were caught in a storm on a trail above the tree line. The older brother calculated a faster route — cutting angles, arguing with the weather, certain that getting out was the only answer. He pushed through two miles of driving rain. He arrived at the trailhead an hour later, soaked, furious, his knees aching.",
+        "The younger brother found a rock overhang and sat down. He watched the storm move across the valley. He noticed the smell of the wet earth and the sound the rain makes in pine trees at different distances — closer trees higher, farther trees lower, like a chord being played across the mountain.",
+        "When it passed, he walked out.",
+        "At the car, the older brother said, \"You got lucky.\"",
+        "The younger brother said, \"You got somewhere. I was there.\"",
+        "Neither of them was wrong. But only one of them still remembers that afternoon."
+      ],
+      moral: "The storm did not spare either of them. What differed was what each one made of it, and where each one actually was while it was happening."
+    },
+    {
+      id: 'carpenters-tools',
+      title: "The Carpenter's Tools",
+      tenets: [2, 6],
+      excerpt: "A man lost his woodworking shop and his hands forgot themselves — until his granddaughter asked what a piece of driftwood could become.",
+      paragraphs: [
+        "A man who had kept a woodworking shop for thirty years lost it when the building sold. He moved into his son's spare room and watched television. His hands forgot themselves. Every morning he thought about the shop. Every morning it was still gone.",
+        "His granddaughter, six years old, found a piece of driftwood in the yard and asked him what it could become.",
+        "He said he didn't know.",
+        "She said that was the best part.",
+        "He bought one chisel. Then a second. He began carving birds in the garage — small ones, imprecise, then better. He didn't sell them. He gave them away, one at a time, to people he couldn't have explained choosing.",
+        "He died at eighty-three. At the service, forty-three people brought birds.",
+        "He never got the shop back. He found something he hadn't gone looking for — which is the only way it could have been found."
+      ],
+      moral: "He grieved the shop for two years. He spent the next twelve years building something the shop never could have made room for."
+    },
+    {
+      id: 'bridge',
+      title: 'The Bridge',
+      tenets: [3, 4],
+      excerpt: "A woman stopped on a bridge at dusk and found herself in a two-hour conversation she hadn't planned, with someone who needed exactly that.",
+      paragraphs: [
+        "A woman stopped on a bridge at dusk because she thought she saw something in the water. She hadn't. But while she was stopped, a man sat down on the railing beside her.",
+        "She didn't know what to do. So she just said, \"The water looks different this time of day.\"",
+        "He said, \"I've been here six times this month. I keep not doing it.\"",
+        "They talked for two hours. She doesn't remember what was said. He doesn't either.",
+        "He is alive. She thinks about that bridge sometimes — not about herself on it, not about what she said or should have said. Just that she stopped. Just that one unhurried moment when she was exactly where she was, and so was he, and something passed between them that neither one of them had planned to give."
+      ],
+      moral: "She stopped because she was present enough to stop. She stayed because she forgot, for two hours, to think about herself. That was enough."
+    },
+    {
+      id: 'surgeons-question',
+      title: "The Surgeon's Question",
+      tenets: [1, 7],
+      excerpt: "A surgeon known for being right missed something on a scan. A first-week resident saw it. He spent the rest of his career asking one question.",
+      paragraphs: [
+        "A surgeon known for being right was reviewing a scan when a first-week resident said, quietly, \"I think there might be something here.\"",
+        "He looked. He saw nothing. He said, \"There's nothing there.\"",
+        "There was something there.",
+        "The patient survived — caught in a follow-up six months later. The surgeon pulled the original scan and looked again. He could see it now: the shadow he had needed not to be there, and so it hadn't been.",
+        "He told no one. But for the rest of his career, he paused after every diagnosis and asked one question: What am I hoping not to see?",
+        "He was wrong less often after that. He never knew whether it was because he'd gotten better at medicine, or better at himself. He eventually stopped believing those were different things."
+      ],
+      moral: "The resident saw it because she had no image to protect. He missed it for the same reason."
+    },
+    {
+      id: 'apology',
+      title: 'The Apology',
+      tenets: [4, 5, 7],
+      excerpt: "A man spent eleven years composing the perfect apology to his daughter, waiting for the right moment that never quite arrived.",
+      paragraphs: [
+        "A man had been composing an apology to his daughter for eleven years. In his head it was exact — the specific things he'd gotten wrong, said badly, failed to say at all. He revised it constantly. He waited for the right moment, the right version of himself that was ready to say it cleanly.",
+        "His daughter called him from a hospital waiting room at 11pm on a Tuesday. Her husband was in surgery. She wasn't calling for his apology. She was calling because she was scared and he was her father.",
+        "He said: \"I'm sorry for everything I got wrong. All of it.\"",
+        "She said: \"I know, Dad.\"",
+        "He drove four hours and arrived before the surgery ended.",
+        "The apology he had spent eleven years composing was never given. The one he gave in thirty seconds was the one that mattered. He had been waiting to be ready. She had needed him to arrive."
+      ],
+      moral: null
+    },
+    {
+      id: 'translator',
+      title: 'The Translator',
+      tenets: [5, 6, 7],
+      excerpt: "For forty years a woman translated novels and never published under her own name, believing her own work was vanity.",
+      paragraphs: [
+        "For forty years, a woman translated novels from Portuguese into English. She never published under her own name. She had ideas for her own books — notes in notebooks, half-started chapters — but translation felt like real work, and her own writing felt like vanity.",
+        "After she retired, a scholar asked to interview her. In preparing, he read all her translations alongside the originals and said: \"You made hundreds of decisions on every page. Word choices no one else would have made. These books exist differently in English because of how you think.\"",
+        "She went home and read one of her translations for the first time as if someone else had written it.",
+        "She had written twelve books. She had just never noticed."
+      ],
+      moral: null
+    },
+    {
+      id: 'fire',
+      title: 'The Fire',
+      tenets: [2, 3, 4],
+      excerpt: "A family lost their house to a fire in March. By April, they had inventoried what they actually missed.",
+      paragraphs: [
+        "A family lost their house to a fire in March. By April they had inventoried what they missed: some photographs, a cast iron pan, a letter. Everything else turned out to be furniture.",
+        "The strange part — all four of them noted it separately, months later — was that the two weeks immediately after, living in a borrowed apartment with nothing, felt lighter than any two weeks they could remember. They ate together every night because there was nowhere else to be. They talked because there was nothing to watch. The kids slept in the same room and didn't complain.",
+        "They rebuilt eventually. The heaviness returned with the furniture, incrementally, piece by piece.",
+        "They still talk about those two weeks. Not with grief — with something more complicated. As if the fire had briefly shown them something about their life that their life had been obscuring."
+      ],
+      moral: null
+    },
+    {
+      id: 'long-grudge',
+      title: 'The Long Grudge',
+      tenets: [1, 4, 7],
+      excerpt: "A man spent nine years rehearsing what he would say to the person who had cost him everything.",
+      paragraphs: [
+        "A man spent nine years planning what he would say to his former business partner who had cost him everything. He rehearsed it while driving, while falling asleep, while running. He built the speech the way other people build careers — with sustained attention and real revision.",
+        "When he finally found himself in the same room, at a mutual friend's funeral, he walked over. The man was older, diminished somehow, standing awkwardly near the back.",
+        "He couldn't say it. Not because he forgave him. But because the version of himself that needed to say it wasn't there anymore. Nine years had passed. He was someone else now.",
+        "He said: \"I'm sorry about David.\"",
+        "The man said: \"Me too.\"",
+        "He drove home unsatisfied and strangely free. The speech had been addressed to a person who no longer existed, from a person who no longer existed. The present had outgrown both of them."
+      ],
+      moral: null
+    },
+    {
+      id: 'gardener',
+      title: 'The Gardener',
+      tenets: [3, 5, 6],
+      excerpt: "An old woman kept a garden between two buildings and gave away everything she grew. She had no idea how many people it reached.",
+      paragraphs: [
+        "An old woman kept a garden in a narrow lot between two buildings in a city neighborhood. She had no use for most of what she grew. She gave it away — bags of tomatoes left on steps, herbs pressed into the hands of people she passed.",
+        "She died at ninety-one.",
+        "At the memorial her daughter put out a notebook for people to write in. She expected a few entries.",
+        "There were sixty-one. A man who had been hungry for a week one winter and lived off her tomatoes. A woman who had started her own garden because of watching her. Three children, now adults, who had worked alongside her as kids and considered it their clearest memory of being useful.",
+        "None of them knew each other. None of them knew how many others there were. She hadn't known either."
+      ],
+      moral: null
+    },
+    {
+      id: 'river',
+      title: 'The River',
+      tenets: [1, 4],
+      excerpt: "A river guide who had run the same canyon four hundred times was asked if he ever got bored.",
+      paragraphs: [
+        "A man had guided the same river canyon for twenty-two years — over four hundred runs.",
+        "A journalist asked him once if he ever got bored.",
+        "He said: \"I have never seen this river before.\"",
+        "The journalist thought he was being poetic. He wasn't. The water in front of them was not the water from last week. The canyon looked different at different levels, in different light, in different seasons. He had learned to read it not as a route he knew but as a situation he was in now.",
+        "He said: \"The guides who get people killed are the ones who think they know it. You can't know a river. You can only know this part of the river, at this level, right now. The moment you think you know it, you've stopped paying attention.\""
+      ],
+      moral: null
+    },
+    {
+      id: 'two-scientists',
+      title: 'The Two Scientists',
+      tenets: [5, 6, 7],
+      excerpt: "Two researchers at the same university had been working on the same problem for six years without knowing about each other.",
+      paragraphs: [
+        "Two researchers at the same university had been working on the same problem for six years without knowing about each other. At a conference, both presented. The other man's paper was better.",
+        "The first researcher spent a week in what he recognized, eventually, as grief — not for the work, but for the version of himself who was going to be first.",
+        "He requested the other man's data. They started corresponding. Eighteen months later they published together. It was the best work either of them had done.",
+        "At the end of his career, when asked about his most important paper, he always named the joint one. Someone once asked how he'd gotten past losing the priority claim.",
+        "He said he wasn't sure he had, entirely. But at some point the question of who got there first had become less interesting than the question of whether they'd gotten it right."
+      ],
+      moral: null
+    }
+  ]
+};
+---
+
+<Base title="Roma — A Personal Book of Tenets" theme="roma">
+  <Nav slot="nav" label="Home">
+    <button class="roma-theme-toggle" id="roma-theme-btn" onclick="toggleRomaTheme()">☽ Dark</button>
+  </Nav>
+
+  <!-- PASSWORD GATE -->
+  <div class="roma-gate" id="roma-gate">
+    <div class="roma-gate-title">ROMA</div>
+    <div class="roma-gate-form">
+      <input
+        class="roma-gate-input"
+        id="roma-gate-input"
+        type="password"
+        placeholder="enter the word"
+        autocomplete="off"
+        onkeydown="if(event.key==='Enter') checkRomaPassword()"
+      />
+      <button class="roma-gate-btn" onclick="checkRomaPassword()">Enter</button>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="roma-hero">
+    <div class="roma-hero-title">ROMA</div>
+    <div class="roma-hero-sub">A personal book of tenets</div>
+  </section>
+
+  <div class="wrap">
+    <!-- SEVEN LINES -->
+    <div class="seven-lines">
+      <div class="seven-lines-inner">
+        <div class="seven-lines-header">THE SEVEN LINES</div>
+        <div class="seven-lines-note">Click any line to read the full tenet</div>
+        <ol class="seven-lines-list">
+          <li class="seven-lines-item" onclick="jumpToTenet(1)">
+            <span class="seven-lines-num">1</span>
+            <span class="seven-lines-text">What disturbs you is never the event — it is what you make of it.</span>
+          </li>
+          <li class="seven-lines-item" onclick="jumpToTenet(2)">
+            <span class="seven-lines-num">2</span>
+            <span class="seven-lines-text">It is not the losing that hurts most — it is the grip.</span>
+          </li>
+          <li class="seven-lines-item" onclick="jumpToTenet(3)">
+            <span class="seven-lines-num">3</span>
+            <span class="seven-lines-text">The wall between you and everything else is thinner than you think.</span>
+          </li>
+          <li class="seven-lines-item" onclick="jumpToTenet(4)">
+            <span class="seven-lines-num">4</span>
+            <span class="seven-lines-text">You can only ever be here. Everything else is memory or invention.</span>
+          </li>
+          <li class="seven-lines-item" onclick="jumpToTenet(5)">
+            <span class="seven-lines-num">5</span>
+            <span class="seven-lines-text">You are not what you intend. You are what you do when it costs something.</span>
+          </li>
+          <li class="seven-lines-item" onclick="jumpToTenet(6)">
+            <span class="seven-lines-num">6</span>
+            <span class="seven-lines-text">You will not find your purpose. You will build it, through what you repeatedly choose to do.</span>
+          </li>
+          <li class="seven-lines-item" onclick="jumpToTenet(7)">
+            <span class="seven-lines-num">7</span>
+            <span class="seven-lines-text">The part of you that needs to be right, to be seen, to be safe — that is what is standing between you and clarity.</span>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- TOOLBAR -->
+    <div class="roma-toolbar">
+      <div class="roma-tabs">
+        <button class="roma-tab active" data-panel="tenets" onclick="showPanel('tenets')">Tenets</button>
+        <button class="roma-tab" data-panel="stories" onclick="showPanel('stories')">Stories</button>
+        <button class="roma-tab" data-panel="finalword" onclick="showPanel('finalword')">Final Word</button>
+        <button class="roma-tab" data-panel="sources" onclick="showPanel('sources')">Sources</button>
+      </div>
+    </div>
+
+    <!-- PANEL: TENETS -->
+    <div class="roma-panel active" id="panel-tenets">
+      <!-- Mobile pill nav -->
+      <div class="tenet-pill-nav" id="tenet-pill-nav">
+        <button class="tenet-pill-btn active" data-tenet="mind" onclick="showTenet('mind')">1. The Mind</button>
+        <button class="tenet-pill-btn" data-tenet="grip" onclick="showTenet('grip')">2. The Grip</button>
+        <button class="tenet-pill-btn" data-tenet="wall" onclick="showTenet('wall')">3. The Wall</button>
+        <button class="tenet-pill-btn" data-tenet="present" onclick="showTenet('present')">4. The Present</button>
+        <button class="tenet-pill-btn" data-tenet="action" onclick="showTenet('action')">5. The Action</button>
+        <button class="tenet-pill-btn" data-tenet="making" onclick="showTenet('making')">6. The Making</button>
+        <button class="tenet-pill-btn" data-tenet="ego" onclick="showTenet('ego')">7. The Humility</button>
+      </div>
+
+      <div class="tenets-layout">
+        <!-- Sidebar nav -->
+        <aside class="tenet-sidebar">
+          <nav class="tenet-nav" id="tenet-nav">
+            <button class="tenet-nav-btn active" data-tenet="mind" onclick="showTenet('mind')">
+              <span class="tenet-nav-num">1</span> The Mind
+            </button>
+            <button class="tenet-nav-btn" data-tenet="grip" onclick="showTenet('grip')">
+              <span class="tenet-nav-num">2</span> The Grip
+            </button>
+            <button class="tenet-nav-btn" data-tenet="wall" onclick="showTenet('wall')">
+              <span class="tenet-nav-num">3</span> The Wall
+            </button>
+            <button class="tenet-nav-btn" data-tenet="present" onclick="showTenet('present')">
+              <span class="tenet-nav-num">4</span> The Present
+            </button>
+            <button class="tenet-nav-btn" data-tenet="action" onclick="showTenet('action')">
+              <span class="tenet-nav-num">5</span> The Action
+            </button>
+            <button class="tenet-nav-btn" data-tenet="making" onclick="showTenet('making')">
+              <span class="tenet-nav-num">6</span> The Making
+            </button>
+            <button class="tenet-nav-btn" data-tenet="ego" onclick="showTenet('ego')">
+              <span class="tenet-nav-num">7</span> The Humility
+            </button>
+          </nav>
+        </aside>
+
+        <!-- Tenet content -->
+        <div class="tenet-content" id="tenet-content">
+          <!-- JS-rendered -->
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL: STORIES -->
+    <div class="roma-panel" id="panel-stories">
+      <div class="stories-filter-bar">
+        <span class="stories-filter-label">Filter by tenet:</span>
+        <button class="stories-filter-btn active" onclick="filterStories('all', this)">All</button>
+        <button class="stories-filter-btn" onclick="filterStories(1, this)">1 — Mind</button>
+        <button class="stories-filter-btn" onclick="filterStories(2, this)">2 — Grip</button>
+        <button class="stories-filter-btn" onclick="filterStories(3, this)">3 — Wall</button>
+        <button class="stories-filter-btn" onclick="filterStories(4, this)">4 — Present</button>
+        <button class="stories-filter-btn" onclick="filterStories(5, this)">5 — Action</button>
+        <button class="stories-filter-btn" onclick="filterStories(6, this)">6 — Making</button>
+        <button class="stories-filter-btn" onclick="filterStories(7, this)">7 — Humility</button>
+      </div>
+      <div class="stories-grid" id="stories-grid">
+        <!-- JS-rendered -->
+      </div>
+    </div>
+
+    <!-- PANEL: FINAL WORD -->
+    <div class="roma-panel" id="panel-finalword">
+      <div class="final-word">
+        <p class="final-word-pull">None of this is new. Everything in this book was observed first by someone who had already run out of easier answers — who had tried to hold on and been broken by the grip, who had spent enough time waiting for meaning that they eventually stopped waiting and began.</p>
+        <div class="final-word-body">
+          <p>These ideas survived because they worked. Not for everyone, not always, not perfectly — but enough. Enough that people from every culture, every century, in languages that share no common root, kept arriving at the same observations about the mind, about time, about the self.</p>
+          <p>You will not master these tenets. You will live with them, lose them, find them again, apply them badly, apply them well, forget them at the moments you most need them, and remember them at moments you least expect to. That is not failure. That is what the practice looks like from the inside.</p>
+          <p>The only thing left to do is go back out and see what they are worth.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL: SOURCES -->
+    <div class="roma-panel" id="panel-sources">
+      <p class="sources-intro">The ideas in this book did not originate here. Below are the texts and thinkers they came from. Organized by tradition, with notes on where each one connects.</p>
+      <div class="sources-accordion">
+
+        <!-- Stoicism -->
+        <div class="sources-tradition">
+          <button class="sources-tradition-btn" onclick="toggleAccordion('stoicism')" id="acc-btn-stoicism">
+            Stoicism
+            <span class="sources-chevron">&#9660;</span>
+          </button>
+          <div class="sources-tradition-body" id="acc-body-stoicism">
+            <div class="source-entry">
+              <div class="source-title">Meditations</div>
+              <div class="source-author">Marcus Aurelius — ~170 CE</div>
+              <div class="source-annotation">The private journal of a Roman emperor who practiced Stoicism daily. The most direct source for Tenets 1, 4, 5, and 7. Read the Gregory Hays translation.</div>
+              <div class="source-tenets">
+                <span class="source-tenet-chip">Tenet 1</span>
+                <span class="source-tenet-chip">Tenet 4</span>
+                <span class="source-tenet-chip">Tenet 5</span>
+                <span class="source-tenet-chip">Tenet 7</span>
+              </div>
+            </div>
+            <div class="source-entry">
+              <div class="source-title">Enchiridion</div>
+              <div class="source-author">Epictetus — ~100 CE</div>
+              <div class="source-annotation">A forty-page handbook of Stoic practice. The source of the core distinction between what is and is not in your control — the backbone of Tenet 1. Unsparing and direct.</div>
+              <div class="source-tenets">
+                <span class="source-tenet-chip">Tenet 1</span>
+              </div>
+            </div>
+            <div class="source-entry">
+              <div class="source-title">Letters from a Stoic</div>
+              <div class="source-author">Seneca — ~65 CE</div>
+              <div class="source-annotation">Letters to a friend on how to live. Warmer than Epictetus, more literary than Marcus. Especially strong on time, mortality, and Tenet 4.</div>
+              <div class="source-tenets">
+                <span class="source-tenet-chip">Tenet 4</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Buddhism -->
+        <div class="sources-tradition">
+          <button class="sources-tradition-btn" onclick="toggleAccordion('buddhism')" id="acc-btn-buddhism">
+            Buddhism
+            <span class="sources-chevron">&#9660;</span>
+          </button>
+          <div class="sources-tradition-body" id="acc-body-buddhism">
+            <div class="source-entry">
+              <div class="source-title">Peace Is Every Step</div>
+              <div class="source-author">Thich Nhat Hanh — 1991</div>
+              <div class="source-annotation">Short chapters, plain language, practical. The best entry point for mindfulness as a daily practice. Directly relevant to Tenets 2, 3, and 4.</div>
+              <div class="source-tenets">
+                <span class="source-tenet-chip">Tenet 2</span>
+                <span class="source-tenet-chip">Tenet 3</span>
+                <span class="source-tenet-chip">Tenet 4</span>
+              </div>
+            </div>
+            <div class="source-entry">
+              <div class="source-title">The Dhammapada</div>
+              <div class="source-author">~300 BCE</div>
+              <div class="source-annotation">The oldest collection of the Buddha's teachings. Short verses. The first line — 'Mind is the forerunner of all actions' — is Tenet 1 in a sentence.</div>
+              <div class="source-tenets">
+                <span class="source-tenet-chip">Tenet 1</span>
+              </div>
+            </div>
+            <div class="source-entry">
+              <div class="source-title">Zen Mind, Beginner's Mind</div>
+              <div class="source-author">Shunryu Suzuki — 1970</div>
+              <div class="source-annotation">The essential Zen text for a Western reader. Covers presence, beginner's mind, and daily practice. Relevant to Tenets 2, 4, and 7.</div>
+              <div class="source-tenets">
+                <span class="source-tenet-chip">Tenet 2</span>
+                <span class="source-tenet-chip">Tenet 4</span>
+                <span class="source-tenet-chip">Tenet 7</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Taoism -->
+        <div class="sources-tradition">
+          <button class="sources-tradition-btn" onclick="toggleAccordion('taoism')" id="acc-btn-taoism">
+            Taoism
+            <span class="sources-chevron">&#9660;</span>
+          </button>
+          <div class="sources-tradition-body" id="acc-body-taoism">
+            <div class="source-entry">
+              <div class="source-title">Tao Te Ching</div>
+              <div class="source-author">Lao Tzu — ~600 BCE</div>
+              <div class="source-annotation">Eighty-one short chapters. Read the Ursula K. Le Guin translation for readability. The source of the ideas behind Tenets 2, 3, and 7.</div>
+              <div class="source-tenets">
+                <span class="source-tenet-chip">Tenet 2</span>
+                <span class="source-tenet-chip">Tenet 3</span>
+                <span class="source-tenet-chip">Tenet 7</span>
+              </div>
+            </div>
+            <div class="source-entry">
+              <div class="source-title">Chuang Tzu</div>
+              <div class="source-author">~300 BCE</div>
+              <div class="source-annotation">More playful than the Tao Te Ching. Uses stories and absurdist humor to point at the same truths. Good for Tenets 3 and 7.</div>
+              <div class="source-tenets">
+                <span class="source-tenet-chip">Tenet 3</span>
+                <span class="source-tenet-chip">Tenet 7</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hindu Philosophy -->
+        <div class="sources-tradition">
+          <button class="sources-tradition-btn" onclick="toggleAccordion('hindu')" id="acc-btn-hindu">
+            Hindu Philosophy
+            <span class="sources-chevron">&#9660;</span>
+          </button>
+          <div class="sources-tradition-body" id="acc-body-hindu">
+            <div class="source-entry">
+              <div class="source-title">The Bhagavad Gita</div>
+              <div class="source-author">~200 BCE</div>
+              <div class="source-annotation">A dialogue on duty, action, attachment, and the self. The source of Tenet 2's teaching on non-attachment to outcomes. Read the Barbara Stoler Miller translation.</div>
+              <div class="source-tenets">
+                <span class="source-tenet-chip">Tenet 2</span>
+              </div>
+            </div>
+            <div class="source-entry">
+              <div class="source-title">The Upanishads</div>
+              <div class="source-author">~800–200 BCE</div>
+              <div class="source-annotation">The philosophical heart of the Hindu tradition. Core to Tenet 3 — the interconnection of all selves in the deeper self. The Juan Mascaró translation is accessible.</div>
+              <div class="source-tenets">
+                <span class="source-tenet-chip">Tenet 3</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sufism -->
+        <div class="sources-tradition">
+          <button class="sources-tradition-btn" onclick="toggleAccordion('sufism')" id="acc-btn-sufism">
+            Sufism
+            <span class="sources-chevron">&#9660;</span>
+          </button>
+          <div class="sources-tradition-body" id="acc-body-sufism">
+            <div class="source-entry">
+              <div class="source-title">The Essential Rumi</div>
+              <div class="source-author">Rumi — translated by Coleman Barks, 1995</div>
+              <div class="source-annotation">Rumi's central themes — return to presence, the pull of what you love, the ego as veil — run throughout this book.</div>
+              <div class="source-tenets">
+                <span class="source-tenet-chip">Tenet 4</span>
+                <span class="source-tenet-chip">Tenet 6</span>
+              </div>
+            </div>
+            <div class="source-entry">
+              <div class="source-title">The Alchemy of Happiness</div>
+              <div class="source-author">Al-Ghazali — ~1100 CE</div>
+              <div class="source-annotation">A practical guide to self-knowledge from the greatest Islamic philosopher. Directly relevant to Tenet 7's treatment of the lower self.</div>
+              <div class="source-tenets">
+                <span class="source-tenet-chip">Tenet 7</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Existentialism -->
+        <div class="sources-tradition">
+          <button class="sources-tradition-btn" onclick="toggleAccordion('existentialism')" id="acc-btn-existentialism">
+            Existentialism
+            <span class="sources-chevron">&#9660;</span>
+          </button>
+          <div class="sources-tradition-body" id="acc-body-existentialism">
+            <div class="source-entry">
+              <div class="source-title">Man's Search for Meaning</div>
+              <div class="source-author">Viktor Frankl — 1946</div>
+              <div class="source-annotation">Frankl's account of surviving the concentration camps and the philosophy of meaning he built from it. The most powerful modern argument for Tenet 6. Short, dense, unforgettable.</div>
+              <div class="source-tenets">
+                <span class="source-tenet-chip">Tenet 6</span>
+              </div>
+            </div>
+            <div class="source-entry">
+              <div class="source-title">The Myth of Sisyphus</div>
+              <div class="source-author">Albert Camus — 1942</div>
+              <div class="source-annotation">The foundational absurdist text: life has no inherent meaning, and the honest response is full engagement anyway — not resignation. Relevant to Tenet 6.</div>
+              <div class="source-tenets">
+                <span class="source-tenet-chip">Tenet 6</span>
+              </div>
+            </div>
+            <div class="source-entry">
+              <div class="source-title">Beyond Good and Evil</div>
+              <div class="source-author">Friedrich Nietzsche — 1886</div>
+              <div class="source-annotation">The will to power as self-mastery, not domination. Relevant to Tenets 5 and 7. Start here before Thus Spoke Zarathustra.</div>
+              <div class="source-tenets">
+                <span class="source-tenet-chip">Tenet 5</span>
+                <span class="source-tenet-chip">Tenet 7</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Confucianism -->
+        <div class="sources-tradition">
+          <button class="sources-tradition-btn" onclick="toggleAccordion('confucianism')" id="acc-btn-confucianism">
+            Confucianism
+            <span class="sources-chevron">&#9660;</span>
+          </button>
+          <div class="sources-tradition-body" id="acc-body-confucianism">
+            <div class="source-entry">
+              <div class="source-title">The Analects</div>
+              <div class="source-author">Confucius — ~500 BCE</div>
+              <div class="source-annotation">Short records of teachings focused entirely on right conduct in relationships and daily life. The most practical ancient ethics text. Directly relevant to Tenets 5 and 7. Read the Edward Slingerland translation.</div>
+              <div class="source-tenets">
+                <span class="source-tenet-chip">Tenet 5</span>
+                <span class="source-tenet-chip">Tenet 7</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modern & Western -->
+        <div class="sources-tradition">
+          <button class="sources-tradition-btn" onclick="toggleAccordion('modern')" id="acc-btn-modern">
+            Modern &amp; Western
+            <span class="sources-chevron">&#9660;</span>
+          </button>
+          <div class="sources-tradition-body" id="acc-body-modern">
+            <div class="source-entry">
+              <div class="source-title">Mere Christianity</div>
+              <div class="source-author">C.S. Lewis — 1952</div>
+              <div class="source-annotation">The clearest modern articulation of the Christian insight on pride — the backbone of Tenet 7. Lewis writes for the unconvinced, which makes him unusually clear.</div>
+              <div class="source-tenets">
+                <span class="source-tenet-chip">Tenet 7</span>
+              </div>
+            </div>
+            <div class="source-entry">
+              <div class="source-title">Pragmatism</div>
+              <div class="source-author">William James — 1907</div>
+              <div class="source-annotation">The American tradition most aligned with Tenet 5. James argued that belief is not separate from behavior — what you do shapes what you think, not just the reverse.</div>
+              <div class="source-tenets">
+                <span class="source-tenet-chip">Tenet 5</span>
+              </div>
+            </div>
+            <div class="source-entry">
+              <div class="source-title">Ego Is the Enemy / The Obstacle Is the Way</div>
+              <div class="source-author">Ryan Holiday — 2016 / 2014</div>
+              <div class="source-annotation">Modern Stoic applications. Practical, short, well-sourced. Ego Is the Enemy is directly relevant to Tenet 7.</div>
+              <div class="source-tenets">
+                <span class="source-tenet-chip">Tenet 7</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /.wrap -->
+
+  <!-- Hidden data for client JS -->
+  <div id="roma-data" data-json={JSON.stringify(romaData)} hidden></div>
+
+  <script is:inline>
+    // ── Global state ─────────────────────────────────────────────────
+    let romaData = null;
+    let currentTenetId = 'mind';
+
+    // ── Helpers ──────────────────────────────────────────────────────
+    function esc(s) {
+      if (!s) return '';
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+
+    function em(s) {
+      if (!s) return '';
+      return esc(s).replace(/\*([^*]+)\*/g, '<em>$1</em>');
+    }
+
+    // ── Theme ────────────────────────────────────────────────────────
+    function applyRomaTheme(dark) {
+      document.documentElement.setAttribute('data-theme', dark ? 'roma-dark' : 'roma');
+      var btn = document.getElementById('roma-theme-btn');
+      if (btn) btn.textContent = dark ? '☀ Light' : '☽ Dark';
+    }
+
+    function toggleRomaTheme() {
+      var isDark = document.documentElement.getAttribute('data-theme') === 'roma-dark';
+      var next = !isDark;
+      localStorage.setItem('roma-theme', next ? 'dark' : 'light');
+      applyRomaTheme(next);
+    }
+
+    // ── Panel switching ──────────────────────────────────────────────
+    function showPanel(id) {
+      document.querySelectorAll('.roma-panel').forEach(function(p) {
+        p.classList.remove('active');
+      });
+      document.querySelectorAll('.roma-tab').forEach(function(btn) {
+        btn.classList.toggle('active', btn.dataset.panel === id);
+      });
+      var panel = document.getElementById('panel-' + id);
+      if (panel) panel.classList.add('active');
+    }
+
+    // ── Tenet rendering ──────────────────────────────────────────────
+    function renderTenet(tenet) {
+      var quotesHtml = tenet.quotes.map(function(q) {
+        return '<div class="tenet-quote-card">' +
+          '<div class="tenet-quote-text">' + em(q.text) + '</div>' +
+          '<div class="tenet-quote-attr"><strong>' + esc(q.attr) + '</strong> / ' + esc(q.source) + '</div>' +
+          '</div>';
+      }).join('');
+
+      var meaningHtml = tenet.meaning.map(function(p) {
+        return '<p>' + em(p) + '</p>';
+      }).join('');
+
+      var realLifeHtml = tenet.realLife.map(function(item) {
+        return '<div class="tenet-reallife-item"><strong>' + esc(item.bold) + '</strong> ' + em(item.body) + '</div>';
+      }).join('');
+
+      var notThisHtml = tenet.notThis.map(function(p) {
+        return '<p>' + em(p) + '</p>';
+      }).join('');
+
+      var rememberHtml = tenet.remember.map(function(r) {
+        return '<li>' + esc(r) + '</li>';
+      }).join('');
+
+      return '<div class="tenet-number">TENET ' + tenet.number + '</div>' +
+        '<h2 class="tenet-title">' + esc(tenet.title) + '</h2>' +
+        '<div class="tenet-statement"><div class="tenet-statement-text">' + esc(tenet.statement) + '</div></div>' +
+        '<div class="tenet-section-label">WHAT OTHERS HAVE SAID</div>' +
+        '<div class="tenet-quotes">' + quotesHtml + '</div>' +
+        '<div class="tenet-section-label">WHAT THIS MEANS</div>' +
+        '<div class="tenet-prose">' + meaningHtml + '</div>' +
+        '<div class="tenet-section-label">IN REAL LIFE</div>' +
+        '<div class="tenet-reallife">' + realLifeHtml + '</div>' +
+        '<div class="tenet-section-label">WHAT THIS IS NOT</div>' +
+        '<div class="tenet-prose">' + notThisHtml + '</div>' +
+        '<div class="tenet-remember">' +
+          '<div class="tenet-remember-label">REMEMBER</div>' +
+          '<ul class="tenet-remember-list">' + rememberHtml + '</ul>' +
+        '</div>';
+    }
+
+    function showTenet(id) {
+      currentTenetId = id;
+
+      // Update all nav buttons (sidebar + pill)
+      document.querySelectorAll('[data-tenet]').forEach(function(btn) {
+        btn.classList.toggle('active', btn.dataset.tenet === id);
+      });
+
+      var tenet = romaData.tenets.find(function(t) { return t.id === id; });
+      if (!tenet) return;
+
+      var content = document.getElementById('tenet-content');
+      if (content) content.innerHTML = renderTenet(tenet);
+    }
+
+    function jumpToTenet(number) {
+      var ids = ['mind', 'grip', 'wall', 'present', 'action', 'making', 'ego'];
+      showPanel('tenets');
+      showTenet(ids[number - 1]);
+    }
+
+    // ── Stories rendering ────────────────────────────────────────────
+    function renderStories() {
+      var grid = document.getElementById('stories-grid');
+      if (!grid) return;
+
+      var tenetNames = ['', 'Mind', 'Grip', 'Wall', 'Present', 'Action', 'Making', 'Humility'];
+
+      var html = romaData.stories.map(function(story) {
+        var chips = story.tenets.map(function(n) {
+          return '<span class="story-tenet-chip">' + n + ' — ' + tenetNames[n] + '</span>';
+        }).join('');
+
+        var paragraphs = story.paragraphs.map(function(p) {
+          return '<p>' + esc(p) + '</p>';
+        }).join('');
+
+        var moralHtml = story.moral
+          ? '<div class="story-moral">' + esc(story.moral) + '</div>'
+          : '';
+
+        return '<div class="story-card" id="story-' + story.id + '" data-tenets="' + story.tenets.join(',') + '">' +
+          '<div class="story-card-title">' + esc(story.title) + '</div>' +
+          '<div class="story-card-tenets">' + chips + '</div>' +
+          '<div class="story-card-excerpt">' + esc(story.excerpt) + '</div>' +
+          '<div class="story-body">' + paragraphs + moralHtml + '</div>' +
+          '<button class="story-card-read-btn" onclick="expandStory(\'' + story.id + '\', this)">Read</button>' +
+          '</div>';
+      }).join('');
+
+      grid.innerHTML = html;
+    }
+
+    function filterStories(tenet, btn) {
+      // Update filter button active state
+      document.querySelectorAll('.stories-filter-btn').forEach(function(b) {
+        b.classList.remove('active');
+      });
+      if (btn) btn.classList.add('active');
+
+      // Show/hide cards
+      document.querySelectorAll('.story-card').forEach(function(card) {
+        if (tenet === 'all') {
+          card.classList.remove('hidden');
+        } else {
+          var tenets = card.dataset.tenets.split(',').map(Number);
+          card.classList.toggle('hidden', tenets.indexOf(tenet) === -1);
+        }
+      });
+    }
+
+    function expandStory(id, btn) {
+      var card = document.getElementById('story-' + id);
+      if (!card) return;
+
+      var isExpanded = card.classList.contains('expanded');
+
+      // Collapse all
+      document.querySelectorAll('.story-card').forEach(function(c) {
+        c.classList.remove('expanded');
+        var readBtn = c.querySelector('.story-card-read-btn');
+        if (readBtn) readBtn.textContent = 'Read';
+      });
+
+      // Expand this one if it wasn't already expanded
+      if (!isExpanded) {
+        card.classList.add('expanded');
+        if (btn) btn.textContent = 'Close';
+      }
+    }
+
+    // ── Sources accordion ────────────────────────────────────────────
+    function toggleAccordion(id) {
+      var body = document.getElementById('acc-body-' + id);
+      var btn = document.getElementById('acc-btn-' + id);
+      if (!body || !btn) return;
+
+      var isOpen = body.classList.contains('open');
+      body.classList.toggle('open', !isOpen);
+      btn.classList.toggle('open', !isOpen);
+    }
+
+    // ── Password gate ────────────────────────────────────────────────
+    function checkRomaPassword() {
+      var input = document.getElementById('roma-gate-input');
+      if (!input) return;
+
+      if (input.value.toLowerCase() === 'roma') {
+        localStorage.setItem('roma-unlocked', 'true');
+        var gate = document.getElementById('roma-gate');
+        if (gate) {
+          gate.classList.add('hidden');
+          setTimeout(function() { gate.style.display = 'none'; }, 450);
+        }
+      } else {
+        input.classList.remove('shake');
+        // Force reflow to restart animation
+        void input.offsetWidth;
+        input.classList.add('shake');
+        input.value = '';
+        setTimeout(function() { input.classList.remove('shake'); }, 400);
+      }
+    }
+
+    // ── Init ─────────────────────────────────────────────────────────
+    (function init() {
+      // Gate check
+      var gate = document.getElementById('roma-gate');
+      if (localStorage.getItem('roma-unlocked') === 'true') {
+        if (gate) gate.style.display = 'none';
+      }
+
+      // Theme
+      var savedTheme = localStorage.getItem('roma-theme');
+      applyRomaTheme(savedTheme === 'dark');
+
+      // Parse data
+      var dataEl = document.getElementById('roma-data');
+      if (dataEl) {
+        romaData = JSON.parse(dataEl.dataset.json);
+      }
+
+      // Render first tenet and stories
+      if (romaData) {
+        showTenet('mind');
+        renderStories();
+      }
+    })();
+  </script>
+</Base>

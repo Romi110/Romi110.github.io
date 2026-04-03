@@ -5,6 +5,8 @@
 
 This text concerns itself with living, not with what precedes or follows it. Every question about the divine, about death, about what the universe owes you — those are left to the practitioner. What this book offers is a set of observations about how the mind works and how a life is built, drawn from every tradition that arrived at the same place. If you find them true when you test them against your own life, they are yours to use.
 
+Read The Seven Lines in the morning. Read one full tenet when you need to think about it, not all seven. The stories are for when you need to feel it, not just understand it. This is a living document — if something stops being true, change it.
+
 ---
 
 ## The Seven Lines
@@ -21,9 +23,9 @@ You can only ever be here. Everything else is memory or invention.
 
 You are not what you intend. You are what you do when it costs something.
 
-You will not find your purpose. You will build it, through what you repeatedly choose to do.
+You will not find your purpose. You will build it.
 
-The part of you that needs to be right, to be seen, to be safe — that is what is standing between you and clarity.
+The need to be right, to be seen, to be safe — that is what stands between you and clarity.
 
 ---
 
@@ -74,9 +76,9 @@ This is the most repeated observation in the history of human thought. Stoics, B
 
 ## What It Is Not
 
-This is not saying that suffering is imaginary, that difficult things don't hurt, or that you should feel nothing. Pain is real. Loss is real. Grief is appropriate. The insight is not that your feelings are wrong — it's that most of what we call suffering is an *addition* the mind makes to what actually happened. The raw event plus the story equals the total weight. You often cannot change the event. You can almost always change the story.
+This is not saying that suffering is imaginary or that you should feel nothing. Pain is real. Grief is appropriate. The insight is that most suffering is an *addition* the mind makes to what actually happened. You can almost always change the story. You cannot always change the event.
 
-It is also not a call for suppression. Noticing that the mind is constructing a story is not the same as pushing the story down. You're not trying to feel nothing. You're trying to see clearly — to know the difference between what is real and what the mind added. That distinction is the whole game.
+This is also not suppression. Noticing the story is not pushing it down. You are trying to see clearly, not to feel nothing.
 
 ---
 
@@ -87,6 +89,7 @@ It is also not a call for suppression. Noticing that the mind is constructing a 
 - Two people facing identical circumstances will have different inner experiences. The variable is the mind.
 - You cannot always change what happens. You can nearly always change the story you build around it.
 - The battlefield is internal. That is bad news and good news at the same time.
+- **Practice**: When you notice suffering, ask: what is the event, and what is the story I built around it?
 
 ---
 
@@ -137,9 +140,9 @@ Every major wisdom tradition identified this. The Buddha called it *tanha* — c
 
 ## What It Is Not
 
-This does not mean you should care about nothing, love no one, or pursue nothing with intensity. That misreading turns a life philosophy into a prescription for numbness. The Stoics loved deeply — Marcus Aurelius was devastated by the deaths of his children. The Buddhists built an entire ethics around compassion. Full engagement with life is not the problem. The problem is the white-knuckle grip — the *need* for things to stay, which is different from wanting them to.
+This does not mean care about nothing and love no one. Full engagement is not the problem. The white-knuckle grip is the problem — the *need* for things to stay, which is different from wanting them to.
 
-Detachment is not indifference. It is full presence without the demand that things be other than they are. You show up completely, you care genuinely, and you hold it all loosely enough that when it changes — as it will — you are not destroyed by the change. That is not coldness. That is the only way to be fully in your life without spending most of it in fear.
+Detachment is not indifference. It is full presence without the demand that things be other than they are. You show up completely and hold it loosely enough that when it changes, you are not destroyed by the change.
 
 ---
 
@@ -150,6 +153,7 @@ Detachment is not indifference. It is full presence without the demand that thin
 - Attachment means your peace depends on something outside you staying a certain way. That is a fragile foundation.
 - Detachment is not indifference — it is engagement without the demand that things comply.
 - What you are most afraid to lose is worth examining. The fear is the signal.
+- **Practice**: Name one thing you are gripping right now. Hold it in your mind without trying to fix it.
 
 ---
 
@@ -200,9 +204,9 @@ This does not erase your individuality. You are distinct. Your experience is you
 
 ## What It Is Not
 
-This is not a call to dissolve into other people, to lose your own perspective in a crowd, or to stop making individual choices. You are a distinct person. Your experience is irreducibly yours. The point is not that the self doesn't exist — it's that the *degree* of separation you feel is greater than what is actually there. You are distinct. You are not isolated. Both are true, and one of them gets drastically underweighted.
+This is not a call to dissolve into other people or lose your own perspective. You are distinct. You are not isolated. Both are true, and one of them gets drastically underweighted.
 
-It is also not an argument for ignoring your own needs in service of others. Recognizing interconnection doesn't mean your interior life matters less. It means the hard line between "my wellbeing" and "the wellbeing of what's around me" is less absolute than the isolated self insists. Taking care of yourself and taking care of others are less opposed than they look when you believe the wall is solid.
+It is also not an argument for ignoring your own needs. Taking care of yourself and taking care of others are less opposed than they look when you believe the wall is solid.
 
 ---
 
@@ -213,6 +217,7 @@ It is also not an argument for ignoring your own needs in service of others. Rec
 - Emotion moves between people without permission. You are already more connected than you act.
 - Compassion is not effort when the boundary is understood correctly. It is the natural response.
 - The wall is real enough to stand on. It is not real enough to live behind.
+- **Practice**: Once today, act as if the boundary between you and someone else is thinner than it feels.
 
 ---
 
@@ -263,9 +268,9 @@ Every tradition that takes mental training seriously converges on this. Buddhist
 
 ## What It Is Not
 
-This is not an argument against planning, memory, or thinking about the future. Planning is a present-moment activity — you do it now, with the mind you have now. Learning from the past is a present-moment activity. The insight is not that the past and future are irrelevant — it is that they only ever exist as *thoughts*, and those thoughts are happening now. The question is whether the mind is using those thoughts as tools, or being dragged around by them.
+This is not an argument against planning or learning from the past. Both are present-moment activities. The insight is that past and future only ever exist as *thoughts happening now*. The question is whether the mind is using those thoughts as tools, or being dragged around by them.
 
-It is also not a prescription for impulsiveness — for ignoring consequences or living only for immediate gratification. Being present means bringing your full attention to what is actually happening, which includes the real weight of decisions and their effects on the future. A person fully present to a difficult choice is more capable, not less, than one whose mind is scattered across ten imaginary scenarios. Presence is not naivety. It is clarity.
+This is also not impulsiveness. Presence is not naivety. A person fully present to a difficult choice is more capable, not less, than one scattered across ten imaginary scenarios.
 
 ---
 
@@ -277,6 +282,7 @@ It is also not a prescription for impulsiveness — for ignoring consequences or
 - Planning is something you do now. You are always doing everything now.
 - Most of what you've missed in your life, you missed while it was happening.
 - You cannot arrive anywhere other than here. You are always already here.
+- **Practice**: Do one thing today with your full attention. Nothing else running in the background.
 
 ---
 
@@ -327,9 +333,9 @@ The hard truth this tenet contains is that it is entirely possible to understand
 
 ## What It Is Not
 
-This is not about perfectionism or an unbroken streak of correct behavior. Everyone acts against their values sometimes — exhausted, afraid, provoked into an old pattern. A single failure doesn't undo what has been built, and the response to failure is itself part of the practice. What matters is not whether you are always right but whether your direction is consistent. The question is not "did I do it perfectly?" It is "am I becoming the person I am trying to be, or am I standing still?"
+This is not perfectionism. Everyone acts against their values sometimes. A single failure does not undo what has been built. The question is not "did I do it perfectly?" It is "am I becoming the person I am trying to be, or am I standing still?"
 
-It is also not a dismissal of reflection, understanding, or inner work. Knowing what you value, examining your failures, understanding why you act as you do — all of this matters. But it matters as preparation for action, not as a substitute for it. The purpose of understanding yourself is to act better. If the understanding never changes the action, it has produced nothing but a more articulate version of the same person.
+This is also not a dismissal of reflection. Understanding yourself matters — but as preparation for action, not a substitute for it. If the understanding never changes the action, it has produced nothing but a more articulate version of the same person.
 
 ---
 
@@ -340,13 +346,14 @@ It is also not a dismissal of reflection, understanding, or inner work. Knowing 
 - Every repeated action is a vote for the person you are becoming.
 - Consistency over intensity — small things done regularly reshape character. Occasional bursts do not.
 - The reading, the planning, the intention — all of it is preparation. At some point, preparation has to become action.
+- **Practice**: Do one thing today that your future self will thank you for. Do not wait until you feel like it.
 
 ---
 
 # Tenet 6: Meaning Is Made, Not Found
 
 ## The Statement
-You will not find your purpose. You will build it, through what you repeatedly choose to do.
+You will not find your purpose. You will build it.
 
 ---
 
@@ -390,9 +397,9 @@ The practical observation — regardless of your metaphysics — is this: meanin
 
 ## What It Is Not
 
-This is not a claim that inherent meaning doesn't exist, or that spiritual and religious traditions are wrong to locate it in something larger than the individual. That is a metaphysical question this tenet does not settle. What it does say is that regardless of where meaning ultimately comes from — God, the universe, the structure of things, or human choice — it behaves, in practice, like something that responds to engagement. Passive waiting does not produce it. Committed action tends to.
+This does not settle whether meaning is inherent or constructed. Regardless of where it comes from, meaning behaves like something that responds to engagement. Passive waiting does not produce it. Committed action tends to.
 
-It is also not saying that any engagement will do — that meaning is arbitrary, that one path is as good as another, or that you should simply throw yourself at random things. Some things move you and some things don't. That signal is worth paying attention to. The point is that you discover which is which by engaging, not by theorizing. You cannot think your way to knowing what matters to you. You have to touch it.
+This is also not saying any engagement will do. Some things move you and some don't. That signal matters. But you discover which is which by engaging, not by theorizing. You cannot think your way to knowing what matters. You have to touch it.
 
 ---
 
@@ -403,13 +410,14 @@ It is also not saying that any engagement will do — that meaning is arbitrary,
 - Commit to something. The clarity comes from inside the commitment, not before it.
 - Meaning is often retrospective — you see it looking back, rarely looking forward.
 - The engagement doesn't have to feel meaningful first. Often it doesn't. Often it does later.
+- **Practice**: If you have been waiting to start something, start it today. Badly is fine. Started is what matters.
 
 ---
 
 # Tenet 7: The Ego Gets in the Way
 
 ## The Statement
-The part of you that needs to be right, to be seen, to be safe — that is what is standing between you and clarity.
+The need to be right, to be seen, to be safe — that is what stands between you and clarity.
 
 ---
 
@@ -453,9 +461,9 @@ When this part is running — which for most people is most of the time — seve
 
 ## What It Is Not
 
-This is not about self-erasure — becoming passive, agreeable, without standards or preferences. The goal is not to have no self. It is to have a self that is not constantly frightened. The Stoic sage, the Zen master, the Confucian exemplary person — none of them are characterized by the absence of self. They are characterized by the absence of the *anxious, grasping, reactive* self. What remains is not nothing. It is something more stable, more spacious, and more effective than the defended version.
+This is not self-erasure. The goal is not to have no self — it is to have a self that is not constantly frightened. The Stoic sage, the Zen master, the Confucian exemplary person are not characterized by absence of self. They are characterized by absence of the *anxious, grasping, reactive* self.
 
-It is also not a call for false humility — performing smallness to seem enlightened, undermining your own work, refusing to take credit or hold positions with confidence. Genuine humility is not the performance of lowness. It is the absence of the need to manage how you appear. A person genuinely free of ego can be decisive, confident, and direct — without any of it being about protecting an image. That is different from ego in the same way that courage is different from aggression.
+This is also not false humility. Genuine humility is not the performance of lowness. It is the absence of the need to manage how you appear. A person free of ego can be decisive, confident, and direct — without any of it being about protecting an image.
 
 ---
 
@@ -466,6 +474,7 @@ It is also not a call for false humility — performing smallness to seem enligh
 - The defended self is not stronger than the open one. It only feels that way.
 - Notice the voice that needs to win, to be seen, to protect its position. That is the obstacle.
 - What remains when the ego quiets is not nothing. It is more.
+- **Practice**: The next time you feel defensive, pause. Ask: am I protecting the work, or am I protecting my image?
 
 ---
 

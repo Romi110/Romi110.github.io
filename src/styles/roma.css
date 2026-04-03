@@ -344,6 +344,32 @@ body {
   color: var(--ink);
 }
 
+/* Practice callout */
+.tenet-practice {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  background: var(--bg2);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 0.9rem 1.25rem;
+  margin-bottom: 0.5rem;
+}
+.tenet-practice-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.tenet-practice-text {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
 /* Quotes row */
 .tenet-section-label {
   font-family: 'Bebas Neue', sans-serif;

@@ -14,6 +14,8 @@ A self-contained single-page kettlebell fitness application. No build tools, no 
 ```
 Romi110.github.io/
 ├── index.html      # Entire application (CSS + JS embedded)
+├── README.md       # User-facing project documentation
+├── CLAUDE.md       # This file — architecture docs for AI-assisted development
 └── gifs/           # Exercise demo GIFs (one per exercise)
     ├── deadlift.gif
     ├── swing.gif
@@ -42,7 +44,7 @@ Only one `.panel` is visible at a time — toggled via the `.active` CSS class (
 
 ## Key Data Structures
 
-### `EXERCISES` (array, 22 objects)
+### `EXERCISES` (array, 21 objects)
 
 ```js
 {
@@ -78,7 +80,7 @@ Three days per level. Three options per day (A / B / C).
 }
 ```
 
-Each group has 4 ranked exercises with beginner / intermediate / advanced set-rep prescriptions.
+Each group has 4 ranked exercises (5 for `total`) with beginner / intermediate / advanced set-rep prescriptions.
 
 ---
 

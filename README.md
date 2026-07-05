@@ -8,12 +8,13 @@ A beginner-friendly, single-page kettlebell training guide covering exercises, s
 
 ## Features
 
-- **🔥 Exercises by Muscle** — 21 exercises with effectiveness scores (1–10), form tips, and animated demos, filterable by movement pattern (hinge, squat, push, pull, core, total body)
+- **🔥 Exercises by Muscle** — 21 exercises with effectiveness scores (1–10), form tips, and video demos (loaded on demand, so the page stays fast), filterable by movement pattern (hinge, squat, push, pull, core, total body)
 - **📋 Workout Circuits** — 3 difficulty levels × 3 days × 3 options each (27 complete workouts), with coach's notes for every session
 - **🎯 Body Group Workouts** — top exercises ranked per muscle group, with beginner / intermediate / advanced set-rep prescriptions
 - **🎓 Tips & Strategies** — how to pick your first bell, a 4-week onboarding plan, safety rules, common mistakes with fixes, a 7-minute warm-up protocol, and progression strategy
-- **🌙 Dark mode** — toggle in the top-right corner, preference saved between visits
-- **📱 Fully responsive** — works on phones, tablets, and desktop
+- **🌙 Dark mode** — follows your OS preference, with a manual toggle saved between visits
+- **🔗 Linkable tabs** — share a direct link to any section (e.g. [/#tips](https://romi110.github.io/#tips))
+- **📱 Fully responsive & accessible** — works on phones, tablets, and desktop; respects reduced-motion preferences
 
 ## Running Locally
 
@@ -30,7 +31,8 @@ open index.html        # macOS
 
 ```
 ├── index.html      # The entire app — HTML, CSS, and JavaScript in one file
-├── gifs/           # Exercise demonstration GIFs (21 files)
+├── 404.html        # Not-found page for GitHub Pages
+├── media/          # Exercise demonstration videos (21 MP4 files, ~3 MB total)
 ├── CLAUDE.md       # Architecture documentation for AI-assisted development
 └── README.md       # This file
 ```

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Page Not Found | Kettlebell Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --ink: #1a1a1a; --muted: #666; --bg2: #f5f4f1; --accent: #D85A30; }
+    @media (prefers-color-scheme: dark) {
+      :root { --ink: #EDECE8; --muted: #909090; --bg2: #161616; }
+    }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg2); color: var(--ink); min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 1rem; }
+    .code { font-family: 'Bebas Neue', sans-serif; font-size: clamp(80px, 20vw, 160px); letter-spacing: 4px; line-height: 1; }
+    .code span { color: var(--accent); }
+    .msg { font-size: 15px; color: var(--muted); margin: 12px 0 24px; }
+    a.home { display: inline-block; padding: 12px 28px; border-radius: 50px; background: var(--ink); color: var(--bg2); text-decoration: none; font-size: 14px; transition: transform .15s; }
+    a.home:hover { transform: translateY(-2px); }
+  </style>
+</head>
+<body>
+  <div>
+    <div class="code">4<span>0</span>4</div>
+    <div class="msg">This page dropped the bell. Let's get you back to the guide.</div>
+    <a class="home" href="/">← Back to Kettlebell Guide</a>
+  </div>
+</body>
+</html>

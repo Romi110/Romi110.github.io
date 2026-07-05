@@ -107,7 +107,7 @@
     .gif-toggle.open .gif-toggle-icon { transform: rotate(90deg); }
     .gif-reveal { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
     .gif-reveal.open { max-height: 380px; }
-    .gif-reveal img { width: 100%; border-radius: 8px; margin-top: 8px; display: block; }
+    .gif-reveal video { width: 100%; border-radius: 8px; margin-top: 8px; display: block; }
     .gif-credit { font-size: 10px; color: var(--muted); text-align: right; margin-top: 3px; opacity: .6; }
 
     /* CIRCUIT LEVEL / DAY SELECTORS */
@@ -213,6 +213,10 @@
     .panel { display: none; }
     .panel.active { display: block; }
 
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; scroll-behavior: auto !important; }
+    }
+
     @media (max-width: 500px) {
       .hero { padding: 2rem .75rem 1.5rem; border-radius: 8px; }
       .tabs { gap: 6px; }
@@ -254,22 +258,22 @@
   </style>
 </head>
 <body>
-<button class="theme-toggle" onclick="toggleTheme()" id="theme-btn" title="Toggle dark mode">🌙</button>
+<button class="theme-toggle" onclick="toggleTheme()" id="theme-btn" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
 <div class="wrap">
   <div class="hero">
     <div class="hero-title">Kettlebell <span>Guide</span></div>
     <div class="hero-sub">Full Body Strength &amp; Conditioning &middot; Beginner Friendly</div>
   </div>
 
-  <div class="tabs">
-    <button class="tab active" onclick="showPanel('exercises', this)">Exercises by Muscle</button>
-    <button class="tab" onclick="showPanel('circuits', this)">Workout Circuits</button>
-    <button class="tab" onclick="showPanel('bodygroups', this)">Body Group Workouts</button>
-    <button class="tab" onclick="showPanel('tips', this)">Tips & Strategies</button>
+  <div class="tabs" role="tablist" aria-label="Guide sections">
+    <button class="tab active" id="tab-exercises" data-panel="exercises" role="tab" aria-selected="true" aria-controls="panel-exercises" onclick="showPanel('exercises')">Exercises by Muscle</button>
+    <button class="tab" id="tab-circuits" data-panel="circuits" role="tab" aria-selected="false" aria-controls="panel-circuits" onclick="showPanel('circuits')">Workout Circuits</button>
+    <button class="tab" id="tab-bodygroups" data-panel="bodygroups" role="tab" aria-selected="false" aria-controls="panel-bodygroups" onclick="showPanel('bodygroups')">Body Group Workouts</button>
+    <button class="tab" id="tab-tips" data-panel="tips" role="tab" aria-selected="false" aria-controls="panel-tips" onclick="showPanel('tips')">Tips & Strategies</button>
   </div>
 
   <!-- EXERCISES PANEL -->
-  <div class="panel active" id="panel-exercises">
+  <div class="panel active" id="panel-exercises" role="tabpanel" aria-labelledby="tab-exercises">
     <div class="callout">
       <div class="callout-icon">💡</div>
       <div class="callout-text"><strong>Brand new to kettlebells?</strong> Start with exercises tagged "Form Builder" first. These build the foundational movement patterns that make all other lifts safe and effective. Spend 2–3 weeks here before progressing to heavier or more complex moves.</div>
@@ -287,7 +291,7 @@
   </div>
 
   <!-- CIRCUITS PANEL -->
-  <div class="panel" id="panel-circuits">
+  <div class="panel" id="panel-circuits" role="tabpanel" aria-labelledby="tab-circuits">
     <div class="callout">
       <div class="callout-icon">📋</div>
       <div class="callout-text"><strong>How to use these circuits:</strong> Pick Option A, B, or C based on your energy and goals that day. Aim for 3 rounds (beginners) or 4–5 rounds (intermediate/advanced). Rest 60–90 sec between rounds. Train 3 days per week with rest days between sessions.</div>
@@ -302,7 +306,7 @@
   </div>
 
   <!-- TIPS & STRATEGIES PANEL -->
-  <div class="panel" id="panel-tips">
+  <div class="panel" id="panel-tips" role="tabpanel" aria-labelledby="tab-tips">
     <div class="callout">
       <div class="callout-icon">🎓</div>
       <div class="callout-text"><strong>New to kettlebells?</strong> This guide covers everything you need to train safely and effectively from day one. Work through each section before your first session — 10 minutes here will prevent months of wasted effort and avoidable injury.</div>
@@ -489,7 +493,7 @@
   </div>
 
   <!-- BODY GROUP WORKOUTS PANEL -->
-  <div class="panel" id="panel-bodygroups">
+  <div class="panel" id="panel-bodygroups" role="tabpanel" aria-labelledby="tab-bodygroups">
     <div class="callout">
       <div class="callout-icon">🎯</div>
       <div class="callout-text"><strong>Targeted body group training:</strong> Exercises ranked #1–5 by effectiveness for each muscle group. Use the set/rep prescriptions as your starting point — increase weight when the top end of the range feels easy for two consecutive sessions.</div>
@@ -501,67 +505,67 @@
 <script>
 const EXERCISES = [
 
-  {id:'deadlift',name:'Two-Hand Kettlebell Deadlift',muscle:'hinge',score:10,tag:'Form Builder',gif:'gifs/deadlift.gif',
+  {id:'deadlift',name:'Two-Hand Kettlebell Deadlift',muscle:'hinge',score:10,tag:'Form Builder',demo:'media/deadlift.mp4',
    desc:'The single most important lift to learn first. Stand with the kettlebell between your feet, push your hips back like closing a car door with your butt, grab the handle, then drive your hips forward to stand tall. You are picking up the bell with your hips and legs — not your back.',
    form:'Keep your chest up and back flat. The bell should travel close to your legs. Think "hip hinge" not "squat down." Your shins stay nearly vertical throughout.'},
-  {id:'swing',name:'Kettlebell Swing',muscle:'hinge',score:10,tag:'Essential',gif:'gifs/swing.gif',
+  {id:'swing',name:'Kettlebell Swing',muscle:'hinge',score:10,tag:'Essential',demo:'media/swing.mp4',
    desc:'The king of kettlebell exercises. Hike the bell back between your legs like hiking a football, then explosively snap your hips forward to send it swinging to chest height. The power comes entirely from your hips and glutes — not your arms.',
    form:'At the top, squeeze your glutes hard and stand tall. The arms are just a guide — they do not pull. Keep your shoulders packed down and back. Master the deadlift before attempting this.'},
-  {id:'rdl',name:'Single-Leg Romanian Deadlift',muscle:'hinge',score:8,tag:'Balance & Stability',gif:'gifs/rdl.gif',
+  {id:'rdl',name:'Single-Leg Romanian Deadlift',muscle:'hinge',score:8,tag:'Balance & Stability',demo:'media/rdl.mp4',
    desc:'Hold the bell in one hand, shift your weight to the opposite foot, and hinge forward letting the bell hang as your free leg floats back behind you like a seesaw. Incredible for building hamstrings, glutes, and balance all at once.',
    form:'Keep your hips square to the floor — do not rotate open. A slight bend in the standing knee is fine. Move slowly and with full control. Start without a weight to learn the pattern first.'},
-  {id:'clean',name:'Kettlebell Clean',muscle:'hinge',score:9,tag:'Technical',gif:'gifs/clean.gif',
+  {id:'clean',name:'Kettlebell Clean',muscle:'hinge',score:9,tag:'Technical',demo:'media/clean.mp4',
    desc:'The clean pulls the bell from between your legs up to your shoulder in one smooth arc. At the top, the bell "racks" on your forearm and shoulder — this position is key for pressing exercises. Think of it as a swing that ends at your shoulder instead of chest height.',
    form:'Guide the bell in a tight arc close to your body. The bell should land softly on your arm — if it bangs your wrist, the arc is too wide. Spend time just practicing the rack position before adding speed.'},
-  {id:'goblet',name:'Goblet Squat',muscle:'squat',score:10,tag:'Form Builder',gif:'gifs/goblet.gif',
+  {id:'goblet',name:'Goblet Squat',muscle:'squat',score:10,tag:'Form Builder',demo:'media/goblet.mp4',
    desc:'Hold the kettlebell at your chest like a goblet and squat down. This is the best squat for beginners because the weight in front naturally keeps your torso upright. You should be able to get your hips below your knees comfortably.',
    form:'Keep your elbows inside your knees at the bottom — use them to push your knees out. Chest stays tall. Drive through your heels to stand. Try a 3-second descent to build control.'},
-  {id:'frontRack',name:'Front Rack Squat',muscle:'squat',score:8,tag:'Intermediate',gif:'gifs/front-rack.gif',
+  {id:'frontRack',name:'Front Rack Squat',muscle:'squat',score:8,tag:'Intermediate',demo:'media/front-rack.mp4',
    desc:'One or two bells held in the "rack" position (resting on your forearms at shoulder height) while you squat. More demanding than a goblet squat because it requires significant core stability and upper back strength to keep upright.',
    form:'The bells rest on your forearms and upper arms — not held by your wrists alone. Elbows stay high. Breathe in at the top, brace your core hard, squat, then exhale on the way up.'},
-  {id:'singleLegBox',name:'Single-Leg Box Squat',muscle:'squat',score:7,tag:'Balance',gif:'gifs/single-leg-box.gif',
+  {id:'singleLegBox',name:'Single-Leg Box Squat',muscle:'squat',score:7,tag:'Balance',demo:'media/single-leg-box.mp4',
    desc:'Stand in front of a chair or low box, extend one leg forward, and slowly lower yourself down on one leg — then stand back up. A superb exercise for single-leg strength that you can do with just bodyweight before adding a bell.',
    form:'Lower slowly and with full control — touch the box gently, do not crash into it. Lean your torso slightly forward as you descend. Drive through your heel to stand. Hold a light bell at your chest for counterbalance.'},
-  {id:'lateralSquat',name:'Lateral Squat',muscle:'squat',score:7,tag:'Hip Mobility',gif:'gifs/lateral-squat.gif',
+  {id:'lateralSquat',name:'Lateral Squat',muscle:'squat',score:7,tag:'Hip Mobility',demo:'media/lateral-squat.mp4',
    desc:'Stand wide with toes turned out slightly. Shift your weight to one side, bending that knee deeply while the other leg stays straight. You will feel a stretch through the inner thigh of the straight leg — great for hip mobility alongside leg strength.',
    form:'Keep the bent-knee foot flat on the floor. Hold the bell at your chest for balance. Chest stays up. Alternate sides each rep or do all reps on one side before switching.'},
-  {id:'press',name:'Single-Arm Overhead Press',muscle:'push',score:9,tag:'Essential',gif:'gifs/press.gif',
+  {id:'press',name:'Single-Arm Overhead Press',muscle:'push',score:9,tag:'Essential',demo:'media/press.mp4',
    desc:'Hold the kettlebell in the rack position at your shoulder, brace your core, and press it straight overhead until your arm is fully extended and your bicep is next to your ear. Lower back slowly under full control.',
    form:'Pack your shoulder down and back before pressing — do not shrug. Your wrist stays straight (not cocked back). Squeeze your glutes and brace your abs throughout. This is a full-body tension exercise, not just an arm movement.'},
-  {id:'floorPress',name:'Kettlebell Floor Press',muscle:'push',score:8,tag:'Chest Focus',gif:'gifs/floor-press.gif',
+  {id:'floorPress',name:'Kettlebell Floor Press',muscle:'push',score:8,tag:'Chest Focus',demo:'media/floor-press.mp4',
    desc:'Lie on your back with knees bent, hold a kettlebell in one hand, and press it up from chest height toward the ceiling. Like a bench press but on the floor — the floor limits elbow depth, which actually protects your shoulder.',
    form:'Keep your elbow at about 45 degrees from your body — not flared straight out. Full pause at the top with a locked elbow, then a slow controlled descent back to the floor. Switch hands between sets.'},
-  {id:'pushPress',name:'Push Press',muscle:'push',score:8,tag:'Power',gif:'gifs/push-press.gif',
+  {id:'pushPress',name:'Push Press',muscle:'push',score:8,tag:'Power',demo:'media/push-press.mp4',
    desc:'Like the overhead press, but you use a quick knee-dip to generate momentum that assists getting the bell overhead. This lets you work with heavier weight and builds explosive upper-body power you cannot train with a strict press.',
    form:'The knee dip is shallow and fast — a slight pop, not a full squat. Your legs straighten before the bell leaves shoulder height. Lock out the arm fully overhead and hold for one second before lowering.'},
-  {id:'row',name:'Single-Arm Row',muscle:'pull',score:9,tag:'Form Builder',gif:'gifs/row.gif',
+  {id:'row',name:'Single-Arm Row',muscle:'pull',score:9,tag:'Form Builder',demo:'media/row.mp4',
    desc:'Place one hand and same-side knee on a bench or chair for support. Hold a kettlebell in the other hand and pull it toward your hip — like starting a lawnmower. This targets the back muscles responsible for upright posture.',
    form:'Lead with your elbow, not your hand. Think "tuck your elbow toward your back pocket." Keep your spine flat — do not rotate to heave the weight. Squeeze the back muscles hard at the top and lower slowly.'},
-  {id:'pullover',name:'Kettlebell Pullover',muscle:'pull',score:7,tag:'Lats & Chest',gif:'gifs/pullover.gif',
+  {id:'pullover',name:'Kettlebell Pullover',muscle:'pull',score:7,tag:'Lats & Chest',demo:'media/pullover.mp4',
    desc:'Lie on your back, hold the kettlebell above your chest, then slowly arc it back overhead toward the floor behind you. Return under control. This stretches and strengthens the lats and opens up a tight chest.',
    form:'Keep your elbows slightly bent throughout — never locked straight. Your lower back stays pressed against the floor. Move slowly through the full range of motion. This is about quality of movement, not speed.'},
-  {id:'halos',name:'Halo',muscle:'pull',score:6,tag:'Shoulder Health',gif:'gifs/halos.gif',
+  {id:'halos',name:'Halo',muscle:'pull',score:6,tag:'Shoulder Health',demo:'media/halos.mp4',
    desc:'Hold the kettlebell upside down (by the ball, not the handle) at chest height and rotate it in a large circle around your head — one way, then the other. An excellent shoulder warm-up and mobility drill that also quietly works your core.',
    form:'Circle wide and smooth. Keep your core braced so you are not swaying. Move slowly — this is about mobility, not speed. Use a light bell. An essential warm-up move for anyone doing overhead pressing.'},
-  {id:'deadbug',name:'Kettlebell Dead Bug',muscle:'core',score:9,tag:'Form Builder',gif:'gifs/deadbug.gif',
+  {id:'deadbug',name:'Kettlebell Dead Bug',muscle:'core',score:9,tag:'Form Builder',demo:'media/deadbug.mp4',
    desc:'Lie on your back, hold the kettlebell above your chest with both hands, knees bent at 90 degrees. Slowly lower one leg toward the floor while keeping your lower back pressed flat against the ground. Return and switch sides. Teaches deep core control essential for protecting your back during all other lifts.',
    form:'Your lower back MUST stay flat on the floor at all times — if it arches, you have gone too far. Breathe out as you lower the leg. Move slowly. This seemingly easy exercise is the foundation of all safe lifting.'},
-  {id:'farmersCarry',name:'Farmer\'s Carry',muscle:'core',score:10,tag:'Essential',gif:'gifs/farmers-carry.gif',
+  {id:'farmersCarry',name:'Farmer\'s Carry',muscle:'core',score:10,tag:'Essential',demo:'media/farmers-carry.mp4',
    desc:'Pick up a heavy kettlebell (or two) and walk. Deceptively simple, yet one of the most effective exercises in existence for core strength, grip, posture, and real-world fitness. If your shoulder tips to one side, your core is working overtime to stop it.',
    form:'Stand tall — do not lean away from the bell. Shoulders back and down. Small deliberate steps. Start with a single bell held at your side (suitcase carry) before using two bells. Go heavier than you think you should.'},
-  {id:'windmill',name:'Windmill',muscle:'core',score:8,tag:'Obliques',gif:'gifs/windmill.gif',
+  {id:'windmill',name:'Windmill',muscle:'core',score:8,tag:'Obliques',demo:'media/windmill.mp4',
    desc:'Press a kettlebell overhead with one arm, feet wide and turned out. Slowly hinge to the side, reaching your free hand down your inner leg toward the floor, while keeping the bell locked overhead. One of the best oblique and hip mobility exercises available.',
    form:'Your eyes stay on the bell the entire time — this is what keeps it locked safely. The hinge is lateral (to the side), not forward. Start without a weight or with a very light bell. A challenging but rewarding movement.'},
-  {id:'tgu',name:'Turkish Get-Up',muscle:'core',score:10,tag:'Mastery Move',gif:'gifs/tgu.gif',
+  {id:'tgu',name:'Turkish Get-Up',muscle:'core',score:10,tag:'Mastery Move',demo:'media/tgu.mp4',
    desc:'Start lying on your back with the bell pressed to the ceiling, then use a series of deliberate steps to stand up — all while keeping the bell locked overhead. Then reverse back to the floor. Complex, but it trains every part of your body simultaneously and is considered by many coaches to be the single greatest kettlebell exercise.',
    form:'Go extremely slow — there is no rushing this. Learn each step as its own standalone move first. Eyes on the bell always. Once you can do this with a shoe balanced on your fist instead of a bell, you are ready for weight.'},
-  {id:'snatch',name:'Kettlebell Snatch',muscle:'total',score:9,tag:'Advanced',gif:'gifs/snatch.gif',
+  {id:'snatch',name:'Kettlebell Snatch',muscle:'total',score:9,tag:'Advanced',demo:'media/snatch.mp4',
    desc:'A one-arm swing that continues in one fluid motion overhead into a locked-out position above your head. Combines the explosive power of the swing with an overhead lockout. Burns enormous calories, builds total-body power, and is the benchmark lift of kettlebell sport.',
    form:'This is all hip drive — not a muscle move. The bell should float at the top before flipping over your hand. Master the swing and the clean completely before attempting this. Let the bell rest in your open hand at the top.'},
-  {id:'complex',name:'Clean + Press Combo',muscle:'total',score:9,tag:'Conditioning',gif:'gifs/complex.gif',
+  {id:'complex',name:'Clean + Press Combo',muscle:'total',score:9,tag:'Conditioning',demo:'media/complex.mp4',
    desc:'Two moves linked into one sequence: clean the bell to your shoulder, then press it overhead. Lower back to rack, then swing back down. Repeat. Linking movements doubles the work per set and builds both strength and serious conditioning.',
    form:'Breathe in before the clean, exhale at the top of the press. Treat each phase as its own careful movement until the pattern is ingrained — do not rush to link them. This combo reveals any weakness in either the clean or the press.'},
-  {id:'thruster',name:'Kettlebell Thruster',muscle:'total',score:8,tag:'Cardio-Strength',gif:'gifs/thruster.gif',
+  {id:'thruster',name:'Kettlebell Thruster',muscle:'total',score:8,tag:'Cardio-Strength',demo:'media/thruster.mp4',
    desc:'A goblet squat directly connected to an overhead press. Hold the bell at your chest, squat down, and as you drive up use the momentum to press the bell overhead in one fluid movement. Extremely challenging and one of the most efficient full-body conditioning exercises that exists.',
    form:'Time the press so you are still rising from the squat as you begin pressing — not after you have fully stood up. The leg drive feeds the press. Keep the bell close to your body throughout the entire movement.'},
 ];
@@ -728,15 +732,21 @@ function getTagClass(t){
 
 function toggleGif(btn){
   const reveal = btn.nextElementSibling;
+  const video = reveal.querySelector('video');
   const isOpen = reveal.classList.contains('open');
   if(isOpen){
     reveal.classList.remove('open');
     btn.classList.remove('open');
+    btn.setAttribute('aria-expanded','false');
     btn.querySelector('.gif-toggle-label').textContent = 'Show exercise demo';
+    video.pause();
   } else {
     reveal.classList.add('open');
     btn.classList.add('open');
+    btn.setAttribute('aria-expanded','true');
     btn.querySelector('.gif-toggle-label').textContent = 'Hide demo';
+    if(!video.src) video.src = video.dataset.src; // demo downloads only on first open
+    video.play();
   }
 }
 
@@ -756,13 +766,13 @@ function renderExercises(){
       <div><span class="ex-tag ${getTagClass(ex.tag)}">${ex.tag}</span></div>
       <div class="ex-desc">${ex.desc}</div>
       <div class="ex-form"><strong>✓ Form tip:</strong> ${ex.form}</div>
-      ${ex.gif ? `
-      <button class="gif-toggle" onclick="toggleGif(this)">
+      ${ex.demo ? `
+      <button class="gif-toggle" onclick="toggleGif(this)" aria-expanded="false">
         <span class="gif-toggle-icon">▶</span>
         <span class="gif-toggle-label">Show exercise demo</span>
       </button>
       <div class="gif-reveal">
-        <img src="${ex.gif}" alt="${ex.name} demonstration" loading="lazy">
+        <video data-src="${ex.demo}" loop muted playsinline preload="none" aria-label="${ex.name} demonstration"></video>
         <div class="gif-credit">via Giphy / Tenor</div>
       </div>` : ''}
     </div>`).join('');
@@ -775,13 +785,17 @@ function showMuscle(m, btn){
   renderExercises();
 }
 
-function showPanel(id, btn){
+function showPanel(id){
+  const btn = document.querySelector(`.tab[data-panel="${id}"]`);
+  if(!btn) return;
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>{ t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
   document.getElementById('panel-'+id).classList.add('active');
   btn.classList.add('active');
+  btn.setAttribute('aria-selected','true');
   if(id==='circuits') renderCircuit();
   if(id==='bodygroups') renderBodyGroups();
+  if(location.hash !== '#'+id) history.replaceState(null, '', '#'+id);
 }
 
 function showGroup(id, btn){
@@ -881,11 +895,19 @@ function toggleTheme(){
   localStorage.setItem('theme', isDark ? 'light' : 'dark');
   applyTheme(!isDark);
 }
-applyTheme(localStorage.getItem('theme') === 'dark');
+const savedTheme = localStorage.getItem('theme');
+applyTheme(savedTheme ? savedTheme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+function activatePanelFromHash(){
+  const id = location.hash.slice(1);
+  if(document.querySelector(`.tab[data-panel="${id}"]`)) showPanel(id);
+}
+window.addEventListener('hashchange', activatePanelFromHash);
 
 renderExercises();
 renderCircuit();
 renderBodyGroups();
+activatePanelFromHash();
 </script>
 </body>
 </html>

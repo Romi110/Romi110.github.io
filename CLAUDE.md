@@ -5,7 +5,7 @@
 A self-contained single-page kettlebell fitness application. No build tools, no frameworks, no dependencies beyond Google Fonts. Open `index.html` directly in a browser.
 
 **Stack:** Pure HTML + embedded CSS + embedded JavaScript
-**Assets:** `gifs/` — 21 exercise demonstration GIFs (~65 MB)
+**Assets:** `media/` — 21 exercise demonstration videos (H.264 MP4, ~3.3 MB total)
 
 ---
 
@@ -14,11 +14,12 @@ A self-contained single-page kettlebell fitness application. No build tools, no 
 ```
 Romi110.github.io/
 ├── index.html      # Entire application (CSS + JS embedded)
+├── 404.html        # GitHub Pages not-found page (standalone, own styles)
 ├── README.md       # User-facing project documentation
 ├── CLAUDE.md       # This file — architecture docs for AI-assisted development
-└── gifs/           # Exercise demo GIFs (one per exercise)
-    ├── deadlift.gif
-    ├── swing.gif
+└── media/          # Exercise demo videos (one per exercise)
+    ├── deadlift.mp4
+    ├── swing.mp4
     └── ... (21 total)
 ```
 
@@ -35,10 +36,13 @@ All CSS lives in a `<style>` block in `<head>`. All JavaScript lives in a `<scri
 Four top-level tabs each map to a hidden panel:
 
 ```
-Tab button  →  showPanel(id, btn)  →  #panel-{id}.active
+Tab button (data-panel="{id}")  →  showPanel(id)  →  #panel-{id}.active
 ```
 
 Only one `.panel` is visible at a time — toggled via the `.active` CSS class (`display: none` → `display: block`).
+
+- Tabs carry ARIA roles (`role="tab"`, `aria-selected`, `aria-controls`); panels are `role="tabpanel"`.
+- `showPanel(id)` finds the button via its `data-panel` attribute and syncs `location.hash` with `history.replaceState`, so tabs are linkable (`/#tips`). A `hashchange` listener + init call restore the panel from the URL.
 
 ---
 
@@ -53,7 +57,7 @@ Only one `.panel` is visible at a time — toggled via the `.active` CSS class (
   muscle: 'hinge',        // hinge | squat | push | pull | core | total
   score:  10,             // 1–10 effectiveness rating
   tag:    'Essential',    // Form Builder | Essential | Technical | Advanced | Mastery Move | ...
-  gif:    'gifs/swing.gif',
+  demo:   'media/swing.mp4',
   desc:   '...',
   form:   '...',
 }
@@ -99,7 +103,7 @@ CSS custom properties on `:root` (light) and `[data-theme="dark"]`:
 | `--opt-a-*` / `--opt-b-*` / `--opt-c-*` | Option card colors (A=orange, B=blue, C=green) |
 | `--grp-color`, `--grp-header`, `--grp-bg` | Set per `.grp-{id}` class on rank cards |
 
-Theme preference persisted in `localStorage` key `theme`. Toggle with `toggleTheme()`.
+Theme preference persisted in `localStorage` key `theme`. Toggle with `toggleTheme()`. On first visit (no saved preference), the OS `prefers-color-scheme` is used.
 
 ---
 
@@ -107,7 +111,8 @@ Theme preference persisted in `localStorage` key `theme`. Toggle with `toggleThe
 
 | Function | Purpose |
 |---|---|
-| `showPanel(id, btn)` | Switch active tab/panel |
+| `showPanel(id)` | Switch active tab/panel, sync URL hash + ARIA state |
+| `activatePanelFromHash()` | Restore active panel from `location.hash` (init + `hashchange`) |
 | `renderExercises()` | Render exercise grid filtered by `currentMuscle` |
 | `showMuscle(m, btn)` | Set muscle filter and re-render exercises |
 | `renderCircuit()` | Render current level/day circuit |
@@ -115,7 +120,7 @@ Theme preference persisted in `localStorage` key `theme`. Toggle with `toggleThe
 | `selectDay(i)` | Switch circuit day |
 | `renderBodyGroups()` | Render ranked exercises for `currentGroup` |
 | `showGroup(id, btn)` | Switch active body group |
-| `toggleGif(btn)` | Expand/collapse exercise GIF demo |
+| `toggleGif(btn)` | Expand/collapse exercise video demo — the `<video>` src is set from `data-src` on first open (deferred loading), and paused on close |
 | `toggleTheme()` / `applyTheme(dark)` | Dark mode management |
 
 ---
@@ -145,22 +150,40 @@ let currentGroup  = 'hinge';   // Body Groups panel active group
 
 1. Add a tab button inside `.tabs`:
    ```html
-   <button class="tab" onclick="showPanel('mytab', this)">Label</button>
+   <button class="tab" id="tab-mytab" data-panel="mytab" role="tab" aria-selected="false"
+           aria-controls="panel-mytab" onclick="showPanel('mytab')">Label</button>
    ```
 2. Add a panel div anywhere inside `.wrap`:
    ```html
-   <div class="panel" id="panel-mytab">...</div>
+   <div class="panel" id="panel-mytab" role="tabpanel" aria-labelledby="tab-mytab">...</div>
    ```
 3. If the panel needs dynamic rendering, add a branch in `showPanel()`:
    ```js
    if (id === 'mytab') renderMyTab();
    ```
 
+The tab is automatically linkable as `/#mytab` — no extra routing code needed.
+
 ---
 
 ## How to Add a New Exercise
 
-Add an object to the `EXERCISES` array with all required fields. It will automatically appear in the correct muscle group filter. If no GIF exists, set `gif: null` — the demo button will be hidden.
+Add an object to the `EXERCISES` array with all required fields. It will automatically appear in the correct muscle group filter. If no demo video exists, set `demo: null` — the demo button will be hidden.
+
+To add a demo video, encode as H.264 MP4 (see existing files):
+
+```bash
+ffmpeg -i in.gif -movflags faststart -pix_fmt yuv420p \
+  -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" -c:v libx264 -crf 27 -preset slow -an media/name.mp4
+```
+
+---
+
+## Gotchas
+
+- **Exercise names are duplicated strings, not references.** `CIRCUITS` and `BODY_GROUPS` use free-typed display names (e.g. `'KB Swing'`, `'Kettlebell Swing'`, `'KB Deadlift (3 sec lower)'`) rather than `EXERCISES` ids. Renaming an exercise requires a manual search across all three data structures.
+- **Demo videos load lazily.** `renderExercises()` emits `<video data-src=...>` with no `src`; `toggleGif()` sets `src` on first open. Don't add `src` directly in the template or all 21 videos download on page load.
+- **`404.html` duplicates minimal styles on purpose** — it must be standalone since GitHub Pages serves it for any bad URL.
 
 ---
 
